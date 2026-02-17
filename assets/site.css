@@ -315,15 +315,27 @@
         max-width: 32rem;
         line-height: 1.62;
         margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+      }
+      .landing-intro-copy {
+        display: block;
+        margin-bottom: var(--space-md);
       }
       .landing-intro strong {
         display: block;
         margin-top: var(--space-sm);
       }
+      .landing-face-note {
+        font-size: var(--text-sm);
+      }
       .inline-nav-link {
         display: inline-block;
-        margin-top: var(--space-md);
+        margin-top: auto;
+        align-self: flex-start;
         font-size: var(--text-sm);
+        line-height: 1.2;
         letter-spacing: 0.68px;
         text-transform: uppercase;
         text-decoration: none;
@@ -341,7 +353,7 @@
         grid-template-columns: minmax(0, 1fr) minmax(168px, var(--rail-card-width));
         min-height: var(--other-center-zone);
         gap: var(--space-md) var(--space-lg);
-        align-items: start;
+        align-items: stretch;
         align-content: center;
       }
       .landing-card-stack {
@@ -349,7 +361,7 @@
         gap: var(--space-md);
         width: 100%;
         max-width: var(--rail-card-width);
-        align-self: start;
+        align-self: stretch;
         justify-self: end;
       }
       .landing-research-card,

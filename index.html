@@ -94,12 +94,14 @@
           <h2 id="landing-heading">About Me</h2>
           <div class="landing-layout">
             <p class="landing-intro">
-              Hey, I'm Bryan. I'm super interested in mathematics and dynamical systems.
-              I've been involved in research since 2021, and I use this site to keep notes, manuscripts,
-              and links in one place. <br><br>
-              Aside from math, I like photography. You can find it in the 'Other' section. See the gallery as well.
-              <br><br>
-              <strong>Click the face animation in the top-right corner for dark-mode.</strong>
+              <span class="landing-intro-copy">
+                Hey, I'm Bryan. I'm super interested in mathematics and dynamical systems.
+                I've been involved in research since 2021, and I use this site to keep notes, manuscripts,
+                and links in one place. <br><br>
+                Aside from math, I like photography. You can find it in the 'Other' section. See the gallery as well.
+                <br><br>
+                <strong class="landing-face-note">Click the face animation in the top-right for dark-mode.</strong>
+              </span>
               <a href="#gallery" class="inline-nav-link nav-link" data-section="gallery">View gallery</a>
             </p>
             <div class="landing-card-stack">
@@ -116,7 +118,17 @@
         </section>
 
         <section class="content-section" id="research" data-section="research" aria-labelledby="research-heading">
-          <h2 id="research-heading">Research</h2>
+          <div class="gallery-heading-row">
+            <a
+              href="#landing"
+              class="button gallery-back-link nav-link"
+              data-section="landing"
+              aria-label="Back to About Me section"
+            >
+              <span aria-hidden="true">&#8598;</span>
+            </a>
+            <h2 id="research-heading">Research</h2>
+          </div>
           <ul class="highlight-list">
             <li>
               <strong>2025</strong> – Arithmetical Structures on Graphs. Advised by A. Díaz-López,
@@ -148,32 +160,26 @@
           </ul>
           <div class="manuscript-copy">
             <h3 class="section-subhead">Manuscripts</h3>
-            <div class="manuscript-layout">
-              <div class="grid-two">
-                <div class="pub">
-                  <b>Transient Length Boundary for Monomial Dynamical Systems</b>
-                  <span class="badge">In prep</span>
-                  <br>
-                  <span class="muted small">
-                    We establish upper and lower bounds on the transient length of boolean monomial
-                    dynamical systems in terms of the Frobenius number of the set of directed cycle
-                    lengths and the diameter of the associated dependency graph.
-                  </span>
-                </div>
-                <div class="pub">
-                  <b>Arithmetical Structures on Cycles with a Multi-Edge</b>
-                  <span class="badge">In prep</span>
-                  <br>
-                  <span class="muted small">
-                    Using principles underlying the Euclidean algorithm, we construct strongly smooth
-                    arithmetical structures on cycles with a multi-edge.
-                  </span>
-                </div>
+            <div class="grid-two">
+              <div class="pub">
+                <b>Transient Length Boundary for Monomial Dynamical Systems</b>
+                <span class="badge">In prep</span>
+                <br>
+                <span class="muted small">
+                  We establish upper and lower bounds on the transient length of boolean monomial
+                  dynamical systems in terms of the Frobenius number of the set of directed cycle
+                  lengths and the diameter of the associated dependency graph.
+                </span>
               </div>
-              <a href="#other" class="choice-card choice-card-compact manuscript-inline-card nav-link" data-section="other">
-                <h3>Other</h3>
-                <p>Contact, CV, and updates.</p>
-              </a>
+              <div class="pub">
+                <b>Arithmetical Structures on Cycles with a Multi-Edge</b>
+                <span class="badge">In prep</span>
+                <br>
+                <span class="muted small">
+                  Using principles underlying the Euclidean algorithm, we construct strongly smooth
+                  arithmetical structures on cycles with a multi-edge.
+                </span>
+              </div>
             </div>
           </div>
         </section>
@@ -235,7 +241,7 @@
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=tlR5utxhe9Y" target="_blank" rel="noopener noreferrer">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=ld55N1bJiuo" target="_blank" rel="noopener noreferrer">
                 <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-08.gif" alt="Video 8 preview GIF" loading="lazy" decoding="async">
               </a>
             </article>

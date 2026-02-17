@@ -93,16 +93,16 @@ for idx in "${!urls[@]}"; do
       duration=12
       ;;
     8)
-      start_seconds=37
-      duration=4
+      start_seconds=18
+      duration=9
       ;;
     9)
       start_seconds=157
       duration=10.5
       ;;
     11)
-      start_seconds=0
-      duration=5
+      start_seconds=1.7
+      duration=1.3
       ;;
     12)
       start_seconds=0
