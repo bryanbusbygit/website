@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Bryan C. Busby</title>
+    <meta name="description" content="Undergraduate mathematician interested in graph theory and combinatorics.">
+    <link rel="stylesheet" href="assets/site.css">
+  </head>
+  <body>
+    <div id="glyph-field" class="glyph-field" aria-hidden="true"></div>
+    <main class="container" id="top">
+      <header>
+        <div>
+          <h1>Bryan C. Busby</h1>
+        </div>
+        <button
+          type="button"
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Switch to dark theme"
+          aria-pressed="false"
+        >
+          <img src="assets/smiley.png" alt="" class="theme-toggle-icon" aria-hidden="true">
+        </button>
+      </header>
+
+      <div class="content-wrapper" id="content-wrapper">
+        <section class="content-section active" id="landing" data-section="landing" aria-labelledby="landing-heading">
+          <h2 id="landing-heading">About Me</h2>
+          <div class="landing-layout">
+            <p class="landing-intro">
+              Hey, I'm Bryan. I'm an undergraduate in Pure Mathematics at the University of Puerto Rico.
+              I've been involved in research since 2021, and I use this site to keep notes, manuscripts,
+              and links in one place.
+              <br><br>
+              I work with advisors at UPR Mayagüez and Villanova.
+              <br><br>
+              Aside from math, I like creating video content. You can find it in the Other section.
+              <strong>Click the smiley icon in the top-right corner to switch between light mode and dark mode.</strong>
+              <a href="#gallery" class="inline-nav-link nav-link" data-section="gallery">Video Gallery</a>
+            </p>
+            <div class="landing-card-stack">
+              <a href="#research" class="choice-card landing-research-card nav-link" data-section="research">
+                <h3>Research Work</h3>
+                <p>Projects, posters, and manuscripts in preparation.</p>
+              </a>
+              <a href="#other" class="choice-card landing-other-card nav-link" data-section="other">
+                <h3>Other</h3>
+                <p>Contact, CV, and updates.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="research" data-section="research" aria-labelledby="research-heading">
+          <h2 id="research-heading">Research</h2>
+          <ul class="highlight-list">
+            <li>
+              <strong>2025</strong> – Arithmetical Structures on Graphs. Advised by A. Díaz-López,
+              J. Louwsma (Enumerative Combinatorics)
+              <br>
+              <span class="small">
+                <a class="resource-link" href="assets/posters/2025_arithmetical_structures_poster.pdf">Poster (PDF)</a>
+              </span>
+            </li>
+            <li>
+              <strong>2024</strong> – Discrete Dynamical Systems. Advised by O. Colón-Reyes
+              (Dynamical Systems)
+              <br>
+              <span class="small">
+                <a class="resource-link" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">Poster (PDF)</a>
+              </span>
+            </li>
+            <li>
+              <strong>2023</strong> – 5G RF Propagation Measurements using GNU Radio. Advised by R. Solís
+              (Debugging Hardware)
+              <br>
+              <span class="small">
+                <a class="resource-link" href="assets/posters/CarsePoster2023.pdf">Poster (PDF)</a>
+              </span>
+            </li>
+            <li>
+              <strong>2021</strong> – Adjacency Matrices &amp; Walks. Advised by E. Benvenutti (Graph Theory)
+            </li>
+          </ul>
+          <div class="manuscript-copy">
+            <h3 class="section-subhead">Manuscripts</h3>
+            <div class="manuscript-layout">
+              <div class="grid-two">
+                <div class="pub">
+                  <b>Transient Length Boundary for Monomial Dynamical Systems</b>
+                  <span class="badge">In prep</span>
+                  <br>
+                  <span class="muted small">
+                    We establish upper and lower bounds on the transient length of boolean monomial
+                    dynamical systems in terms of the Frobenius number of the set of directed cycle
+                    lengths and the diameter of the associated dependency graph.
+                  </span>
+                </div>
+                <div class="pub">
+                  <b>Arithmetical Structures on Cycles with a Multi-Edge</b>
+                  <span class="badge">In prep</span>
+                  <br>
+                  <span class="muted small">
+                    Using principles underlying the Euclidean algorithm, we construct strongly smooth
+                    arithmetical structures on cycles with a multi-edge.
+                  </span>
+                </div>
+              </div>
+              <a href="#other" class="choice-card choice-card-compact manuscript-inline-card nav-link" data-section="other">
+                <h3>Other</h3>
+                <p>Contact, CV, and updates.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" id="gallery" data-section="gallery" aria-labelledby="gallery-heading">
+          <div class="gallery-heading-row">
+            <a
+              href="#landing"
+              class="button gallery-back-link nav-link"
+              data-section="landing"
+              aria-label="Back to About Me section"
+            >
+              <span aria-hidden="true">&#8598;</span>
+            </a>
+            <h2 id="gallery-heading">Video Gallery</h2>
+          </div>
+          <p class="small muted gallery-intro">
+				Click any tile to open the full video.
+          </p>
+          <div class="gallery-grid" role="list">
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=wuRqYiMyx3Q" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-01.gif" alt="Video 1 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gcg_tv8Oskg" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-02.gif" alt="Video 2 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=i_F_aZDRU1E" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-03.gif" alt="Video 3 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gm7-UJHO9os" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-04.gif" alt="Video 4 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=dYS__VQq_fs" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-05.gif" alt="Video 5 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=vs_LFS-XwqE" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-06.gif" alt="Video 6 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=3C4puA9A88w" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-07.gif" alt="Video 7 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=tlR5utxhe9Y" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-08.gif" alt="Video 8 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=G7uVYzsEkU0" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-09.gif" alt="Video 9 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=-kuf7N2idOo" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-10.gif" alt="Video 10 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=pJfya9tQfh4" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-11.gif" alt="Video 11 preview GIF">
+              </a>
+            </article>
+            <article class="gallery-tile" role="listitem">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=-e__pw1Jtq0" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-12.gif" alt="Video 12 preview GIF">
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section class="content-section" id="other" data-section="other" aria-labelledby="other-heading">
+          <h2 id="other-heading">Other</h2>
+          <div class="other-layout">
+            <div class="other-stack">
+              <div class="other-links-grid">
+                <a class="choice-card other-link-card" href="mailto:bryan.busby@upr.edu" aria-label="Email">
+                  <h3>Email</h3>
+                  <p>bryan.busby@upr.edu</p>
+                </a>
+                <a class="choice-card other-link-card" href="https://www.youtube.com/@busbymath" target="_blank" rel="noopener noreferrer">
+                  <h3>YouTube</h3>
+                  <p>@busbymath</p>
+                </a>
+                <a class="choice-card other-link-card" href="https://www.youtube.com/@bryanbusby61" target="_blank" rel="noopener noreferrer">
+                  <h3>YouTube (Other)</h3>
+                  <p>@bryanbusby61</p>
+                </a>
+                <a class="choice-card other-link-card" href="https://x.com/brybusby" target="_blank" rel="noopener noreferrer">
+                  <h3>X (Twitter)</h3>
+                  <p>@brybusby</p>
+                </a>
+                <a class="choice-card other-link-card other-link-card-wide" href="assets/Bryan_Busby_CV.pdf">
+                  <h3>Curriculum Vitae</h3>
+                  <p>Open CV (PDF)</p>
+                </a>
+              </div>
+            </div>
+            <a href="#landing" class="choice-card back-home-card nav-link" data-section="landing">
+              <h3>Back About Me</h3>
+              <p>Return to the main section.</p>
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="content-status-anchor">
+        <div class="status-path">
+          <a class="status-square" href="#landing" data-index="1" data-target="landing" aria-label="Go to about me section"></a>
+          <a class="status-square" href="#research" data-index="2" data-target="research" aria-label="Go to research section"></a>
+          <a class="status-square" href="#gallery" data-index="3" data-target="gallery" aria-label="Go to video gallery section"></a>
+          <a class="status-square" href="#other" data-index="4" data-target="other" aria-label="Go to other section"></a>
+        </div>
+      </div>
+
+      <div class="content-date-anchor">
+        <div class="small muted last-updated-label" id="last-updated-label"></div>
+      </div>
+    </main>
+    <script>
+      (() => {
+        const galleryGifs = document.querySelectorAll('.gallery-gif[data-gif-src]');
+        if (!galleryGifs.length) {
+          return;
+        }
+
+        const maxStartDelayMs = 3200;
+        galleryGifs.forEach((gif) => {
+          const gifSource = gif.getAttribute('data-gif-src');
+          if (!gifSource) {
+            return;
+          }
+
+          const startDelay = Math.floor(Math.random() * maxStartDelayMs);
+          window.setTimeout(() => {
+            gif.setAttribute('src', gifSource);
+          }, startDelay);
+        });
+      })();
+    </script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>
