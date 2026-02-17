@@ -411,16 +411,7 @@
         margin-top: 0;
         transition: color 0.42s cubic-bezier(0.22, 1, 0.36, 1);
       }
-      .choice-card:hover {
-        background: var(--ink);
-        color: var(--page-bg);
-        border-color: var(--ink);
-        box-shadow: 1px 1px 0 var(--choice-shadow);
-      }
-      .choice-card:focus-visible {
-        background: var(--ink);
-        color: var(--page-bg);
-        border-color: var(--ink);
+      .choice-card:active {
         box-shadow: 1px 1px 0 var(--choice-shadow);
       }
       .choice-card-compact {
@@ -603,12 +594,6 @@
       .button:active {
         box-shadow: 1px 1px 0 var(--choice-shadow);
       }
-      .button:hover {
-        background: var(--ink);
-        color: var(--page-bg);
-        border-color: var(--ink);
-        box-shadow: 1px 1px 0 var(--choice-shadow);
-      }
       .button:focus-visible {
         background: var(--ink);
         color: var(--page-bg);
@@ -635,6 +620,20 @@
       }
       .contact-list a:hover {
         border-bottom: 1px solid var(--line);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .choice-card:hover {
+          background: var(--ink);
+          color: var(--page-bg);
+          border-color: var(--ink);
+          box-shadow: 1px 1px 0 var(--choice-shadow);
+        }
+        .button:hover {
+          background: var(--ink);
+          color: var(--page-bg);
+          border-color: var(--ink);
+          box-shadow: 1px 1px 0 var(--choice-shadow);
+        }
       }
       .other-layout {
         display: grid;
@@ -911,12 +910,19 @@
           color: var(--ink);
           cursor: pointer;
         }
-        .manuscript-inline-card:hover,
         .manuscript-inline-card:focus-visible {
           background: var(--ink);
           color: var(--page-bg);
           border-color: var(--ink);
           box-shadow: 1px 1px 0 var(--choice-shadow);
+        }
+        @media (hover: hover) and (pointer: fine) {
+          .manuscript-inline-card:hover {
+            background: var(--ink);
+            color: var(--page-bg);
+            border-color: var(--ink);
+            box-shadow: 1px 1px 0 var(--choice-shadow);
+          }
         }
         .manuscript-inline-card:active {
           box-shadow: 1px 1px 0 var(--choice-shadow);
