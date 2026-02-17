@@ -581,6 +581,7 @@
       });
 
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const lowPowerViewport = window.matchMedia('(max-width: 900px)');
       let asciiFrameId = 0;
       let asciiLastTick = 0;
       let asciiTime = 0;
@@ -1354,6 +1355,11 @@
         });
       };
 
+      const shouldAnimateAscii = () => (
+        !reducedMotion.matches &&
+        !document.hidden
+      );
+
       const stopAscii = () => {
         if (!asciiFrameId) {
           return;
@@ -1367,7 +1373,7 @@
       };
 
       const animateAscii = (timestamp) => {
-        if (!glyphInstances.length || reducedMotion.matches) {
+        if (!glyphInstances.length || !shouldAnimateAscii()) {
           stopAscii();
           return;
         }
@@ -1375,7 +1381,7 @@
           asciiLastTick = timestamp;
         }
         const elapsed = timestamp - asciiLastTick;
-        const frameInterval = 1000 / 24;
+        const frameInterval = lowPowerViewport.matches ? (1000 / 12) : (1000 / 24);
         if (elapsed >= frameInterval) {
           const dt = Math.min(elapsed / 1000, 0.08);
           asciiLastTick = timestamp - (elapsed % frameInterval);
@@ -1386,7 +1392,7 @@
       };
 
       const startAscii = () => {
-        if (!glyphInstances.length || reducedMotion.matches || asciiFrameId || document.hidden) {
+        if (!glyphInstances.length || asciiFrameId || !shouldAnimateAscii()) {
           return;
         }
         asciiLastTick = 0;
@@ -1414,29 +1420,39 @@
           createBackgroundGlyphs();
           refreshAscii();
           scheduleSpacingAudit();
+          if (shouldAnimateAscii()) {
+            startAscii();
+          } else {
+            stopAscii();
+          }
         });
       };
       window.addEventListener('resize', handleViewportResize);
 
       if (glyphField) {
         refreshAscii();
-        if (!reducedMotion.matches) {
+        if (shouldAnimateAscii()) {
           startAscii();
         }
 
-        const onReducedMotionChange = () => {
-          if (reducedMotion.matches) {
-            stopAscii();
-            renderAsciiScene();
-            return;
+        const onAnimationPolicyChange = () => {
+          stopAscii();
+          renderAsciiScene();
+          if (shouldAnimateAscii()) {
+            startAscii();
           }
-          startAscii();
         };
 
         if (typeof reducedMotion.addEventListener === 'function') {
-          reducedMotion.addEventListener('change', onReducedMotionChange);
+          reducedMotion.addEventListener('change', onAnimationPolicyChange);
         } else if (typeof reducedMotion.addListener === 'function') {
-          reducedMotion.addListener(onReducedMotionChange);
+          reducedMotion.addListener(onAnimationPolicyChange);
+        }
+
+        if (typeof lowPowerViewport.addEventListener === 'function') {
+          lowPowerViewport.addEventListener('change', onAnimationPolicyChange);
+        } else if (typeof lowPowerViewport.addListener === 'function') {
+          lowPowerViewport.addListener(onAnimationPolicyChange);
         }
 
         document.addEventListener('visibilitychange', () => {
@@ -1444,7 +1460,9 @@
             stopAscii();
             return;
           }
-          startAscii();
+          if (shouldAnimateAscii()) {
+            startAscii();
+          }
         });
       }
 
