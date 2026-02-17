@@ -156,19 +156,6 @@
         z-index: 1;
         animation: fade-up 0.55s ease-out both;
       }
-      .container::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border: 0;
-        border-radius: 0;
-        background: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(2px) saturate(1);
-        -webkit-backdrop-filter: blur(2px) saturate(1);
-        pointer-events: none;
-        z-index: -1;
-      }
-      
       body.theme-dark .container {
         background-image: none;
       }
