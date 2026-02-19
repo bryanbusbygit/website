@@ -493,13 +493,18 @@
         }
 
         updateStatusSquares(target);
-        const targetHash = `#${target}`;
-        if (
-          window.location.hash !== targetHash &&
-          window.history &&
-          typeof window.history.replaceState === 'function'
-        ) {
-          window.history.replaceState(null, '', targetHash);
+        if (window.history && typeof window.history.replaceState === 'function') {
+          if (target === 'landing') {
+            if (window.location.hash) {
+              const baseUrl = `${window.location.pathname}${window.location.search}`;
+              window.history.replaceState(null, '', baseUrl);
+            }
+          } else {
+            const targetHash = `#${target}`;
+            if (window.location.hash !== targetHash) {
+              window.history.replaceState(null, '', targetHash);
+            }
+          }
         }
 
         sections.forEach((section) => {
@@ -564,11 +569,20 @@
       sections.forEach((section) => prepareStagger(section));
       const hashTarget = window.location.hash.replace('#', '');
       const initialTarget = sectionsToTarget(hashTarget) || 'landing';
+      const resetInitialScrollToTop = hashTarget === 'landing';
       setActiveSection(initialTarget, { instant: true });
       setWrapperHeight();
+      if (resetInitialScrollToTop) {
+        window.requestAnimationFrame(() => {
+          window.scrollTo(0, 0);
+        });
+      }
       scheduleSpacingAudit({ log: spacingDebugEnabled });
       window.addEventListener('load', () => {
         setWrapperHeight();
+        if (resetInitialScrollToTop) {
+          window.scrollTo(0, 0);
+        }
         scheduleSpacingAudit({ log: spacingDebugEnabled });
       });
       window.addEventListener('hashchange', () => {
@@ -1180,7 +1194,7 @@
               cols: 36,
               rows: 20,
               fontSize: 9.4,
-              opacity: 0.26,
+              opacity: 0.57,
               yaw: -0.46,
               pitch: 0.42,
               roll: 0.16,
@@ -1196,7 +1210,7 @@
               cols: 34,
               rows: 24,
               fontSize: 9.4,
-              opacity: 0.23,
+              opacity: 0.54,
               yaw: 0.64,
               pitch: 0.38,
               roll: 0.12,
@@ -1212,7 +1226,7 @@
               cols: 26,
               rows: 18,
               fontSize: 7.8,
-              opacity: 0.2,
+              opacity: 0.51,
               yaw: 0.22,
               pitch: 0.42,
               roll: -0.14,
@@ -1232,7 +1246,7 @@
             cols: 42,
             rows: 26,
             fontSize: 10.6,
-            opacity: 0.28,
+            opacity: 0.59,
             yaw: -0.5,
             pitch: 0.48,
             roll: 0.22,
@@ -1248,7 +1262,7 @@
             cols: 44,
             rows: 30,
             fontSize: 10.8,
-            opacity: 0.24,
+            opacity: 0.55,
             yaw: 0.58,
             pitch: 0.42,
             roll: 0.1,
@@ -1264,7 +1278,7 @@
             cols: 30,
             rows: 20,
             fontSize: 8.6,
-            opacity: 0.21,
+            opacity: 0.52,
             yaw: 0.18,
             pitch: 0.46,
             roll: -0.12,

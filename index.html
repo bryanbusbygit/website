@@ -11,25 +11,38 @@
       :root {
         --profile-size: 136px;
       }
+      body:not(.theme-dark) .theme-toggle-face {
+        color: #000000;
+      }
+      body:not(.theme-dark) .glyph-node {
+        color: #000000;
+      }
+      body.theme-dark {
+        --page-bg: #000000;
+        --card-bg: #000000;
+        --bg-glass: 0 0 0 / 1;
+      }
       .theme-toggle-face {
         margin: 0;
         width: 100%;
         height: 100%;
+        box-sizing: border-box;
+        padding: 0;
         display: block;
         overflow: hidden;
         white-space: pre;
         text-align: center;
         font-family: var(--mono);
-        font-size: 6px;
-        line-height: 0.79;
-        letter-spacing: -0.05em;
+        font-size: 6.6px;
+        line-height: 0.84;
+        letter-spacing: -0.045em;
         font-weight: 700;
         font-variant-ligatures: none;
         user-select: none;
         pointer-events: none;
         opacity: 0.9;
         color: var(--ink);
-        text-shadow: 0 0 1px rgba(0, 0, 0, 0.18);
+        text-shadow: none;
         transition: opacity 0.2s ease;
       }
       .theme-toggle:hover .theme-toggle-face,
@@ -37,7 +50,7 @@
         opacity: 1;
       }
       body.theme-dark .theme-toggle-face {
-        text-shadow: 0 0 2px rgba(212, 255, 244, 0.14);
+        text-shadow: none;
       }
       .glyph-node {
         color: var(--ink);
@@ -50,8 +63,8 @@
           --profile-size: 108px;
         }
         .theme-toggle-face {
-          font-size: 4.6px;
-          line-height: 0.79;
+          font-size: 5.1px;
+          line-height: 0.84;
         }
       }
       @media (max-width: 560px) {
@@ -59,9 +72,9 @@
           --profile-size: 84px;
         }
         .theme-toggle-face {
-          font-size: 3.4px;
-          line-height: 0.79;
-          letter-spacing: -0.055em;
+          font-size: 3.8px;
+          line-height: 0.84;
+          letter-spacing: -0.05em;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -99,8 +112,8 @@
                 I've been involved in research since 2021, and I use this site to keep notes, manuscripts,
                 and links in one place. <br><br>
                 Aside from math, I like photography. You can find it in the 'Other' section. See the gallery as well.
-                <br>
-                <strong class="landing-face-note">click the face animation in the top-right for dark-mode*</strong>
+                <br><br>
+                <strong class="landing-face-note">*click the face animation in the top-right for dark-mode*</strong>
               </span>
               <a href="#gallery" class="inline-nav-link nav-link" data-section="gallery">View gallery</a>
             </p>
@@ -451,6 +464,8 @@
 
         const sampleCanvas = document.createElement('canvas');
         const sampleCtx = sampleCanvas.getContext('2d', { willReadFrequently: true });
+        const faceSourceCanvas = document.createElement('canvas');
+        const faceSourceCtx = faceSourceCanvas.getContext('2d', { willReadFrequently: true });
         const glyphCanvas = document.createElement('canvas');
         glyphCanvas.width = 64;
         glyphCanvas.height = 64;
@@ -476,6 +491,7 @@
         let resizeTimer = 0;
         let hasImage = false;
         let triedEmbeddedFace = false;
+        let faceCrop = null;
 
         const tryEmbeddedFace = () => {
           if (triedEmbeddedFace) {
@@ -486,6 +502,88 @@
           stop();
           faceImage.src = embeddedFaceUrl;
           return true;
+        };
+
+        const prepareFaceSource = () => {
+          faceCrop = null;
+          if (!faceSourceCtx || !faceImage.naturalWidth || !faceImage.naturalHeight) {
+            return;
+          }
+
+          const width = faceImage.naturalWidth;
+          const height = faceImage.naturalHeight;
+          faceSourceCanvas.width = width;
+          faceSourceCanvas.height = height;
+          faceSourceCtx.drawImage(faceImage, 0, 0, width, height);
+
+          let imageData;
+          try {
+            imageData = faceSourceCtx.getImageData(0, 0, width, height);
+          } catch (error) {
+            return;
+          }
+
+          const pixels = imageData.data;
+          let minX = width;
+          let minY = height;
+          let maxX = -1;
+          let maxY = -1;
+
+          for (let y = 0; y < height; y += 1) {
+            for (let x = 0; x < width; x += 1) {
+              const offset = ((y * width) + x) * 4;
+              const red = pixels[offset];
+              const green = pixels[offset + 1];
+              const blue = pixels[offset + 2];
+              const maxChannel = Math.max(red, green, blue);
+              const minChannel = Math.min(red, green, blue);
+              const saturation = maxChannel === 0 ? 0 : ((maxChannel - minChannel) / maxChannel);
+              const luma = lumaFromRGB(red, green, blue);
+
+              const neutralBackground = luma > 0.72 && saturation < 0.14;
+              const faintHalo = luma > 0.9 && saturation < 0.2;
+              if (neutralBackground || faintHalo) {
+                pixels[offset] = 255;
+                pixels[offset + 1] = 255;
+                pixels[offset + 2] = 255;
+                continue;
+              }
+
+              if (x < minX) {
+                minX = x;
+              }
+              if (y < minY) {
+                minY = y;
+              }
+              if (x > maxX) {
+                maxX = x;
+              }
+              if (y > maxY) {
+                maxY = y;
+              }
+            }
+          }
+
+          faceSourceCtx.putImageData(imageData, 0, 0);
+
+          if (maxX < minX || maxY < minY) {
+            return;
+          }
+
+          const paddingX = Math.round(width * 0.09);
+          const paddingTop = Math.round(height * 0.06);
+          const paddingBottom = Math.round(height * 0.38);
+          const cropX = Math.max(0, minX - paddingX);
+          const cropY = Math.max(0, minY - paddingTop);
+          const cropMaxX = Math.min(width - 1, maxX + paddingX);
+          const cropMaxY = Math.min(height - 1, maxY + paddingBottom);
+
+          faceCrop = {
+            x: cropX,
+            y: cropY,
+            width: Math.max(1, (cropMaxX - cropX) + 1),
+            height: Math.max(1, (cropMaxY - cropY) + 1),
+          };
         };
 
         const buildGlyphRamp = () => {
@@ -543,12 +641,17 @@
           const styles = window.getComputedStyle(asciiFace);
           const width = Math.max(44, Math.round(asciiFace.clientWidth || parseFloat(styles.width) || 96));
           const height = Math.max(44, Math.round(asciiFace.clientHeight || parseFloat(styles.height) || 96));
+          const paddingX = (parseFloat(styles.paddingLeft) || 0) + (parseFloat(styles.paddingRight) || 0);
+          const paddingY = (parseFloat(styles.paddingTop) || 0) + (parseFloat(styles.paddingBottom) || 0);
+          const usableWidth = Math.max(24, width - paddingX);
+          const usableHeight = Math.max(24, height - paddingY);
           const fontSize = parseFloat(styles.fontSize) || 4;
           const parsedLineHeight = parseFloat(styles.lineHeight);
           const lineHeight = Number.isFinite(parsedLineHeight) ? parsedLineHeight : (fontSize * 0.82);
-          const charWidth = fontSize * 0.58;
-          const nextCols = Math.max(18, Math.round(width / Math.max(charWidth, 1)));
-          const nextRows = Math.max(18, Math.round(height / Math.max(lineHeight, 1)));
+          const charWidth = fontSize * 0.66;
+          const nextCols = Math.max(14, Math.round(usableWidth / Math.max(charWidth, 1)));
+          // Use floor to avoid clipping the final ASCII row at the bottom edge.
+          const nextRows = Math.max(14, Math.floor(usableHeight / Math.max(lineHeight, 1)));
 
           if (nextCols === cols && nextRows === rows) {
             return;
@@ -563,39 +666,60 @@
         const drawFace = (time) => {
           const width = sampleCanvas.width;
           const height = sampleCanvas.height;
-          const sourceWidth = faceImage.naturalWidth;
-          const sourceHeight = faceImage.naturalHeight;
+          const source = faceSourceCanvas.width && faceSourceCanvas.height ? faceSourceCanvas : faceImage;
+          const sourceRect = faceCrop
+            ? faceCrop
+            : {
+                x: 0,
+                y: 0,
+                width: source === faceImage ? faceImage.naturalWidth : faceSourceCanvas.width,
+                height: source === faceImage ? faceImage.naturalHeight : faceSourceCanvas.height,
+              };
+          const sourceWidth = sourceRect.width;
+          const sourceHeight = sourceRect.height;
           if (!width || !height || !sourceWidth || !sourceHeight) {
             return;
           }
 
           const staticFrame = reducedMotion.matches;
-          const pulse = staticFrame ? 0 : (Math.sin(time * 0.0012) * 0.015);
-          const driftX = staticFrame ? 0 : (Math.sin(time * 0.0009) * width * 0.016);
-          const driftY = staticFrame ? 0 : (Math.cos(time * 0.0011) * height * 0.016);
-          const rotation = staticFrame ? 0 : (Math.sin(time * 0.00045) * 0.02);
-          const coverScale = Math.max(width / sourceWidth, height / sourceHeight) * (1.04 + pulse);
+          const pulse = staticFrame ? 0 : (Math.sin(time * 0.0012) * 0.006);
+          const driftX = staticFrame ? 0 : (Math.sin(time * 0.0009) * width * 0.008);
+          const driftY = staticFrame ? 0 : (Math.cos(time * 0.0011) * height * 0.006);
+          const rotation = staticFrame ? 0 : (Math.sin(time * 0.00045) * 0.0075);
+          const coverScale = Math.max(width / sourceWidth, height / sourceHeight) * (0.92 + pulse);
           const drawWidth = sourceWidth * coverScale;
           const drawHeight = sourceHeight * coverScale;
 
           sampleCtx.save();
           sampleCtx.clearRect(0, 0, width, height);
-          sampleCtx.translate((width * 0.5) + driftX, (height * 0.5) + driftY);
+          sampleCtx.fillStyle = '#fff';
+          sampleCtx.fillRect(0, 0, width, height);
+          sampleCtx.translate((width * 0.5) + driftX, (height * 0.57) + driftY);
           sampleCtx.rotate(rotation);
-          sampleCtx.filter = 'grayscale(1) contrast(1.42) brightness(0.98)';
-          sampleCtx.drawImage(faceImage, -drawWidth * 0.5, -drawHeight * 0.5, drawWidth, drawHeight);
+          sampleCtx.filter = 'grayscale(1) contrast(1.08) brightness(1.08) blur(0.75px)';
+          sampleCtx.drawImage(
+            source,
+            sourceRect.x,
+            sourceRect.y,
+            sourceWidth,
+            sourceHeight,
+            -drawWidth * 0.5,
+            -drawHeight * 0.5,
+            drawWidth,
+            drawHeight,
+          );
           sampleCtx.restore();
         };
 
-        const glyphForLuma = (luma, x, y, time) => {
-          let darkness = 1 - luma;
-          if (!reducedMotion.matches) {
-            const shimmer = Math.sin((x * 0.73) + (y * 0.91) + (time * 0.003)) * 0.032;
-            darkness = clamp01(darkness + shimmer);
-          }
+        const faceBlackPoint = 0.1;
+        const faceWhitePoint = 0.99;
+        const normalizeFaceLuma = (luma) => clamp01(
+          (luma - faceBlackPoint) / (faceWhitePoint - faceBlackPoint),
+        );
 
-          darkness = Math.pow(clamp01(darkness), 0.86);
-          if (darkness < 0.02) {
+        const glyphForLuma = (luma) => {
+          const darkness = clamp01(Math.pow(clamp01(1 - luma), 1.12) * 0.78);
+          if (darkness < 0.04) {
             return ' ';
           }
 
@@ -631,8 +755,6 @@
           const width = sampleCanvas.width;
           const count = rows * cols;
           const lumaGrid = new Float32Array(count);
-          let minLuma = 1;
-          let maxLuma = 0;
 
           for (let y = 0; y < rows; y += 1) {
             for (let x = 0; x < cols; x += 1) {
@@ -655,24 +777,32 @@
               const luma = lumaSum / 6;
               const index = (y * cols) + x;
               lumaGrid[index] = luma;
-              if (luma < minLuma) {
-                minLuma = luma;
-              }
-              if (luma > maxLuma) {
-                maxLuma = luma;
-              }
             }
           }
 
-          const span = Math.max(maxLuma - minLuma, 0.001);
+          const bottomFeatherRows = Math.max(3, Math.round(rows * 0.16));
+          const bottomFeatherStart = Math.max(0, rows - bottomFeatherRows);
           const lines = new Array(rows);
           for (let y = 0; y < rows; y += 1) {
             let line = '';
             for (let x = 0; x < cols; x += 1) {
               const index = (y * cols) + x;
-              const normalized = clamp01((lumaGrid[index] - minLuma) / span);
-              const tuned = Math.pow(normalized, 0.92);
-              line += glyphForLuma(tuned, x, y, time);
+              let normalized = normalizeFaceLuma(lumaGrid[index]);
+
+              if (y >= bottomFeatherStart) {
+                const featherDepth = (y - bottomFeatherStart + 1) / (bottomFeatherRows + 1);
+                const rowAbove = Math.max(0, y - 1);
+                const carriedIndex = (rowAbove * cols) + x;
+                const baseDarkness = 1 - normalized;
+                const carriedDarkness = (1 - normalizeFaceLuma(lumaGrid[carriedIndex])) * (1 - featherDepth) * 0.34;
+                let softenedDarkness = baseDarkness * (1 - (featherDepth * 0.66));
+                // Add a small static dither so the edge breaks up organically.
+                const dither = (((x + 3) * 17 + (y + 5) * 31) % 11) / 11;
+                softenedDarkness = (softenedDarkness + carriedDarkness) * (1 - (featherDepth * 0.4 * dither));
+                normalized = clamp01(1 - softenedDarkness);
+              }
+
+              line += glyphForLuma(normalized);
             }
             lines[y] = line;
           }
@@ -773,6 +903,7 @@
           }
 
           hasImage = true;
+          prepareFaceSource();
           buildGlyphRamp();
           start();
         };
