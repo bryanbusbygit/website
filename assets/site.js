@@ -602,6 +602,7 @@
       let resizeRaf = 0;
       let asciiGlyphProfiles = [];
       let glyphInstances = [];
+      let glyphSoftenRaf = 0;
 
       const TAU = Math.PI * 2;
       const ASCII_SUBCELLS = 6;
@@ -1176,10 +1177,108 @@
       };
 
       const clearBackgroundGlyphs = () => {
+        if (glyphSoftenRaf) {
+          window.cancelAnimationFrame(glyphSoftenRaf);
+          glyphSoftenRaf = 0;
+        }
         glyphInstances = [];
         if (glyphField) {
           glyphField.replaceChildren();
         }
+      };
+
+      const GLYPH_TEXT_TARGET_SELECTOR =
+        'header h1, .content-section.active h2, .content-section.active h3, ' +
+        '.content-section.active p, .content-section.active li, ' +
+        '.content-section.active .small, .last-updated-label';
+      const GLYPH_TEXT_PROXIMITY_DISTANCE = 240;
+      const GLYPH_TEXT_OPACITY_REDUCTION = 0.62;
+      const GLYPH_TEXT_MIN_OPACITY = 0.18;
+
+      const rectDistance = (first, second) => {
+        const dx = first.right < second.left
+          ? (second.left - first.right)
+          : (second.right < first.left ? (first.left - second.right) : 0);
+        const dy = first.bottom < second.top
+          ? (second.top - first.bottom)
+          : (second.bottom < first.top ? (first.top - second.bottom) : 0);
+        return Math.hypot(dx, dy);
+      };
+
+      const collectVisibleTextRects = () => {
+        const nodes = Array.from(document.querySelectorAll(GLYPH_TEXT_TARGET_SELECTOR));
+        const rects = [];
+        nodes.forEach((node) => {
+          const styles = window.getComputedStyle(node);
+          if (styles.display === 'none' || styles.visibility === 'hidden') {
+            return;
+          }
+          const rect = node.getBoundingClientRect();
+          if (rect.width <= 2 || rect.height <= 2) {
+            return;
+          }
+          rects.push(rect);
+        });
+        return rects;
+      };
+
+      const blendChannel = (base, target, weight) => (
+        Math.round(base + ((target - base) * weight))
+      );
+
+      const applyGlyphTextSoftening = () => {
+        if (!glyphInstances.length) {
+          return;
+        }
+
+        const textRects = collectVisibleTextRects();
+        const darkTheme = document.body.classList.contains('theme-dark');
+        const baseColor = darkTheme ? [236, 236, 236] : [0, 0, 0];
+        const softenedColor = darkTheme ? [168, 168, 168] : [146, 146, 146];
+
+        glyphInstances.forEach((glyph) => {
+          const baseOpacity = glyph.baseOpacity;
+          if (!textRects.length) {
+            glyph.node.style.opacity = baseOpacity.toFixed(3);
+            glyph.node.style.color = '';
+            return;
+          }
+
+          const glyphRect = glyph.node.getBoundingClientRect();
+          let nearestDistance = Number.POSITIVE_INFINITY;
+          for (let index = 0; index < textRects.length; index += 1) {
+            const distance = rectDistance(glyphRect, textRects[index]);
+            if (distance < nearestDistance) {
+              nearestDistance = distance;
+            }
+            if (!nearestDistance) {
+              break;
+            }
+          }
+
+          const proximity = clamp01(1 - (nearestDistance / GLYPH_TEXT_PROXIMITY_DISTANCE));
+          const soften = proximity * proximity;
+          const adjustedOpacity = Math.max(
+            GLYPH_TEXT_MIN_OPACITY,
+            baseOpacity * (1 - (soften * GLYPH_TEXT_OPACITY_REDUCTION)),
+          );
+          const red = blendChannel(baseColor[0], softenedColor[0], soften);
+          const green = blendChannel(baseColor[1], softenedColor[1], soften);
+          const blue = blendChannel(baseColor[2], softenedColor[2], soften);
+
+          glyph.node.style.opacity = adjustedOpacity.toFixed(3);
+          glyph.node.style.color = `rgb(${red} ${green} ${blue})`;
+        });
+      };
+
+      const scheduleGlyphTextSoftening = () => {
+        if (!glyphField || glyphSoftenRaf) {
+          return;
+        }
+        glyphSoftenRaf = window.requestAnimationFrame(() => {
+          glyphSoftenRaf = 0;
+          applyGlyphTextSoftening();
+        });
       };
 
       const getBackgroundGlyphLayout = () => {
@@ -1303,6 +1402,7 @@
           node.style.top = `${(placement.y * 100).toFixed(2)}%`;
           node.style.setProperty('--glyph-font-size', `${placement.fontSize.toFixed(2)}px`);
           node.style.setProperty('--glyph-opacity', `${placement.opacity.toFixed(3)}`);
+          node.style.opacity = placement.opacity.toFixed(3);
           const pre = document.createElement('pre');
           pre.setAttribute('aria-hidden', 'true');
           node.append(pre);
@@ -1311,6 +1411,7 @@
             shape: placement.shape,
             pre,
             node,
+            baseOpacity: placement.opacity,
             phase: index * 1.2,
             yaw: placement.yaw,
             pitch: placement.pitch,
@@ -1338,6 +1439,7 @@
               : (placement.shape === 'plus' ? Math.max(24, placement.rows) : placement.rows + 20),
           });
         });
+        applyGlyphTextSoftening();
       };
 
       const renderBackgroundGlyphs = () => {
@@ -1384,6 +1486,7 @@
 
       const renderAsciiScene = () => {
         renderBackgroundGlyphs();
+        applyGlyphTextSoftening();
       };
 
       const animateAscii = (timestamp) => {
@@ -1442,6 +1545,11 @@
         });
       };
       window.addEventListener('resize', handleViewportResize);
+      window.addEventListener('scroll', scheduleGlyphTextSoftening, { passive: true });
+      window.addEventListener('hashchange', scheduleGlyphTextSoftening);
+      if (themeToggle) {
+        themeToggle.addEventListener('click', scheduleGlyphTextSoftening);
+      }
 
       if (glyphField) {
         refreshAscii();
