@@ -578,12 +578,81 @@
         });
       }
       scheduleSpacingAudit({ log: spacingDebugEnabled });
+
+      const INTRO_TOUR_KEY = 'intro-tour-v1';
+      const INTRO_TOUR_STEP_MS = 950;
+      const queueIntroTour = () => {
+        if (storage.get(INTRO_TOUR_KEY) === 'done') {
+          return;
+        }
+        if (window.location.hash) {
+          return;
+        }
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          return;
+        }
+        if (document.visibilityState === 'hidden') {
+          return;
+        }
+
+        const tourSections = sectionOrder.filter((target) => target && target !== 'landing');
+        if (!tourSections.length) {
+          return;
+        }
+
+        storage.set(INTRO_TOUR_KEY, 'done');
+
+        const sequence = [...tourSections, 'landing'];
+        let timerId = 0;
+        let cancelled = false;
+
+        const cleanup = () => {
+          window.removeEventListener('pointerdown', cancel);
+          window.removeEventListener('keydown', cancel);
+        };
+
+        const cancel = () => {
+          if (cancelled) {
+            return;
+          }
+          cancelled = true;
+          window.clearTimeout(timerId);
+          cleanup();
+          setActiveSection('landing', { instant: true });
+          setWrapperHeight();
+          window.scrollTo(0, 0);
+        };
+
+        window.addEventListener('pointerdown', cancel, { passive: true });
+        window.addEventListener('keydown', cancel);
+
+        let index = 0;
+        const tick = () => {
+          if (cancelled) {
+            return;
+          }
+          const target = sequence[index];
+          setActiveSection(target, { instant: true });
+          setWrapperHeight();
+          window.scrollTo(0, 0);
+          index += 1;
+          if (index >= sequence.length) {
+            cleanup();
+            return;
+          }
+          timerId = window.setTimeout(tick, INTRO_TOUR_STEP_MS);
+        };
+
+        timerId = window.setTimeout(tick, 520);
+      };
+
       window.addEventListener('load', () => {
         setWrapperHeight();
         if (resetInitialScrollToTop) {
           window.scrollTo(0, 0);
         }
         scheduleSpacingAudit({ log: spacingDebugEnabled });
+        queueIntroTour();
       });
       window.addEventListener('hashchange', () => {
         const target = sectionsToTarget(window.location.hash.replace('#', ''));
