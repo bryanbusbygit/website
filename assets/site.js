@@ -128,7 +128,11 @@
         if (!lastUpdatedLabel) {
           return;
         }
-        const lastUpdatedDate = parseLastModifiedDate(document.lastModified) || new Date();
+        const explicitDate = document.body ? document.body.getAttribute('data-last-updated') : '';
+        const lastUpdatedDate =
+          parseLastModifiedDate(explicitDate) ||
+          parseLastModifiedDate(document.lastModified) ||
+          new Date();
         const compactDate = formatCompactLastUpdatedDate(lastUpdatedDate);
         lastUpdatedLabel.textContent = formatDisplayLastUpdatedDate(lastUpdatedDate);
         if (compactDate) {
@@ -182,6 +186,31 @@
           return;
         }
         contentWrapper.style.height = `${getSectionHeight(active)}px`;
+      };
+
+      let activeSectionObserver = null;
+      const scheduleWrapperHeight = () => {
+        if (!contentWrapper) {
+          return;
+        }
+        window.requestAnimationFrame(() => {
+          setWrapperHeight();
+        });
+      };
+      const observeActiveSection = (section) => {
+        if (!contentWrapper || typeof ResizeObserver === 'undefined') {
+          return;
+        }
+        if (activeSectionObserver) {
+          activeSectionObserver.disconnect();
+        }
+        if (!section) {
+          return;
+        }
+        activeSectionObserver = new ResizeObserver(() => {
+          scheduleWrapperHeight();
+        });
+        activeSectionObserver.observe(section);
       };
 
       const SPACING_RUBRIC = Object.freeze({
@@ -468,10 +497,10 @@
         const isLanding = section.getAttribute('data-section') === 'landing';
         items.forEach((item, index) => {
           item.classList.add('stagger-item');
-          let delay = Math.min(index * 90, 540);
+          let delay = Math.min(index * 24, 120);
           if (isLanding) {
             const inChoice = item.classList.contains('choice-card') || item.closest('.choice-card');
-            delay = inChoice ? 160 : 0;
+            delay = inChoice ? 60 : 0;
           }
           item.style.setProperty('--stagger-delay', `${delay}ms`);
         });
@@ -517,6 +546,7 @@
             section.inert = !isActiveSection;
           }
         });
+        observeActiveSection(next);
 
         if (!contentWrapper) {
           if (previous && previous !== next) {
@@ -563,7 +593,7 @@
           cleanup();
         };
         contentWrapper.addEventListener('transitionend', onTransitionEnd);
-        window.setTimeout(cleanup, 850);
+        window.setTimeout(cleanup, 220);
       };
 
       sections.forEach((section) => prepareStagger(section));
@@ -579,80 +609,12 @@
       }
       scheduleSpacingAudit({ log: spacingDebugEnabled });
 
-      const INTRO_TOUR_KEY = 'intro-tour-v1';
-      const INTRO_TOUR_STEP_MS = 950;
-      const queueIntroTour = () => {
-        if (storage.get(INTRO_TOUR_KEY) === 'done') {
-          return;
-        }
-        if (window.location.hash) {
-          return;
-        }
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          return;
-        }
-        if (document.visibilityState === 'hidden') {
-          return;
-        }
-
-        const tourSections = sectionOrder.filter((target) => target && target !== 'landing');
-        if (!tourSections.length) {
-          return;
-        }
-
-        storage.set(INTRO_TOUR_KEY, 'done');
-
-        const sequence = [...tourSections, 'landing'];
-        let timerId = 0;
-        let cancelled = false;
-
-        const cleanup = () => {
-          window.removeEventListener('pointerdown', cancel);
-          window.removeEventListener('keydown', cancel);
-        };
-
-        const cancel = () => {
-          if (cancelled) {
-            return;
-          }
-          cancelled = true;
-          window.clearTimeout(timerId);
-          cleanup();
-          setActiveSection('landing', { instant: true });
-          setWrapperHeight();
-          window.scrollTo(0, 0);
-        };
-
-        window.addEventListener('pointerdown', cancel, { passive: true });
-        window.addEventListener('keydown', cancel);
-
-        let index = 0;
-        const tick = () => {
-          if (cancelled) {
-            return;
-          }
-          const target = sequence[index];
-          setActiveSection(target, { instant: true });
-          setWrapperHeight();
-          window.scrollTo(0, 0);
-          index += 1;
-          if (index >= sequence.length) {
-            cleanup();
-            return;
-          }
-          timerId = window.setTimeout(tick, INTRO_TOUR_STEP_MS);
-        };
-
-        timerId = window.setTimeout(tick, 520);
-      };
-
       window.addEventListener('load', () => {
         setWrapperHeight();
         if (resetInitialScrollToTop) {
           window.scrollTo(0, 0);
         }
         scheduleSpacingAudit({ log: spacingDebugEnabled });
-        queueIntroTour();
       });
       window.addEventListener('hashchange', () => {
         const target = sectionsToTarget(window.location.hash.replace('#', ''));
