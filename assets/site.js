@@ -151,13 +151,7 @@
         }
       };
 
-      const getInitialTheme = () => {
-        const saved = storage.get(THEME_KEY);
-        if (saved === 'dark' || saved === 'light') {
-          return saved;
-        }
-        return 'light';
-      };
+      const getInitialTheme = () => 'light';
 
       setTheme(getInitialTheme());
       setLastUpdatedLabel();
@@ -168,7 +162,6 @@
       if (themeToggle) {
         themeToggle.addEventListener('click', (event) => {
           const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
-          storage.set(THEME_KEY, next);
           setTheme(next);
         });
       }
