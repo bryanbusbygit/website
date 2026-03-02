@@ -514,6 +514,9 @@
           return;
         }
 
+        if (document.body) {
+          document.body.setAttribute('data-active-section', target);
+        }
         updateStatusSquares(target);
         if (window.history && typeof window.history.replaceState === 'function') {
           if (target === 'landing') {
@@ -587,6 +590,149 @@
         };
         contentWrapper.addEventListener('transitionend', onTransitionEnd);
         window.setTimeout(cleanup, 220);
+      };
+
+      const getActiveSectionName = () => {
+        const fromBody = document.body ? document.body.getAttribute('data-active-section') : '';
+        return sectionsToTarget(fromBody) || 'landing';
+      };
+
+      const getRelativeSection = (step) => {
+        if (!step || !sectionOrder.length) {
+          return null;
+        }
+        const currentIndex = sectionOrder.indexOf(getActiveSectionName());
+        if (currentIndex === -1) {
+          return null;
+        }
+        const nextIndex = currentIndex + step;
+        if (nextIndex < 0 || nextIndex >= sectionOrder.length) {
+          return null;
+        }
+        return sectionOrder[nextIndex];
+      };
+
+      const isInteractiveSwipeStart = (target) => {
+        if (!(target instanceof Element)) {
+          return false;
+        }
+        return Boolean(target.closest(
+          'a, button, input, textarea, select, label, summary, video, iframe, [role="button"]',
+        ));
+      };
+
+      const swipeState = {
+        active: false,
+        pointerId: null,
+        startX: 0,
+        startY: 0,
+        lastX: 0,
+        lastY: 0,
+        axis: null,
+        startedAt: 0,
+      };
+
+      const resetSwipeState = () => {
+        swipeState.active = false;
+        swipeState.pointerId = null;
+        swipeState.startX = 0;
+        swipeState.startY = 0;
+        swipeState.lastX = 0;
+        swipeState.lastY = 0;
+        swipeState.axis = null;
+        swipeState.startedAt = 0;
+      };
+
+      const findTrackedTouch = (touchList) => {
+        for (let index = 0; index < touchList.length; index += 1) {
+          const touch = touchList[index];
+          if (touch.identifier === swipeState.pointerId) {
+            return touch;
+          }
+        }
+        return null;
+      };
+
+      const SWIPE_AXIS_LOCK_DISTANCE = 16;
+      const SWIPE_MIN_DISTANCE = 72;
+      const SWIPE_MAX_OFF_AXIS = 56;
+      const SWIPE_MAX_DURATION = 700;
+
+      const handleSwipeStart = (event) => {
+        if (event.touches.length !== 1 || isInteractiveSwipeStart(event.target)) {
+          resetSwipeState();
+          return;
+        }
+        const [touch] = event.touches;
+        swipeState.active = true;
+        swipeState.pointerId = touch.identifier;
+        swipeState.startX = touch.clientX;
+        swipeState.startY = touch.clientY;
+        swipeState.lastX = touch.clientX;
+        swipeState.lastY = touch.clientY;
+        swipeState.axis = null;
+        swipeState.startedAt = event.timeStamp;
+      };
+
+      const handleSwipeMove = (event) => {
+        if (!swipeState.active) {
+          return;
+        }
+        const touch = findTrackedTouch(event.touches);
+        if (!touch) {
+          resetSwipeState();
+          return;
+        }
+
+        swipeState.lastX = touch.clientX;
+        swipeState.lastY = touch.clientY;
+        const deltaX = touch.clientX - swipeState.startX;
+        const deltaY = touch.clientY - swipeState.startY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+
+        if (!swipeState.axis && (absX >= SWIPE_AXIS_LOCK_DISTANCE || absY >= SWIPE_AXIS_LOCK_DISTANCE)) {
+          swipeState.axis = absX > absY ? 'x' : 'y';
+        }
+
+        if (swipeState.axis === 'x' && event.cancelable) {
+          event.preventDefault();
+        }
+      };
+
+      const handleSwipeEnd = (event) => {
+        if (!swipeState.active) {
+          return;
+        }
+        const touch = findTrackedTouch(event.changedTouches);
+        if (!touch) {
+          resetSwipeState();
+          return;
+        }
+
+        const deltaX = touch.clientX - swipeState.startX;
+        const deltaY = touch.clientY - swipeState.startY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        const elapsed = event.timeStamp - swipeState.startedAt;
+
+        if (
+          swipeState.axis === 'x' &&
+          elapsed <= SWIPE_MAX_DURATION &&
+          absX >= SWIPE_MIN_DISTANCE &&
+          absY <= SWIPE_MAX_OFF_AXIS
+        ) {
+          const target = deltaX < 0 ? getRelativeSection(1) : getRelativeSection(-1);
+          if (target) {
+            setActiveSection(target);
+          }
+        }
+
+        resetSwipeState();
+      };
+
+      const handleSwipeCancel = () => {
+        resetSwipeState();
       };
 
       sections.forEach((section) => prepareStagger(section));
@@ -1643,6 +1789,13 @@
           }
         });
       });
+
+      if (contentWrapper) {
+        contentWrapper.addEventListener('touchstart', handleSwipeStart, { passive: true });
+        contentWrapper.addEventListener('touchmove', handleSwipeMove, { passive: false });
+        contentWrapper.addEventListener('touchend', handleSwipeEnd, { passive: true });
+        contentWrapper.addEventListener('touchcancel', handleSwipeCancel, { passive: true });
+      }
 
       function sectionsToTarget(target) {
         if (!target) {
