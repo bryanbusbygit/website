@@ -9,34 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-    <script>
-      (() => {
-        const themeKey = 'theme-preference-v2';
-        let storedTheme = null;
-
-        try {
-          storedTheme = window.localStorage.getItem(themeKey);
-        } catch (error) {
-          storedTheme = null;
-        }
-
-        if (!storedTheme) {
-          const encodedKey = encodeURIComponent(themeKey);
-          const cookieMatch = document.cookie.match(new RegExp(`(?:^|; )${encodedKey}=([^;]*)`));
-          if (cookieMatch) {
-            try {
-              storedTheme = decodeURIComponent(cookieMatch[1]);
-            } catch (error) {
-              storedTheme = cookieMatch[1];
-            }
-          }
-        }
-
-        if (storedTheme === 'dark') {
-          document.documentElement.classList.add('theme-dark');
-        }
-      })();
-    </script>
     <link rel="stylesheet" href="assets/site.css">
     <style>
       :root {

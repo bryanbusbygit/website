@@ -1,5 +1,3 @@
-      const THEME_KEY = 'theme-preference-v3';
-      const THEME_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
       document.body.classList.add('js-enabled');
 
       const allLinks = document.querySelectorAll('.nav-link');
@@ -15,57 +13,6 @@
       const sectionOrder = Array.from(sections)
         .map((section) => section.getAttribute('data-section'))
         .filter(Boolean);
-      const cookieStorage = {
-        get(key) {
-          const encodedKey = encodeURIComponent(key);
-          const keyPattern = new RegExp(`(?:^|; )${encodedKey}=([^;]*)`);
-          const match = document.cookie.match(keyPattern);
-          if (!match) {
-            return null;
-          }
-          try {
-            return decodeURIComponent(match[1]);
-          } catch (error) {
-            return match[1];
-          }
-        },
-        set(key, value) {
-          const encodedKey = encodeURIComponent(key);
-          const encodedValue = encodeURIComponent(value);
-          document.cookie = `${encodedKey}=${encodedValue}; path=/; max-age=${THEME_COOKIE_MAX_AGE_SECONDS}; samesite=lax`;
-        },
-      };
-
-      const storage = {
-        get(key) {
-          try {
-            const stored = window.localStorage.getItem(key);
-            if (stored !== null) {
-              return stored;
-            }
-          } catch (error) {
-            // Fall through to cookie storage.
-          }
-          try {
-            return cookieStorage.get(key);
-          } catch (error) {
-            return null;
-          }
-        },
-        set(key, value) {
-          try {
-            window.localStorage.setItem(key, value);
-          } catch (error) {
-            // Ignore localStorage failures and use cookie fallback.
-          }
-          try {
-            cookieStorage.set(key, value);
-          } catch (error) {
-            // Ignore cookie failures and keep runtime behavior stable.
-          }
-        },
-      };
-
       const updateStatusSquares = (target) => {
         if (!footerSquares.length) {
           return;
@@ -144,8 +91,7 @@
         }
       };
 
-      const setTheme = (mode, options = {}) => {
-        const { persist = false } = options;
+      const setTheme = (mode) => {
         const nextMode = mode === 'dark' ? 'dark' : 'light';
         const isDark = nextMode === 'dark';
 
@@ -155,20 +101,9 @@
           themeToggle.setAttribute('aria-pressed', String(isDark));
           themeToggle.setAttribute('aria-label', isDark ? 'switch to light theme' : 'switch to dark theme');
         }
-        if (persist) {
-          storage.set(THEME_KEY, nextMode);
-        }
       };
 
-      const getInitialTheme = () => {
-        const storedTheme = storage.get(THEME_KEY);
-        if (storedTheme === 'dark' || storedTheme === 'light') {
-          return storedTheme;
-        }
-        return 'light';
-      };
-
-      setTheme(getInitialTheme());
+      setTheme('light');
       setLastUpdatedLabel();
       if (typeof compactDateViewport.addEventListener === 'function') {
         compactDateViewport.addEventListener('change', setLastUpdatedLabel);
@@ -182,7 +117,7 @@
       if (themeToggle) {
         themeToggle.addEventListener('click', () => {
           const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
-          setTheme(next, { persist: true });
+          setTheme(next);
         });
       }
 
