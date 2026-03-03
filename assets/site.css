@@ -59,10 +59,10 @@
         --ascii-flux: rgba(15, 40, 66, 0.62);
         --ascii-dust: rgba(8, 8, 8, 0.45);
         --status-gallery: #2f7f66;
-        --status-square-1: #871515;
-        --status-square-2: #981a1a;
-        --status-square-3: #a91f1f;
-        --status-square-4: #bb2525;
+        --status-square-1: #c9a43a;
+        --status-square-2: #4f78ad;
+        --status-square-3: #d06a63;
+        --status-square-4: #000000;
       }
       body.theme-dark {
         --bg-glass: 8 8 8 / 1;
@@ -89,9 +89,9 @@
         --ascii-flux: rgba(255, 255, 255, 0.76);
         --ascii-dust: rgba(255, 255, 255, 0.54);
         --status-gallery: #ffffff;
-        --status-square-1: #ffffff;
-        --status-square-2: #ffffff;
-        --status-square-3: #ffffff;
+        --status-square-1: #d8b54a;
+        --status-square-2: #8fb2de;
+        --status-square-3: #d06a63;
         --status-square-4: #ffffff;
       }
       body.theme-dark .name-black {
@@ -1197,7 +1197,7 @@
       }
       .date-stamp {
         display: inline-flex;
-        align-items: baseline;
+        align-items: center;
         justify-content: flex-end;
         gap: 10px;
         width: 100%;
@@ -1214,9 +1214,18 @@
         white-space: nowrap;
         letter-spacing: 0.1em;
         font-variant-numeric: tabular-nums;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
       }
-      .date-accent {
-        color: #d06a63;
+      .date-segment-month {
+        color: #c9a43a;
+      }
+      .date-segment-day {
+        color: #4f78ad;
+      }
+      .date-separator {
+        color: inherit;
       }
       .status-path {
         display: inline-flex;
@@ -1245,8 +1254,8 @@
         content: "";
         width: 6px;
         height: 6px;
-        border: 1px solid color-mix(in srgb, var(--status-square-base, var(--line)) 78%, transparent);
-        background: color-mix(in srgb, var(--status-square-base, var(--line)) 78%, transparent);
+        border: 1px solid var(--status-square-base, var(--line));
+        background: var(--status-square-base, var(--line));
         box-sizing: border-box;
         transition: opacity 0.14s ease-out, transform 0.14s ease-out, outline-offset 0.14s ease-out;
       }
@@ -1659,6 +1668,7 @@
           white-space: normal;
           letter-spacing: 0.01em;
           font-size: 0.92rem;
+          gap: 0.25em;
         }
         .date-stamp {
           font-size: 0.84rem;

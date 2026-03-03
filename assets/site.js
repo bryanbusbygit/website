@@ -72,6 +72,23 @@
         return `${spreadDigits(month)} - ${spreadDigits(day)} - ${spreadDigits(year)}`;
       };
 
+      const buildLastUpdatedMarkup = (compactDate, displayDate) => {
+        if (!compactDate || !displayDate) {
+          return displayDate;
+        }
+        const [month, day] = compactDate.split('-');
+        const isCompact = displayDate === compactDate;
+        const monthDisplay = isCompact ? month : month.split('').join(' ');
+        const dayDisplay = isCompact ? day : day.split('').join(' ');
+        const separator = isCompact ? '-' : ' - ';
+        return displayDate
+          .replace(monthDisplay, `<span class="date-segment-month">${monthDisplay}</span>`)
+          .replace(
+            `${separator}${dayDisplay}`,
+            `<span class="date-separator">${separator}</span><span class="date-segment-day">${dayDisplay}</span>`
+          );
+      };
+
       const setLastUpdatedLabel = () => {
         if (!lastUpdatedLabel) {
           return;
@@ -85,7 +102,7 @@
         const displayDate = compactDateViewport.matches
           ? compactDate
           : formatDisplayLastUpdatedDate(lastUpdatedDate);
-        lastUpdatedLabel.innerHTML = displayDate.replace(/6(?=[^6]*$)/, '<span class="date-accent">6</span>');
+        lastUpdatedLabel.innerHTML = buildLastUpdatedMarkup(compactDate, displayDate);
         if (compactDate) {
           lastUpdatedLabel.setAttribute('aria-label', `last updated ${compactDate}`);
         }
