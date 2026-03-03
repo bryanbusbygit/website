@@ -13,6 +13,14 @@
       const sectionOrder = Array.from(sections)
         .map((section) => section.getAttribute('data-section'))
         .filter(Boolean);
+      const findSectionByName = (target) => {
+        if (!target) {
+          return null;
+        }
+        return Array.from(sections).find(
+          (section) => section.getAttribute('data-section') === target,
+        ) || null;
+      };
       const updateStatusSquares = (target) => {
         if (!footerSquares.length) {
           return;
@@ -33,11 +41,12 @@
         if (typeof rawValue !== 'string' || !rawValue.trim()) {
           return null;
         }
-        const parsed = new Date(rawValue);
+        const normalizedValue = rawValue.trim().replace(/\s*([\/.\-])\s*/g, '$1');
+        const parsed = new Date(normalizedValue);
         if (!Number.isNaN(parsed.getTime())) {
           return parsed;
         }
-        const match = rawValue.match(/(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})/);
+        const match = normalizedValue.match(/(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})/);
         if (!match) {
           return null;
         }
@@ -498,7 +507,7 @@
 
       const setActiveSection = (target, options = {}) => {
         const { instant = false, history = 'replace' } = options;
-        const next = document.querySelector(`.content-section[data-section="${target}"]`);
+        const next = findSectionByName(target);
         const previous = document.querySelector('.content-section.active');
         const isSameSection = next === previous;
         const startHeight = contentWrapper
@@ -1335,7 +1344,11 @@
         }
         glyphInstances = [];
         if (glyphField) {
-          glyphField.replaceChildren();
+          if (typeof glyphField.replaceChildren === 'function') {
+            glyphField.replaceChildren();
+          } else {
+            glyphField.textContent = '';
+          }
         }
       };
 
@@ -1775,6 +1788,5 @@
           return null;
         }
         const normalized = target.trim().toLowerCase();
-        const exists = document.querySelector(`.content-section[data-section="${normalized}"]`);
-        return exists ? normalized : null;
+        return findSectionByName(normalized) ? normalized : null;
       }
