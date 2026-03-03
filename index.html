@@ -8,10 +8,10 @@
     <meta name="description" content="undergraduate mathematician interested in graph theory and combinatorics.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
     <script>
       (() => {
-        const themeKey = 'theme-preference-v3';
+        const themeKey = 'theme-preference-v2';
         let storedTheme = null;
 
         try {
@@ -40,10 +40,16 @@
     <link rel="stylesheet" href="assets/site.css">
     <style>
       :root {
-        --profile-size: 232px;
+        --profile-size: 212px;
       }
       html:not(.theme-dark) body:not(.theme-dark) .theme-toggle-face {
         color: #000000;
+      }
+      html.theme-dark body,
+      body.theme-dark {
+        --page-bg: #000000;
+        --card-bg: #000000;
+        --bg-glass: 0 0 0 / 1;
       }
       .theme-toggle-face {
         margin: 0;
@@ -56,7 +62,7 @@
         white-space: pre;
         text-align: center;
         font-family: var(--mono);
-        font-size: 7.4px;
+        font-size: 9.1px;
         line-height: 0.84;
         letter-spacing: -0.045em;
         font-weight: 700;
@@ -78,19 +84,19 @@
       }
       @media (max-width: 820px) {
         header {
-          --profile-size: 172px;
+          --profile-size: 156px;
         }
         .theme-toggle-face {
-          font-size: 6px;
+          font-size: 7px;
           line-height: 0.84;
         }
       }
       @media (max-width: 560px) {
         header {
-          --profile-size: 130px;
+          --profile-size: 112px;
         }
         .theme-toggle-face {
-          font-size: 4.6px;
+          font-size: 5.1px;
           line-height: 0.84;
           letter-spacing: -0.05em;
         }
@@ -102,11 +108,11 @@
       }
     </style>
   </head>
-  <body data-last-updated="03-02-2026" data-active-section="landing">
+  <body data-last-updated="03 - 02 - 2026" data-active-section="landing">
     <main class="container" id="top">
       <header>
         <div>
-          <h1><span class="name-blue">b</span><span class="name-red">r</span>y<span class="name-black">a</span>n c. b<span class="name-red">u</span>sby</h1>
+          <h1>b<span class="name-blue">r</span>y<span class="name-red">a</span>n c. b<span class="name-black">u</span>sb<span class="name-yellow">y</span></h1>
         </div>
         <button
           type="button"
@@ -121,30 +127,78 @@
 
       <div class="content-wrapper" id="content-wrapper">
         <section class="content-section active" id="landing" data-section="landing" aria-labelledby="landing-heading">
-          <h2 id="landing-heading">about <span class="name-red">m</span>e</h2>
+          <h2 id="landing-heading"><span class="name-blue">a</span>bo<span class="name-yellow">u</span>t <span class="name-red">m</span>e</h2>
           <div class="landing-layout">
             <div class="landing-intro">
               <p class="landing-intro-copy">
-                i'm b<span class="name-red">r</span>yan, an undergrad at the university of p<span class="name-red">u</span>erto rico. i'm super interested in gr<span class="name-red">a</span>ph theory and
-                nonlinear d<span class="name-red">y</span>namics. recently worked on arithme<span class="name-red">t</span>ical structures and boo<span class="name-red">l</span>ean monomial sy<span class="name-red">s</span>tems.
+                i am b<span class="name-blue">r</span>yan, currently an undegraduate at the university of p<span class="name-red">u</span>erto rico. i am super interested in gr<span class="name-red">a</span>ph theory and
+                nonlinear d<span class="name-blue">y</span>namics. recently worked on arithme<span class="name-blue">t</span>ical structures and bo<span class="name-red">o</span>lean monomial sy<span class="name-blue">s</span>tems.
+              </p>
+              <p class="landing-intro-copy">
+                apart from mathematics i enjoy photography (see gallery). <a class="resource-link" href="https://www.youtube.com/watch?v=Oseqh7SMIvo" target="_blank" rel="noopener noreferrer">professor of logic joke</a>.
+              </p>
+              <p class="landing-links-line">
+                <a href="#research" class="landing-text-link nav-link" data-section="research">research w<span class="name-yellow">o</span>rk</a>
+                <span class="landing-links-separator" aria-hidden="true">/</span>
+                <a href="#other" class="landing-text-link nav-link" data-section="other">oth<span class="name-blue">e</span>r link<span class="name-red">s</span></a>
               </p>
               <p class="landing-email">
                 email:
                 <a class="resource-link" href="mailto:bryan.busby@upr.edu">bryan.busby</a>
               </p>
-              <strong class="landing-face-note">t<span class="name-red">i</span>p: click the animated face in the top-ri<span class="name-red">g</span>ht to toggle dark mode.</strong>
+              <strong class="landing-face-note">t<span class="name-yellow">i</span>p: click the animated face in the top-ri<span class="name-blue">g</span>ht to toggle dark mode.</strong>
               <a href="#gallery" class="inline-nav-link inline-gallery-link nav-link" data-section="gallery">
                 <span class="inline-gallery-link-title">gallery</span>
               </a>
             </div>
-            <div class="landing-card-stack">
-              <a href="#research" class="choice-card landing-research-card nav-link" data-section="research">
-                <h3>research w<span class="name-red">o</span>rk</h3>
+            <aside class="landing-art-panel landing-art-panel-portrait" aria-label="featured artwork">
+              <a
+                class="landing-art-frame theme-light-only"
+                href="https://commons.wikimedia.org/wiki/File:Architectural_fresco_in_Pompeii_watercolor_by_Luigi_Bazzani.jpg"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Luigi Bazzani, Architectural fresco in Pompeii on Wikimedia Commons"
+              >
+                <span class="landing-art-mat">
+                  <img
+                    class="landing-art-image"
+                    src="assets/art/architectural-fresco-pompeii-bazzani.jpg"
+                    alt="Luigi Bazzani's Architectural fresco in Pompeii"
+                    width="682"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                  >
+                </span>
               </a>
-              <a href="#other" class="choice-card landing-other-card nav-link" data-section="other">
-                <h3>oth<span class="name-red">e</span>r link<span class="name-red">s</span></h3>
+              <a
+                class="landing-art-frame theme-dark-only"
+                href="https://commons.wikimedia.org/wiki/File:Black_fresco_with_statuettes_in_Pompeii_watercolor_by_Luigi_Bazzani.jpg"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Luigi Bazzani, Black fresco with statuettes in Pompeii on Wikimedia Commons"
+              >
+                <span class="landing-art-mat">
+                  <img
+                    class="landing-art-image"
+                    src="assets/art/black-fresco-statuettes-pompeii.jpg"
+                    alt="Luigi Bazzani's Black fresco with statuettes in Pompeii"
+                    width="914"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                  >
+                </span>
               </a>
-            </div>
+              <p class="landing-art-caption theme-light-only">
+                Luigi Bazzani, <em>Architectural fresco in Pompeii</em>
+              </p>
+              <p class="landing-art-caption theme-dark-only">
+                Luigi Bazzani, <em>Black fresco with statuettes in Pompeii</em>
+              </p>
+            </aside>
           </div>
         </section>
 
@@ -156,87 +210,87 @@
               data-section="landing"
               aria-label="back to about me section"
             >
-              <span aria-hidden="true">&#8592;</span>
+              <span aria-hidden="true">&#8598;</span>
             </a>
-            <h2 id="research-heading">research</h2>
+            <h2 id="research-heading">Research</h2>
           </div>
           <div class="research-group">
-            <h3 class="section-subhead">topics &amp; posters</h3>
+            <h3 class="section-subhead">Topics</h3>
             <ul class="highlight-list">
               <li class="research-item">
                 <div class="research-item-main">
-                  <p class="research-item-title">arithmetical structures on graphs</p>
+                  <p class="research-item-title">Arithmetical structures on graphs</p>
                   <p class="research-item-meta">
-                    <span class="research-item-topic">combinatorics</span>
+                    <span class="research-item-topic">Combinatorics</span>
                     <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span class="research-item-advisor">advised by <a class="resource-link" href="https://sites.google.com/site/diazlopezalexander/home" target="_blank" rel="noopener noreferrer">alexander díaz</a> and <a class="resource-link" href="https://www.joellouwsma.com" target="_blank" rel="noopener noreferrer">joel louwsma</a></span>
+                    <span>advised by <span class="research-accent-advisor"><a class="resource-link" href="https://sites.google.com/site/diazlopezalexander/home" target="_blank" rel="noopener noreferrer">Alexander Díaz</a></span> and <span class="research-accent-advisor"><a class="resource-link" href="https://www.joellouwsma.com" target="_blank" rel="noopener noreferrer">Joel Louwsma</a></span></span>
                   </p>
                   <p class="research-item-presentation">
-                    presented as <em>arithmetical structures on cycles with a multi-edge</em> at MAA MathFest, Sacramento, CA, Aug 2025
+                    Presented as <em>arithmetical structures on cycles with a multi-edge</em> at MAA MathFest, Sacramento, CA, Aug <span class="research-accent-year">2025</span>
                   </p>
                 </div>
                 <a class="badge poster-badge" href="assets/posters/2025_arithmetical_structures_poster.pdf">(pdf)</a>
               </li>
               <li class="research-item">
                 <div class="research-item-main">
-                  <p class="research-item-title">nonlinear boolean dynamical systems</p>
+                  <p class="research-item-title">Nonlinear boolean dynamical systems</p>
                   <p class="research-item-meta">
-                    <span class="research-item-topic">dynamical systems</span>
+                    <span class="research-item-topic">Finite dynamical systems</span>
                     <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span class="research-item-advisor">advised by <a class="resource-link" href="https://pegasus.uprm.edu/ocolon/" target="_blank" rel="noopener noreferrer">omar colón</a></span>
+                    <span>advised by <span class="research-accent-advisor"><a class="resource-link" href="https://pegasus.uprm.edu/ocolon/" target="_blank" rel="noopener noreferrer">Omar Colón</a></span></span>
                   </p>
                   <p class="research-item-presentation">
-                    presented as <em>finite dynamical systems: transient bounds for Boolean monomial systems</em> at SIDIM (PR Interdisciplinary Mathematics Symposium), UPR Ponce, May 2024
+                    Presented as <em>finite dynamical systems: transient bounds for boolean monomial systems</em> at SIDIM (PR Interdisciplinary Mathematics Symposium), UPR Ponce, May <span class="research-accent-year">2024</span>
                   </p>
                 </div>
                 <a class="badge poster-badge" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">(pdf)</a>
               </li>
               <li class="research-item">
                 <div class="research-item-main">
-                  <p class="research-item-title">5g rf propagation</p>
+                  <p class="research-item-title">5G rf propagation</p>
                   <p class="research-item-meta">
-                    <span class="research-item-topic">rf measurements</span>
+                    <span class="research-item-topic">RF measurements</span>
                     <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span class="research-item-advisor">advised by <a class="resource-link" href="https://inec.uprm.edu/rafaelr/" target="_blank" rel="noopener noreferrer">rafael solís</a></span>
+                    <span>advised by <span class="research-accent-advisor"><a class="resource-link" href="https://inec.uprm.edu/rafaelr/" target="_blank" rel="noopener noreferrer">Rafael Solís</a></span></span>
                   </p>
                   <p class="research-item-presentation">
-                    presented as <em>development of radio wave propagation setup and propagation measurements at 5G bands</em> at UPR Mayagüez, 2023
+                    Presented as <em>development of radio wave propagation setup and propagation measurements at 5G bands</em> at UPR Mayagüez, <span class="research-accent-year">2023</span>
                   </p>
                 </div>
                 <a class="badge poster-badge" href="assets/posters/CarsePoster2023.pdf">(pdf)</a>
               </li>
               <li class="research-item">
                 <div class="research-item-main">
-                  <p class="research-item-title">adjacency matrices &amp; walks</p>
+                  <p class="research-item-title">Adjacency matrices &amp; walks</p>
                   <p class="research-item-meta">
-                    <span class="research-item-topic">graph theory</span>
+                    <span class="research-item-topic">Graph theory</span>
                     <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span class="research-item-advisor">advised by <span class="name-red">edwin benvenutti</span></span>
+                    <span>advised by <span class="research-accent-advisor">Edwin Benvenutti</span></span>
                   </p>
                   <p class="research-item-presentation">
-                    presented as <em>on the adjacency matrix and walks</em> at Regional Math Fair (PR Dept. of Education), 2021
+                    Presented as <em>on the adjacency matrix and walks</em> at Regional Math Fair (PR Dept. of Education), <span class="research-accent-year">2021</span>
                   </p>
                 </div>
               </li>
             </ul>
           </div>
           <div class="research-group manuscript-copy">
-            <h3 class="section-subhead">manuscripts</h3>
+            <h3 class="section-subhead">Manuscripts</h3>
             <div class="grid-two">
               <div class="pub">
-                <b>transient length boundary for nonlinear boolean dynamical systems</b>
+                <b>Transient length boundary for monomial dynamical systems</b>
                 <span class="badge manuscript-badge">in preperation</span>
                 <span class="muted small manuscript-summary">
-                  we establish upper and lower bounds on the transient length of boolean monomial
+                  We establish upper and lower bounds on the transient length of boolean monomial
                   dynamical systems in terms of the frobenius number of the set of directed cycle
                   lengths and the diameter of the associated dependency graph.
                 </span>
               </div>
               <div class="pub">
-                <b>arithmetical structures on cycles with a multi-edge</b>
+                <b>Arithmetical structures on cycles with a multi-edge</b>
                 <span class="badge manuscript-badge">in preperation</span>
                 <span class="muted small manuscript-summary">
-                  using principles underlying the euclidean algorithm, we construct strongly smooth
+                  Using principles underlying the euclidean algorithm, we construct strongly smooth
                   arithmetical structures on cycles with a multi-edge.
                 </span>
               </div>
@@ -266,63 +320,63 @@
           </noscript>
           <div class="gallery-grid" role="list">
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=wuRqYiMyx3Q" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 1 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-01.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=wuRqYiMyx3Q" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-01.gif" alt="video 1 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gcg_tv8Oskg" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 2 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-02.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gcg_tv8Oskg" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-02.gif" alt="video 2 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=i_F_aZDRU1E" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 3 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-03.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=i_F_aZDRU1E" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-03.gif" alt="video 3 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gm7-UJHO9os" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 4 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-04.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gm7-UJHO9os" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-04.gif" alt="video 4 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=dYS__VQq_fs" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 5 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-05.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=dYS__VQq_fs" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-05.gif" alt="video 5 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=vs_LFS-XwqE" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 6 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-06.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=vs_LFS-XwqE" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-06.gif" alt="video 6 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=3C4puA9A88w" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 7 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-07.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=3C4puA9A88w" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-07.gif" alt="video 7 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=ld55N1bJiuo" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 8 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-08.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=ld55N1bJiuo" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-08.gif" alt="video 8 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=H4M6hB0jPo8" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 9 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-09.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=H4M6hB0jPo8" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-09.gif" alt="video 9 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=-kuf7N2idOo" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 10 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-10.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=-kuf7N2idOo" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-10.gif" alt="video 10 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=pJfya9tQfh4" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 11 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-11.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=pJfya9tQfh4" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-11.gif" alt="video 11 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
             <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=-e__pw1Jtq0" target="_blank" rel="noopener noreferrer" aria-label="Open gallery clip 12 on YouTube (opens in a new tab)">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-12.gif" alt="" loading="lazy" decoding="async">
+              <a class="gallery-link" href="https://www.youtube.com/watch?v=-e__pw1Jtq0" target="_blank" rel="noopener noreferrer">
+                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-12.gif" alt="video 12 preview gif" loading="lazy" decoding="async">
               </a>
             </article>
           </div>
@@ -336,7 +390,7 @@
               data-section="landing"
               aria-label="back to about me section"
             >
-              <span aria-hidden="true">&#8592;</span>
+              <span aria-hidden="true">&#8598;</span>
             </a>
             <h2 id="other-heading">other links</h2>
           </div>
@@ -372,16 +426,16 @@
 
       <div class="content-meta-row">
         <div class="content-status-anchor">
-          <div class="status-path" role="list" aria-label="Current section status">
-            <span class="status-square" data-index="1" data-target="landing" role="listitem" aria-label="About me section"></span>
-            <span class="status-square" data-index="2" data-target="research" role="listitem" aria-label="Research section"></span>
-            <span class="status-square" data-index="3" data-target="gallery" role="listitem" aria-label="Video gallery section"></span>
-            <span class="status-square" data-index="4" data-target="other" role="listitem" aria-label="Other section"></span>
+          <div class="status-path">
+            <span class="status-square" data-index="1" data-target="landing" aria-hidden="true"></span>
+            <span class="status-square" data-index="2" data-target="research" aria-hidden="true"></span>
+            <span class="status-square" data-index="3" data-target="gallery" aria-hidden="true"></span>
+            <span class="status-square" data-index="4" data-target="other" aria-hidden="true"></span>
           </div>
         </div>
         <div class="content-date-anchor">
           <div class="small muted date-stamp">
-            <span class="date-stamp-label">upda<span class="name-red">t</span>ed</span>
+            <span class="date-stamp-label">updated</span>
             <span class="last-updated-label" id="last-updated-label"></span>
           </div>
         </div>
