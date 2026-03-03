@@ -1529,7 +1529,7 @@
           --profile-size: 84px;
           margin-top: 0;
           margin-bottom: 12px;
-          align-items: flex-start;
+          align-items: center;
           gap: 14px;
         }
         header h1 {
@@ -1542,10 +1542,10 @@
           padding-right: 0;
         }
         .theme-toggle {
-          margin-top: 4px;
+          margin-top: 0;
           margin-right: 0;
           transform: none;
-          align-self: flex-start;
+          align-self: center;
         }
         .gallery-heading-row {
           align-items: center;
