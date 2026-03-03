@@ -1,4 +1,4 @@
-      const THEME_KEY = 'theme-preference-v2';
+      const THEME_KEY = 'theme-preference-v3';
       const THEME_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
       document.body.classList.add('js-enabled');
 
@@ -11,6 +11,7 @@
       const glyphField = document.getElementById('glyph-field');
       const supportsInert = 'inert' in HTMLElement.prototype;
       const spacingDebugEnabled = new URLSearchParams(window.location.search).has('spacing-debug');
+      const compactDateViewport = window.matchMedia('(max-width: 560px)');
       const sectionOrder = Array.from(sections)
         .map((section) => section.getAttribute('data-section'))
         .filter(Boolean);
@@ -134,35 +135,54 @@
           parseLastModifiedDate(document.lastModified) ||
           new Date();
         const compactDate = formatCompactLastUpdatedDate(lastUpdatedDate);
-        lastUpdatedLabel.textContent = formatDisplayLastUpdatedDate(lastUpdatedDate);
+        const displayDate = compactDateViewport.matches
+          ? compactDate
+          : formatDisplayLastUpdatedDate(lastUpdatedDate);
+        lastUpdatedLabel.innerHTML = displayDate.replace(/6(?=[^6]*$)/, '<span class="date-accent">6</span>');
         if (compactDate) {
-          lastUpdatedLabel.setAttribute('aria-label', `Last updated ${compactDate}`);
+          lastUpdatedLabel.setAttribute('aria-label', `last updated ${compactDate}`);
         }
       };
 
-      const setTheme = (mode) => {
+      const setTheme = (mode, options = {}) => {
+        const { persist = false } = options;
         const nextMode = mode === 'dark' ? 'dark' : 'light';
         const isDark = nextMode === 'dark';
 
+        document.documentElement.classList.toggle('theme-dark', isDark);
         document.body.classList.toggle('theme-dark', isDark);
         if (themeToggle) {
           themeToggle.setAttribute('aria-pressed', String(isDark));
-          themeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+          themeToggle.setAttribute('aria-label', isDark ? 'switch to light theme' : 'switch to dark theme');
+        }
+        if (persist) {
+          storage.set(THEME_KEY, nextMode);
         }
       };
 
-      const getInitialTheme = () => 'light';
+      const getInitialTheme = () => {
+        const storedTheme = storage.get(THEME_KEY);
+        if (storedTheme === 'dark' || storedTheme === 'light') {
+          return storedTheme;
+        }
+        return 'light';
+      };
 
       setTheme(getInitialTheme());
       setLastUpdatedLabel();
+      if (typeof compactDateViewport.addEventListener === 'function') {
+        compactDateViewport.addEventListener('change', setLastUpdatedLabel);
+      } else if (typeof compactDateViewport.addListener === 'function') {
+        compactDateViewport.addListener(setLastUpdatedLabel);
+      }
       if (spacingDebugEnabled) {
         document.body.classList.add('spacing-debug');
       }
 
       if (themeToggle) {
-        themeToggle.addEventListener('click', (event) => {
+        themeToggle.addEventListener('click', () => {
           const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
-          setTheme(next);
+          setTheme(next, { persist: true });
         });
       }
 
@@ -499,8 +519,30 @@
         });
       };
 
+      const updateSectionHistory = (target, mode = 'replace') => {
+        if (
+          mode === 'none' ||
+          !window.history ||
+          (typeof window.history.replaceState !== 'function' && typeof window.history.pushState !== 'function')
+        ) {
+          return;
+        }
+
+        const baseUrl = `${window.location.pathname}${window.location.search}`;
+        const targetUrl = target === 'landing' ? baseUrl : `#${target}`;
+        const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+        if (currentUrl === targetUrl) {
+          return;
+        }
+
+        const historyMethod = mode === 'push' ? window.history.pushState : window.history.replaceState;
+        if (typeof historyMethod === 'function') {
+          historyMethod.call(window.history, null, '', targetUrl);
+        }
+      };
+
       const setActiveSection = (target, options = {}) => {
-        const { instant = false } = options;
+        const { instant = false, history = 'replace' } = options;
         const next = document.querySelector(`.content-section[data-section="${target}"]`);
         const previous = document.querySelector('.content-section.active');
         const isSameSection = next === previous;
@@ -514,20 +556,11 @@
           return;
         }
 
-        updateStatusSquares(target);
-        if (window.history && typeof window.history.replaceState === 'function') {
-          if (target === 'landing') {
-            if (window.location.hash) {
-              const baseUrl = `${window.location.pathname}${window.location.search}`;
-              window.history.replaceState(null, '', baseUrl);
-            }
-          } else {
-            const targetHash = `#${target}`;
-            if (window.location.hash !== targetHash) {
-              window.history.replaceState(null, '', targetHash);
-            }
-          }
+        if (document.body) {
+          document.body.setAttribute('data-active-section', target);
         }
+        updateStatusSquares(target);
+        updateSectionHistory(target, history);
 
         sections.forEach((section) => {
           const isActiveSection = section === next;
@@ -589,11 +622,154 @@
         window.setTimeout(cleanup, 220);
       };
 
+      const getActiveSectionName = () => {
+        const fromBody = document.body ? document.body.getAttribute('data-active-section') : '';
+        return sectionsToTarget(fromBody) || 'landing';
+      };
+
+      const getRelativeSection = (step) => {
+        if (!step || !sectionOrder.length) {
+          return null;
+        }
+        const currentIndex = sectionOrder.indexOf(getActiveSectionName());
+        if (currentIndex === -1) {
+          return null;
+        }
+        const nextIndex = currentIndex + step;
+        if (nextIndex < 0 || nextIndex >= sectionOrder.length) {
+          return null;
+        }
+        return sectionOrder[nextIndex];
+      };
+
+      const isInteractiveSwipeStart = (target) => {
+        if (!(target instanceof Element)) {
+          return false;
+        }
+        return Boolean(target.closest(
+          'a, button, input, textarea, select, label, summary, video, iframe, [role="button"]',
+        ));
+      };
+
+      const swipeState = {
+        active: false,
+        pointerId: null,
+        startX: 0,
+        startY: 0,
+        lastX: 0,
+        lastY: 0,
+        axis: null,
+        startedAt: 0,
+      };
+
+      const resetSwipeState = () => {
+        swipeState.active = false;
+        swipeState.pointerId = null;
+        swipeState.startX = 0;
+        swipeState.startY = 0;
+        swipeState.lastX = 0;
+        swipeState.lastY = 0;
+        swipeState.axis = null;
+        swipeState.startedAt = 0;
+      };
+
+      const findTrackedTouch = (touchList) => {
+        for (let index = 0; index < touchList.length; index += 1) {
+          const touch = touchList[index];
+          if (touch.identifier === swipeState.pointerId) {
+            return touch;
+          }
+        }
+        return null;
+      };
+
+      const SWIPE_AXIS_LOCK_DISTANCE = 16;
+      const SWIPE_MIN_DISTANCE = 72;
+      const SWIPE_MAX_OFF_AXIS = 56;
+      const SWIPE_MAX_DURATION = 700;
+
+      const handleSwipeStart = (event) => {
+        if (event.touches.length !== 1 || isInteractiveSwipeStart(event.target)) {
+          resetSwipeState();
+          return;
+        }
+        const [touch] = event.touches;
+        swipeState.active = true;
+        swipeState.pointerId = touch.identifier;
+        swipeState.startX = touch.clientX;
+        swipeState.startY = touch.clientY;
+        swipeState.lastX = touch.clientX;
+        swipeState.lastY = touch.clientY;
+        swipeState.axis = null;
+        swipeState.startedAt = event.timeStamp;
+      };
+
+      const handleSwipeMove = (event) => {
+        if (!swipeState.active) {
+          return;
+        }
+        const touch = findTrackedTouch(event.touches);
+        if (!touch) {
+          resetSwipeState();
+          return;
+        }
+
+        swipeState.lastX = touch.clientX;
+        swipeState.lastY = touch.clientY;
+        const deltaX = touch.clientX - swipeState.startX;
+        const deltaY = touch.clientY - swipeState.startY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+
+        if (!swipeState.axis && (absX >= SWIPE_AXIS_LOCK_DISTANCE || absY >= SWIPE_AXIS_LOCK_DISTANCE)) {
+          swipeState.axis = absX > absY ? 'x' : 'y';
+        }
+
+        if (swipeState.axis === 'x' && event.cancelable) {
+          event.preventDefault();
+        }
+      };
+
+      const handleSwipeEnd = (event) => {
+        if (!swipeState.active) {
+          return;
+        }
+        const touch = findTrackedTouch(event.changedTouches);
+        if (!touch) {
+          resetSwipeState();
+          return;
+        }
+
+        const deltaX = touch.clientX - swipeState.startX;
+        const deltaY = touch.clientY - swipeState.startY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        const elapsed = event.timeStamp - swipeState.startedAt;
+
+        if (
+          swipeState.axis === 'x' &&
+          elapsed <= SWIPE_MAX_DURATION &&
+          absX >= SWIPE_MIN_DISTANCE &&
+          absY <= SWIPE_MAX_OFF_AXIS
+        ) {
+          const target = deltaX < 0 ? getRelativeSection(1) : getRelativeSection(-1);
+          if (target) {
+            setActiveSection(target, { history: 'push' });
+          }
+        }
+
+        resetSwipeState();
+      };
+
+      const handleSwipeCancel = () => {
+        resetSwipeState();
+      };
+
       sections.forEach((section) => prepareStagger(section));
       const hashTarget = window.location.hash.replace('#', '');
       const initialTarget = sectionsToTarget(hashTarget) || 'landing';
       const resetInitialScrollToTop = hashTarget === 'landing';
-      setActiveSection(initialTarget, { instant: true });
+      setActiveSection(initialTarget, { instant: true, history: 'replace' });
       setWrapperHeight();
       if (resetInitialScrollToTop) {
         window.requestAnimationFrame(() => {
@@ -610,11 +786,8 @@
         scheduleSpacingAudit({ log: spacingDebugEnabled });
       });
       window.addEventListener('hashchange', () => {
-        const target = sectionsToTarget(window.location.hash.replace('#', ''));
-        if (!target) {
-          return;
-        }
-        setActiveSection(target, { instant: true });
+        const target = sectionsToTarget(window.location.hash.replace('#', '')) || 'landing';
+        setActiveSection(target, { instant: true, history: 'none' });
         setWrapperHeight();
       });
 
@@ -1558,6 +1731,7 @@
         resizeRaf = window.requestAnimationFrame(() => {
           resizeRaf = 0;
           setWrapperHeight();
+          setLastUpdatedLabel();
           createBackgroundGlyphs();
           refreshAscii();
           scheduleSpacingAudit();
@@ -1627,22 +1801,18 @@
           event.preventDefault();
           const target = link.getAttribute('data-section');
           if (target) {
-            setActiveSection(target);
+            setActiveSection(target, { history: 'push' });
             blurAfterPointerClick(event);
           }
         });
       });
 
-      footerSquares.forEach((square) => {
-        square.addEventListener('click', (event) => {
-          event.preventDefault();
-          const target = square.getAttribute('data-target');
-          if (target) {
-            setActiveSection(target);
-            blurAfterPointerClick(event);
-          }
-        });
-      });
+      if (contentWrapper) {
+        contentWrapper.addEventListener('touchstart', handleSwipeStart, { passive: true });
+        contentWrapper.addEventListener('touchmove', handleSwipeMove, { passive: false });
+        contentWrapper.addEventListener('touchend', handleSwipeEnd, { passive: true });
+        contentWrapper.addEventListener('touchcancel', handleSwipeCancel, { passive: true });
+      }
 
       function sectionsToTarget(target) {
         if (!target) {
