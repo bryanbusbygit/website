@@ -1416,7 +1416,7 @@
           text-align: left;
           margin-top: 0;
           margin-bottom: var(--space-sm);
-          align-items: flex-start;
+          align-items: center;
         }
         header > div {
           margin-inline: 0;
@@ -1427,6 +1427,10 @@
           gap: var(--space-md);
           align-items: start;
           align-content: start;
+        }
+        .theme-toggle {
+          margin-top: 0;
+          align-self: center;
         }
         .landing-layout {
           display: grid;
