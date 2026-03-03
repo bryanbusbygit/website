@@ -85,17 +85,30 @@
         if (!compactDate || !displayDate) {
           return displayDate;
         }
-        const [month, day] = compactDate.split('-');
+        const [month, day, year] = compactDate.split('-');
         const isCompact = displayDate === compactDate;
-        const monthDisplay = isCompact ? month : month.split('').join(' ');
-        const dayDisplay = isCompact ? day : day.split('').join(' ');
+        const spreadDigits = (segment) => (isCompact ? segment : segment.split('').join(' '));
         const separator = isCompact ? '-' : ' - ';
-        return displayDate
-          .replace(monthDisplay, `<span class="date-segment-month">${monthDisplay}</span>`)
-          .replace(
-            `${separator}${dayDisplay}`,
-            `<span class="date-separator">${separator}</span><span class="date-segment-day">${dayDisplay}</span>`
-          );
+        const renderDigits = (segment, classes) => {
+          const digits = spreadDigits(segment);
+          if (isCompact) {
+            return digits
+              .split('')
+              .map((digit, index) => `<span class="${classes[index]}">${digit}</span>`)
+              .join('');
+          }
+          const rawDigits = segment.split('');
+          return rawDigits
+            .map((digit, index) => `<span class="${classes[index]}">${digit}</span>`)
+            .join('<span class="date-digit-white"> </span>');
+        };
+        return [
+          renderDigits(month, ['date-digit-white', 'date-digit-yellow']),
+          `<span class="date-separator">${separator}</span>`,
+          renderDigits(day, ['date-digit-white', 'date-digit-blue']),
+          `<span class="date-separator">${separator}</span>`,
+          renderDigits(year, ['date-digit-white', 'date-digit-white', 'date-digit-red', 'date-digit-red']),
+        ].join('');
       };
 
       const setLastUpdatedLabel = () => {
