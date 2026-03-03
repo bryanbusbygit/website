@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/site.css">
     <style>
       :root {
-        --profile-size: 212px;
+        --profile-size: 284px;
       }
       html:not(.theme-dark) body:not(.theme-dark) .theme-toggle-face {
         color: #000000;
@@ -34,7 +34,7 @@
         white-space: pre;
         text-align: center;
         font-family: var(--mono);
-        font-size: 9.1px;
+        font-size: 12px;
         line-height: 0.84;
         letter-spacing: -0.045em;
         font-weight: 700;
@@ -56,19 +56,19 @@
       }
       @media (max-width: 820px) {
         header {
-          --profile-size: 156px;
+          --profile-size: 212px;
         }
         .theme-toggle-face {
-          font-size: 7px;
+          font-size: 9px;
           line-height: 0.84;
         }
       }
       @media (max-width: 560px) {
         header {
-          --profile-size: 112px;
+          --profile-size: 148px;
         }
         .theme-toggle-face {
-          font-size: 5.1px;
+          font-size: 6.5px;
           line-height: 0.84;
           letter-spacing: -0.05em;
         }
@@ -107,7 +107,7 @@
                 nonlinear d<span class="name-blue">y</span>namics. recently worked on arithme<span class="name-blue">t</span>ical structures and bo<span class="name-red">o</span>lean monomial sy<span class="name-blue">s</span>tems.
               </p>
               <p class="landing-intro-copy">
-                apart from mathematics i enjoy photography (see gallery). <a class="resource-link" href="https://www.youtube.com/watch?v=Oseqh7SMIvo" target="_blank" rel="noopener noreferrer">professor of logic joke</a>.
+                apart from mathematics i enjoy photography (see gallery).
               </p>
               <p class="landing-links-line">
                 <a href="#research" class="landing-text-link nav-link" data-section="research">research w<span class="name-yellow">o</span>rk</a>
@@ -182,7 +182,7 @@
               data-section="landing"
               aria-label="back to about me section"
             >
-              <span aria-hidden="true">&#8598;</span>
+              <span class="gallery-back-arrow" aria-hidden="true"></span>
             </a>
             <h2 id="research-heading">Research</h2>
           </div>
@@ -278,7 +278,7 @@
               data-section="landing"
               aria-label="back to about me section"
             >
-              <span aria-hidden="true">&#8598;</span>
+              <span class="gallery-back-arrow" aria-hidden="true"></span>
             </a>
             <h2 id="gallery-heading">video gallery</h2>
           </div>
@@ -362,7 +362,7 @@
               data-section="landing"
               aria-label="back to about me section"
             >
-              <span aria-hidden="true">&#8598;</span>
+              <span class="gallery-back-arrow" aria-hidden="true"></span>
             </a>
             <h2 id="other-heading">other links</h2>
           </div>
@@ -450,7 +450,7 @@
                 gifObserver.unobserve(entry.target);
               });
             }, {
-              rootMargin: '200px 0px',
+              rootMargin: '120px 0px',
             });
 
             galleryGifs.forEach((gif) => {

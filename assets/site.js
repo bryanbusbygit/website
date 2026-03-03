@@ -424,6 +424,9 @@
       window.runSpacingAudit = runSpacingAudit;
       let spacingAuditRaf = 0;
       const scheduleSpacingAudit = ({ log = false } = {}) => {
+        if (!spacingDebugEnabled) {
+          return;
+        }
         if (spacingAuditRaf) {
           return;
         }
@@ -1605,7 +1608,8 @@
 
       const shouldAnimateAscii = () => (
         !reducedMotion.matches &&
-        !document.hidden
+        !document.hidden &&
+        !lowPowerViewport.matches
       );
 
       const stopAscii = () => {

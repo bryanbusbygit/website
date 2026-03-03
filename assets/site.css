@@ -289,8 +289,8 @@
         overflow: visible;
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
-        margin-top: 38px;
-        margin-right: 10px;
+        margin-top: 6px;
+        margin-right: 2px;
         transform: none;
       }
       .theme-toggle-icon {
@@ -495,27 +495,28 @@
       }
       .landing-intro {
         max-width: 30rem;
-        line-height: 1.68;
+        line-height: 1.72;
         margin-bottom: 0;
         display: flex;
         flex-direction: column;
         align-self: stretch;
         align-items: flex-start;
-        gap: var(--space-md);
+        gap: 20px;
       }
       .landing-intro-copy {
         margin: 0;
         font-size: 1.5rem;
         max-width: 29rem;
+        line-height: 1.7;
       }
       .landing-email {
         margin: 0;
         display: inline-flex;
         flex-wrap: wrap;
         align-items: baseline;
-        gap: 0.35rem;
+        gap: 0.45rem;
         font-size: 1.28rem;
-        line-height: 1.45;
+        line-height: 1.55;
       }
       .landing-email .resource-link {
         word-break: break-word;
@@ -527,7 +528,7 @@
       }
       .landing-face-note {
         font-size: 1.08rem;
-        line-height: 1.5;
+        line-height: 1.58;
         letter-spacing: 0.02em;
         text-transform: none;
         color: var(--muted);
@@ -539,7 +540,7 @@
         align-items: center;
         justify-content: center;
         gap: var(--space-xs);
-        margin-top: var(--space-md);
+        margin-top: var(--space-lg);
         align-self: flex-start;
         font-size: var(--text-sm);
         line-height: 1.15;
@@ -583,7 +584,7 @@
         display: grid;
         grid-template-columns: minmax(0, 1fr) clamp(132px, 22vw, 320px);
         min-height: 0;
-        gap: clamp(12px, 2vw, calc(var(--space-lg) + 6px));
+        gap: clamp(18px, 2.6vw, 42px);
         align-items: start;
         align-content: start;
       }
@@ -726,7 +727,7 @@
         width: min(100%, 360px);
       }
       .content-section[data-section="landing"] {
-        gap: var(--space-lg);
+        gap: 36px;
       }
       .content-section[data-section="research"] h2 + .section-subhead {
         margin-top: var(--space-sm);
@@ -969,10 +970,38 @@
         text-transform: none;
         box-shadow: 2px 2px 0 var(--choice-shadow);
       }
-      .gallery-back-link span {
-        display: inline-block;
-        line-height: 1;
-        transform: translate(-0.5px, 0.5px);
+      .gallery-back-arrow {
+        position: relative;
+        display: block;
+        width: 15px;
+        height: 15px;
+      }
+      .gallery-back-arrow::before,
+      .gallery-back-arrow::after {
+        content: "";
+        position: absolute;
+        display: block;
+        background: currentColor;
+        border-radius: 999px;
+        transform-origin: center;
+      }
+      .gallery-back-arrow::before {
+        width: 13px;
+        height: 1.5px;
+        top: 7px;
+        left: 1px;
+        transform: rotate(-45deg);
+      }
+      .gallery-back-arrow::after {
+        width: 5px;
+        height: 5px;
+        top: 2px;
+        left: 0;
+        background: transparent;
+        border-top: 1.5px solid currentColor;
+        border-left: 1.5px solid currentColor;
+        border-radius: 0;
+        transform: rotate(0deg);
       }
       .gallery-grid {
         display: grid;
@@ -1332,10 +1361,16 @@
         body {
           align-items: flex-start;
         }
+        body[data-active-section="landing"] {
+          align-items: center;
+        }
         .container {
           width: min(100%, 980px);
           padding-inline: clamp(var(--space-lg), 2.2vw, 28px);
           justify-content: flex-start;
+        }
+        body[data-active-section="landing"] .container {
+          justify-content: center;
         }
         .container > header,
         .container > .content-wrapper,
@@ -1355,6 +1390,13 @@
           --other-center-zone: clamp(180px, 30vh, 240px);
           --rail-card-width: 152px;
           --rail-card-min-height-compact: 96px;
+          --text-md: 1.34rem;
+          --text-sm: 1.16rem;
+          --text-xs: 1.02rem;
+          --heading-lg: 2.02rem;
+          --heading-md: 1.34rem;
+          --heading-sm: 1.04rem;
+          --label-sm: 0.88rem;
         }
         body {
           overflow: auto;
@@ -1373,7 +1415,8 @@
           --profile-size: 116px;
           text-align: left;
           margin-top: 0;
-          margin-bottom: var(--space-xs);
+          margin-bottom: var(--space-sm);
+          align-items: flex-start;
         }
         header > div {
           margin-inline: 0;
@@ -1386,23 +1429,22 @@
           align-content: start;
         }
         .landing-layout {
-          display: block;
-          position: relative;
-          padding-right: min(32vw, 250px);
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) clamp(126px, 28vw, 188px);
+          gap: 18px;
+          padding-right: 0;
           min-height: 0;
         }
         .landing-links-line {
           gap: 7px;
         }
         .landing-art-panel {
-          position: absolute;
-          top: 0;
-          right: 0;
-          justify-self: auto;
-          width: min(30vw, 232px);
-          max-width: 232px;
+          position: static;
+          justify-self: end;
+          width: 100%;
+          max-width: 188px;
           margin: 0;
-          padding-top: 2px;
+          padding-top: 6px;
         }
         .manuscript-layout {
           grid-template-columns: 1fr;
@@ -1473,31 +1515,34 @@
         :root {
           --other-center-zone: clamp(144px, 28vh, 196px);
           --date-display-width: clamp(136px, 34vw, 176px);
+          --text-md: 1.08rem;
           --text-sm: 1rem;
-          --text-xs: 0.92rem;
-          --heading-lg: 1.72rem;
-          --heading-md: 1.24rem;
-          --heading-sm: 1rem;
-          --label-sm: 0.84rem;
+          --text-xs: 0.94rem;
+          --heading-lg: 1.9rem;
+          --heading-md: 1.18rem;
+          --heading-sm: 0.98rem;
+          --label-sm: 0.82rem;
           --rail-card-width: 132px;
           --rail-card-min-height-compact: 92px;
         }
         header {
           --profile-size: 84px;
           margin-top: 0;
-          margin-bottom: var(--space-xs);
-          flex-wrap: wrap;
+          margin-bottom: 12px;
           align-items: flex-start;
+          gap: 14px;
         }
         header h1 {
-          font-size: clamp(1.5rem, 9vw, 1.9rem);
+          font-size: clamp(2.15rem, 8.6vw, 2.65rem);
+          line-height: 0.98;
+          letter-spacing: 0.01em;
         }
         header > div {
-          flex: 1 1 168px;
+          flex: 1 1 auto;
           padding-right: 0;
         }
         .theme-toggle {
-          margin-top: 32px;
+          margin-top: 4px;
           margin-right: 0;
           transform: none;
           align-self: flex-start;
@@ -1510,40 +1555,58 @@
           gap: 0;
         }
         .landing-intro {
-          gap: var(--space-sm);
+          gap: 12px;
         }
         .landing-intro-copy {
-          font-size: var(--text-sm);
+          font-size: var(--text-md);
+          line-height: 1.58;
+          max-width: none;
         }
         .landing-email {
+          font-size: 1.03rem;
           width: 100%;
           max-width: 100%;
         }
         .landing-layout {
-          display: block;
-          padding-right: min(44vw, 164px);
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) 128px;
+          gap: 16px;
+          align-items: start;
+          padding-right: 0;
         }
         .landing-art-panel {
-          position: absolute;
-          top: 0;
-          right: 0;
-          justify-self: auto;
-          width: min(42vw, 148px);
+          position: static;
+          justify-self: end;
+          width: 100%;
           max-width: 148px;
           margin: 0;
-          padding-top: 2px;
+          padding-top: 4px;
         }
         .landing-art-caption {
-          max-width: 11rem;
-          font-size: 0.82rem;
+          max-width: 8.5rem;
+          font-size: 0.74rem;
+          line-height: 1.22;
         }
         .inline-nav-link {
-          width: 100%;
+          width: auto;
           justify-content: center;
-          margin-top: var(--space-xs);
+          margin-top: 2px;
         }
         .landing-links-line {
           gap: 6px;
+          font-size: 1rem;
+          line-height: 1.25;
+        }
+        .landing-face-note {
+          font-size: 0.98rem;
+          line-height: 1.48;
+          max-width: 18rem;
+        }
+        .inline-gallery-link {
+          padding: 8px 12px;
+        }
+        .inline-gallery-link-title {
+          font-size: 0.92rem;
         }
         .manuscript-inline-card {
           width: min(100%, 230px);
@@ -1590,7 +1653,15 @@
         }
         .last-updated-label {
           white-space: normal;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.01em;
+          font-size: 0.92rem;
+        }
+        .date-stamp {
+          font-size: 0.84rem;
+          gap: 6px;
+        }
+        .date-stamp-label {
+          letter-spacing: 0.08em;
         }
       }
       @media (prefers-reduced-motion: reduce) {
