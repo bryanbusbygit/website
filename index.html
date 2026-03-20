@@ -23,15 +23,22 @@
         scroll-behavior: smooth;
       }
 
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         min-height: 100vh;
         display: flex;
         align-items: center;
+        overflow-x: hidden;
         color: var(--text);
         font-family: "Newsreader", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-        line-height: 1.38;
-        font-size: 1.28rem;
+        line-height: 1.42;
+        font-size: 1.18rem;
         background: #ffffff;
         font-optical-sizing: auto;
         text-rendering: optimizeLegibility;
@@ -49,6 +56,11 @@
         margin-bottom: 18px;
       }
 
+      .intro {
+        margin-top: 10px;
+        max-width: 32rem;
+      }
+
       h1 {
         margin: 0;
         font-size: 3rem;
@@ -61,6 +73,7 @@
       a {
         color: var(--link);
         text-decoration: none;
+        overflow-wrap: anywhere;
       }
 
       a:hover {
@@ -68,7 +81,7 @@
       }
 
       main {
-        max-width: 37rem;
+        max-width: 43rem;
         padding-top: 0;
       }
 
@@ -87,6 +100,7 @@
 
       p {
         margin: 0;
+        overflow-wrap: anywhere;
       }
 
       p + p {
@@ -106,7 +120,21 @@
       }
 
       .entry + .entry {
-        margin-top: 12px;
+        margin-top: 16px;
+      }
+
+      .entry-title {
+        display: block;
+        font-weight: 700;
+      }
+
+      .entry-note {
+        display: block;
+        color: var(--muted);
+      }
+
+      .entry-text {
+        display: block;
       }
 
       .link-label {
@@ -134,11 +162,11 @@
 
       @media (max-width: 820px) {
         body {
-          align-items: flex-start;
+          font-size: 1.1rem;
         }
 
         .masthead {
-          margin-bottom: 32px;
+          margin-bottom: 26px;
         }
 
         main {
@@ -154,7 +182,7 @@
         body {
           display: block;
           min-height: auto;
-          font-size: 1.08rem;
+          font-size: 1.02rem;
           line-height: 1.4;
         }
 
@@ -168,22 +196,26 @@
     <div class="page">
       <header class="masthead" id="top">
         <h1>Bryan C. Busby</h1>
+        <p class="intro">I put this page together to keep a few projects and presentations in one place.</p>
       </header>
 
       <main>
         <section id="research">
           <h2>Research</h2>
           <p class="entry">
-            <span class="item-title">Arithmetical structures on graphs.</span>
-            Combinatorics research advised by <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a> and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.
+            <span class="entry-title">Arithmetical structures on graphs.</span>
+            <span class="entry-note">Combinatorics research advised by <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a> and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
+            <span class="entry-text">We worked on arithmetical structures on graphs, especially cycles with a multi-edge.</span>
           </p>
           <p class="entry">
-            <span class="item-title">Nonlinear Boolean dynamical systems.</span>
-            Finite dynamical systems research advised by <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.
+            <span class="entry-title">Nonlinear Boolean dynamical systems.</span>
+            <span class="entry-note">Finite dynamical systems research advised by <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.</span>
+            <span class="entry-text">We worked on transient bounds for Boolean monomial systems.</span>
           </p>
           <p class="entry">
-            <span class="item-title">5G RF propagation / GNU Radio.</span>
-            RF measurements work advised by <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.
+            <span class="entry-title">5G RF propagation / GNU Radio.</span>
+            <span class="entry-note">RF measurements work advised by <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.</span>
+            <span class="entry-text">We developed a radio-wave propagation setup for 5G bands and used GNU Radio for the measurements.</span>
           </p>
         </section>
 
@@ -214,6 +246,7 @@
           </div>
         </section>
       </main>
+
     </div>
   </body>
 </html>
