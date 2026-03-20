@@ -4,904 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>bryan c. busby</title>
-    <meta name="description" content="undergraduate mathematician interested in graph theory and combinatorics.">
+    <title>Bryan C. Busby</title>
+    <meta
+      name="description"
+      content="Plain academic homepage for Bryan C. Busby."
+    >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
       :root {
-        --profile-size: 284px;
+        --text: #161616;
+        --muted: #5d5d5d;
+        --link: #355a78;
       }
-      html:not(.theme-dark) body:not(.theme-dark) .theme-toggle-face {
-        color: #000000;
+
+      html {
+        scroll-behavior: smooth;
       }
-      html.theme-dark body,
-      body.theme-dark {
-        --page-bg: #000000;
-        --card-bg: #000000;
-        --bg-glass: 0 0 0 / 1;
-      }
-      .theme-toggle-face {
+
+      body {
         margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        color: var(--text);
+        font-family: "Newsreader", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        line-height: 1.38;
+        font-size: 1.28rem;
+        background: #ffffff;
+        font-optical-sizing: auto;
+        text-rendering: optimizeLegibility;
+      }
+
+      .page {
+        max-width: 796px;
+        margin: 0 auto;
         width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        padding: 0;
+        padding: 26px 24px 30px;
+      }
+
+      .masthead {
         display: block;
-        overflow: hidden;
-        white-space: pre;
-        text-align: center;
-        font-family: var(--mono);
-        font-size: 12px;
-        line-height: 0.84;
-        letter-spacing: -0.045em;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 3rem;
+        font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+        font-weight: 500;
+        line-height: 1.02;
+        letter-spacing: -0.015em;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      main {
+        max-width: 37rem;
+        padding-top: 0;
+      }
+
+      section + section {
+        margin-top: 24px;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.34rem;
+        font-weight: 500;
+        font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+        letter-spacing: -0.01em;
+        text-transform: none;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      p + p {
+        margin-top: 10px;
+      }
+
+      .item-title {
         font-weight: 700;
-        font-variant-ligatures: none;
-        user-select: none;
-        pointer-events: none;
-        opacity: 0.9;
-        color: var(--ink);
-        text-shadow: none;
-        transition: opacity 0.08s ease-out;
       }
-      .theme-toggle:hover .theme-toggle-face,
-      .theme-toggle:focus-visible .theme-toggle-face {
-        opacity: 1;
+
+      .meta {
+        color: var(--muted);
       }
-      html.theme-dark .theme-toggle-face,
-      body.theme-dark .theme-toggle-face {
-        text-shadow: none;
+
+      .entry {
+        margin: 0;
       }
+
+      .entry + .entry {
+        margin-top: 12px;
+      }
+
+      .link-label {
+        font-weight: 600;
+      }
+
+      .link-note {
+        color: var(--muted);
+      }
+
+      .plain-links,
+      .plain-videos {
+        margin: 0;
+      }
+
+      .plain-links p,
+      .plain-videos p {
+        margin: 0;
+      }
+
+      .plain-links p + p,
+      .plain-videos p + p {
+        margin-top: 4px;
+      }
+
       @media (max-width: 820px) {
-        header {
-          --profile-size: 212px;
+        body {
+          align-items: flex-start;
         }
-        .theme-toggle-face {
-          font-size: 9px;
-          line-height: 0.84;
+
+        .masthead {
+          margin-bottom: 32px;
+        }
+
+        main {
+          max-width: none;
         }
       }
+
       @media (max-width: 560px) {
-        header {
-          --profile-size: 148px;
+        .page {
+          padding: 28px 16px 40px;
         }
-        .theme-toggle-face {
-          font-size: 6.5px;
-          line-height: 0.84;
-          letter-spacing: -0.05em;
+
+        body {
+          display: block;
+          min-height: auto;
+          font-size: 1.08rem;
+          line-height: 1.4;
         }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .theme-toggle-face {
-          transition: none;
+
+        h1 {
+          font-size: 2.5rem;
         }
       }
     </style>
   </head>
-  <body data-last-updated="03 - 03 - 2026" data-active-section="landing">
-    <main class="container" id="top">
-      <header>
-        <div>
-          <h1>b<span class="name-blue">r</span>y<span class="name-red">a</span>n c. b<span class="name-black">u</span>sb<span class="name-yellow">y</span></h1>
-        </div>
-        <button
-          type="button"
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="switch to dark theme"
-          aria-pressed="false"
-        >
-          <pre id="theme-toggle-face" class="theme-toggle-face" aria-hidden="true">:)</pre>
-        </button>
+  <body>
+    <div class="page">
+      <header class="masthead" id="top">
+        <h1>Bryan C. Busby</h1>
       </header>
 
-      <div class="content-wrapper" id="content-wrapper">
-        <section class="content-section active" id="landing" data-section="landing" aria-labelledby="landing-heading">
-          <h2 id="landing-heading"><span class="name-blue">a</span>bo<span class="name-yellow">u</span>t <span class="name-red">m</span>e</h2>
-          <div class="landing-layout">
-            <div class="landing-intro">
-              <p class="landing-intro-copy">
-                i am b<span class="name-blue">r</span>yan, currently an undegraduate at the university of p<span class="name-red">u</span>erto rico. i am super interested in gr<span class="name-red">a</span>ph theory and
-                nonlinear d<span class="name-blue">y</span>namics. recently worked on arithme<span class="name-blue">t</span>ical structures and bo<span class="name-red">o</span>lean monomial sy<span class="name-blue">s</span>tems.
-              </p>
-              <p class="landing-intro-copy">
-                apart from mathematics i enjoy photography (see gallery).
-              </p>
-              <p class="landing-links-line">
-                <a href="#research" class="landing-text-link nav-link" data-section="research">research w<span class="name-yellow">o</span>rk</a>
-                <span class="landing-links-separator" aria-hidden="true">/</span>
-                <a href="#other" class="landing-text-link nav-link" data-section="other">oth<span class="name-blue">e</span>r link<span class="name-red">s</span></a>
-              </p>
-              <p class="landing-email">
-                email:
-                <a class="resource-link" href="mailto:bryan.busby@upr.edu">bryan.busby</a>
-              </p>
-              <strong class="landing-face-note">t<span class="name-yellow">i</span>p: click the animated face in the top-ri<span class="name-blue">g</span>ht to toggle dark mode.</strong>
-              <a href="#gallery" class="inline-nav-link inline-gallery-link nav-link" data-section="gallery">
-                <span class="inline-gallery-link-title">gallery</span>
-              </a>
-            </div>
-            <aside class="landing-art-panel landing-art-panel-portrait" aria-label="featured artwork">
-              <a
-                class="landing-art-frame theme-light-only"
-                href="https://commons.wikimedia.org/wiki/File:Architectural_fresco_in_Pompeii_watercolor_by_Luigi_Bazzani.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View Luigi Bazzani, Architectural fresco in Pompeii on Wikimedia Commons"
-              >
-                <span class="landing-art-mat">
-                  <img
-                    class="landing-art-image"
-                    src="assets/art/architectural-fresco-pompeii-bazzani.jpg"
-                    alt="Luigi Bazzani's Architectural fresco in Pompeii"
-                    width="682"
-                    height="1200"
-                    loading="lazy"
-                    decoding="async"
-                    referrerpolicy="no-referrer"
-                  >
-                </span>
-              </a>
-              <a
-                class="landing-art-frame theme-dark-only"
-                href="https://commons.wikimedia.org/wiki/File:Black_fresco_with_statuettes_in_Pompeii_watercolor_by_Luigi_Bazzani.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View Luigi Bazzani, Black fresco with statuettes in Pompeii on Wikimedia Commons"
-              >
-                <span class="landing-art-mat">
-                  <img
-                    class="landing-art-image"
-                    src="assets/art/black-fresco-statuettes-pompeii.jpg"
-                    alt="Luigi Bazzani's Black fresco with statuettes in Pompeii"
-                    width="914"
-                    height="1200"
-                    loading="lazy"
-                    decoding="async"
-                    referrerpolicy="no-referrer"
-                  >
-                </span>
-              </a>
-              <p class="landing-art-caption theme-light-only">
-                Luigi Bazzani, <em>Architectural fresco in Pompeii</em>
-              </p>
-              <p class="landing-art-caption theme-dark-only">
-                Luigi Bazzani, <em>Black fresco with statuettes in Pompeii</em>
-              </p>
-            </aside>
-          </div>
-        </section>
-
-        <section class="content-section" id="research" data-section="research" aria-labelledby="research-heading">
-          <div class="gallery-heading-row">
-            <a
-              href="#landing"
-              class="button gallery-back-link nav-link"
-              data-section="landing"
-              aria-label="back to about me section"
-            >
-              <span class="gallery-back-arrow" aria-hidden="true"></span>
-            </a>
-            <h2 id="research-heading">Research</h2>
-          </div>
-          <div class="research-group">
-            <h3 class="section-subhead">Topics</h3>
-            <ul class="highlight-list">
-              <li class="research-item">
-                <div class="research-item-main">
-                  <p class="research-item-title">Arithmetical structures on graphs</p>
-                  <p class="research-item-meta">
-                    <span class="research-item-topic">Combinatorics</span>
-                    <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span>advised by <span class="research-accent-advisor"><a class="resource-link" href="https://sites.google.com/site/diazlopezalexander/home" target="_blank" rel="noopener noreferrer">Alexander Díaz</a></span> and <span class="research-accent-advisor"><a class="resource-link" href="https://www.joellouwsma.com" target="_blank" rel="noopener noreferrer">Joel Louwsma</a></span></span>
-                  </p>
-                  <p class="research-item-presentation">
-                    Presented as <em>arithmetical structures on cycles with a multi-edge</em> at MAA MathFest, Sacramento, CA, Aug <span class="research-accent-year">2025</span>
-                  </p>
-                </div>
-                <a class="badge poster-badge" href="assets/posters/2025_arithmetical_structures_poster.pdf">(pdf)</a>
-              </li>
-              <li class="research-item">
-                <div class="research-item-main">
-                  <p class="research-item-title">Nonlinear boolean dynamical systems</p>
-                  <p class="research-item-meta">
-                    <span class="research-item-topic">Finite dynamical systems</span>
-                    <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span>advised by <span class="research-accent-advisor"><a class="resource-link" href="https://pegasus.uprm.edu/ocolon/" target="_blank" rel="noopener noreferrer">Omar Colón</a></span></span>
-                  </p>
-                  <p class="research-item-presentation">
-                    Presented as <em>finite dynamical systems: transient bounds for boolean monomial systems</em> at SIDIM (PR Interdisciplinary Mathematics Symposium), UPR Ponce, May <span class="research-accent-year">2024</span>
-                  </p>
-                </div>
-                <a class="badge poster-badge" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">(pdf)</a>
-              </li>
-              <li class="research-item">
-                <div class="research-item-main">
-                  <p class="research-item-title">5G rf propagation</p>
-                  <p class="research-item-meta">
-                    <span class="research-item-topic">RF measurements</span>
-                    <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span>advised by <span class="research-accent-advisor"><a class="resource-link" href="https://inec.uprm.edu/rafaelr/" target="_blank" rel="noopener noreferrer">Rafael Solís</a></span></span>
-                  </p>
-                  <p class="research-item-presentation">
-                    Presented as <em>development of radio wave propagation setup and propagation measurements at 5G bands</em> at UPR Mayagüez, <span class="research-accent-year">2023</span>
-                  </p>
-                </div>
-                <a class="badge poster-badge" href="assets/posters/CarsePoster2023.pdf">(pdf)</a>
-              </li>
-              <li class="research-item">
-                <div class="research-item-main">
-                  <p class="research-item-title">Adjacency matrices &amp; walks</p>
-                  <p class="research-item-meta">
-                    <span class="research-item-topic">Graph theory</span>
-                    <span class="research-item-separator" aria-hidden="true">-</span>
-                    <span>advised by <span class="research-accent-advisor">Edwin Benvenutti</span></span>
-                  </p>
-                  <p class="research-item-presentation">
-                    Presented as <em>on the adjacency matrix and walks</em> at Regional Math Fair (PR Dept. of Education), <span class="research-accent-year">2021</span>
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="research-group manuscript-copy">
-            <h3 class="section-subhead">Manuscripts</h3>
-            <div class="grid-two">
-              <div class="pub">
-                <b>Transient length boundary for monomial dynamical systems</b>
-                <span class="badge manuscript-badge">in preperation</span>
-                <span class="muted small manuscript-summary">
-                  We establish upper and lower bounds on the transient length of boolean monomial
-                  dynamical systems in terms of the frobenius number of the set of directed cycle
-                  lengths and the diameter of the associated dependency graph.
-                </span>
-              </div>
-              <div class="pub">
-                <b>Arithmetical structures on cycles with a multi-edge</b>
-                <span class="badge manuscript-badge">in preperation</span>
-                <span class="muted small manuscript-summary">
-                  Using principles underlying the euclidean algorithm, we construct strongly smooth
-                  arithmetical structures on cycles with a multi-edge.
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="content-section" id="gallery" data-section="gallery" aria-labelledby="gallery-heading">
-          <div class="gallery-heading-row">
-            <a
-              href="#landing"
-              class="button gallery-back-link nav-link"
-              data-section="landing"
-              aria-label="back to about me section"
-            >
-              <span class="gallery-back-arrow" aria-hidden="true"></span>
-            </a>
-            <h2 id="gallery-heading">video gallery</h2>
-          </div>
-          <p class="small muted gallery-intro">
-					click any gif to watch the full video.
+      <main>
+        <section id="research">
+          <h2>Research</h2>
+          <p class="entry">
+            <span class="item-title">Arithmetical structures on graphs.</span>
+            Combinatorics research advised by <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a> and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.
           </p>
-          <noscript>
-            <p class="small muted gallery-intro">
-              javascript is disabled, so animated previews are unavailable. the video links still work.
-            </p>
-          </noscript>
-          <div class="gallery-grid" role="list">
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=wuRqYiMyx3Q" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-01.gif" alt="video 1 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gcg_tv8Oskg" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-02.gif" alt="video 2 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=i_F_aZDRU1E" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-03.gif" alt="video 3 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=Gm7-UJHO9os" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-04.gif" alt="video 4 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=dYS__VQq_fs" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-05.gif" alt="video 5 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=vs_LFS-XwqE" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-06.gif" alt="video 6 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=3C4puA9A88w" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-07.gif" alt="video 7 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=ld55N1bJiuo" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-08.gif" alt="video 8 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=H4M6hB0jPo8" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-09.gif" alt="video 9 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=-kuf7N2idOo" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-10.gif" alt="video 10 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=pJfya9tQfh4" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-11.gif" alt="video 11 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-            <article class="gallery-tile" role="listitem">
-              <a class="gallery-link" href="https://www.youtube.com/watch?v=-e__pw1Jtq0" target="_blank" rel="noopener noreferrer">
-                <img class="gallery-gif" src="assets/black.gif" data-gif-src="assets/gallery-gifs/clip-12.gif" alt="video 12 preview gif" loading="lazy" decoding="async">
-              </a>
-            </article>
-          </div>
+          <p class="entry">
+            <span class="item-title">Nonlinear Boolean dynamical systems.</span>
+            Finite dynamical systems research advised by <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.
+          </p>
+          <p class="entry">
+            <span class="item-title">5G RF propagation / GNU Radio.</span>
+            RF measurements work advised by <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.
+          </p>
         </section>
 
-        <section class="content-section" id="other" data-section="other" aria-labelledby="other-heading">
-          <div class="gallery-heading-row">
-            <a
-              href="#landing"
-              class="button gallery-back-link nav-link"
-              data-section="landing"
-              aria-label="back to about me section"
-            >
-              <span class="gallery-back-arrow" aria-hidden="true"></span>
-            </a>
-            <h2 id="other-heading">other links</h2>
-          </div>
-          <div class="other-layout">
-            <div class="other-stack">
-              <div class="other-links-grid">
-                <a class="choice-card other-link-card" href="mailto:bryan.busby@upr.edu" aria-label="email">
-                  <h3>email</h3>
-                  <p>bryan.busby@upr.edu</p>
-                </a>
-                <a class="choice-card other-link-card" href="https://www.youtube.com/@busbymath" target="_blank" rel="noopener noreferrer">
-                  <h3>youtube</h3>
-                  <p>@busbymath</p>
-                </a>
-                <a class="choice-card other-link-card" href="https://www.youtube.com/@bryanbusby61" target="_blank" rel="noopener noreferrer">
-                  <h3>photography</h3>
-                  <p>@bryanbusby61</p>
-                </a>
-                <a class="choice-card other-link-card" href="https://x.com/brybusby" target="_blank" rel="noopener noreferrer">
-                  <h3>x</h3>
-                  <p>@brybusby</p>
-                </a>
-                <a class="choice-card other-link-card other-link-card-wide" href="assets/Bryan_Busby_CV.pdf">
-                  <h3>cv</h3>
-                  <p>open cv (pdf)</p>
-                </a>
-              </div>
-            </div>
-          </div>
+        <section id="presentations">
+          <h2>Presentations</h2>
+          <p class="entry">
+            <span class="item-title">MAA MathFest, Sacramento, California, August 2025.</span>
+            Poster presentation on <em>arithmetical structures on cycles with a multi-edge</em>.
+            <a href="assets/posters/2025_arithmetical_structures_poster.pdf">Poster PDF</a>
+          </p>
+          <p class="entry">
+            <span class="item-title">SIDIM, UPR Ponce, May 2024.</span>
+            Poster presentation on <em>finite dynamical systems: transient bounds for Boolean monomial systems</em>.
+            <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">Poster PDF</a>
+          </p>
+          <p class="entry">
+            <span class="item-title">UPR Mayaguez, 2023.</span>
+            Presentation on <em>development of radio wave propagation setup and propagation measurements at 5G bands</em>.
+            <a href="assets/posters/CarsePoster2023.pdf">Poster PDF</a>
+          </p>
         </section>
 
-      </div>
-
-      <div class="content-meta-row">
-        <div class="content-status-anchor">
-          <div class="status-path">
-            <span class="status-square" data-index="1" data-target="landing" aria-hidden="true"></span>
-            <span class="status-square" data-index="2" data-target="research" aria-hidden="true"></span>
-            <span class="status-square" data-index="3" data-target="gallery" aria-hidden="true"></span>
-            <span class="status-square" data-index="4" data-target="other" aria-hidden="true"></span>
+        <section id="links">
+          <h2>Contact</h2>
+          <div class="plain-links">
+            <p><span class="link-label"><a href="assets/Bryan_Busby_CV.pdf">Curriculum Vitae</a></span> <span class="link-note">PDF</span></p>
+            <p><span class="link-label"><a href="mailto:bryan.busby@upr.edu">Email</a></span> <span class="link-note">bryan.busby@upr.edu</span></p>
           </div>
-        </div>
-        <div class="content-date-anchor">
-          <div class="small muted date-stamp">
-            <span class="date-stamp-label">updated</span>
-            <span class="last-updated-label" id="last-updated-label"></span>
-          </div>
-        </div>
-      </div>
-    </main>
-    <script>
-      (() => {
-        const galleryGifs = Array.from(document.querySelectorAll('.gallery-gif[data-gif-src]'));
-        if (!galleryGifs.length) {
-          return;
-        }
-        let loadedGallery = false;
-        let gifObserver = null;
-
-        const loadGif = (gif) => {
-          if (!(gif instanceof HTMLImageElement) || gif.dataset.gifLoaded === 'true') {
-            return;
-          }
-          const gifSource = gif.getAttribute('data-gif-src');
-          if (!gifSource) {
-            return;
-          }
-          gif.src = gifSource;
-          gif.dataset.gifLoaded = 'true';
-        };
-
-        const loadGallery = () => {
-          if (loadedGallery) {
-            return;
-          }
-          loadedGallery = true;
-
-          if ('IntersectionObserver' in window) {
-            gifObserver = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) {
-                  return;
-                }
-                loadGif(entry.target);
-                gifObserver.unobserve(entry.target);
-              });
-            }, {
-              rootMargin: '120px 0px',
-            });
-
-            galleryGifs.forEach((gif) => {
-              gifObserver.observe(gif);
-            });
-            return;
-          }
-
-          galleryGifs.forEach(loadGif);
-        };
-
-        const maybeLoadGallery = () => {
-          if (document.body && document.body.getAttribute('data-active-section') === 'gallery') {
-            loadGallery();
-          }
-        };
-
-        const bodyObserver = new MutationObserver(maybeLoadGallery);
-        if (document.body) {
-          bodyObserver.observe(document.body, {
-            attributes: true,
-            attributeFilter: ['data-active-section'],
-          });
-        }
-
-        maybeLoadGallery();
-      })();
-    </script>
-    <script src="assets/face-fallback.js"></script>
-    <script>
-      (() => {
-        const asciiFace = document.getElementById('theme-toggle-face');
-        if (!asciiFace) {
-          return;
-        }
-
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const lowPowerViewport = window.matchMedia('(max-width: 900px)');
-        const fallbackText = ':)';
-        const candidateChars = Array.from({ length: 95 }, (_, index) => String.fromCharCode(index + 32));
-        const clamp01 = (value) => Math.max(0, Math.min(1, value));
-        const lumaFromRGB = (red, green, blue) => ((0.2126 * red) + (0.7152 * green) + (0.0722 * blue)) / 255;
-
-        const sampleCanvas = document.createElement('canvas');
-        const sampleCtx = sampleCanvas.getContext('2d', { willReadFrequently: true });
-        const faceSourceCanvas = document.createElement('canvas');
-        const faceSourceCtx = faceSourceCanvas.getContext('2d', { willReadFrequently: true });
-        const glyphCanvas = document.createElement('canvas');
-        glyphCanvas.width = 64;
-        glyphCanvas.height = 64;
-        const glyphCtx = glyphCanvas.getContext('2d', { willReadFrequently: true });
-
-        if (!sampleCtx || !glyphCtx) {
-          asciiFace.textContent = fallbackText;
-          return;
-        }
-
-        const faceImage = new Image();
-        faceImage.decoding = 'async';
-        const embeddedFaceUrl = window.__FACE_FALLBACK_BASE64__ || null;
-        const faceImageUrl = embeddedFaceUrl || 'assets/face.jpg';
-        const fallbackFaceUrl = embeddedFaceUrl ? 'assets/face.jpg' : null;
-
-        let glyphRamp = [{ char: '#', density: 1 }];
-        let glyphRampStart = 0;
-        let cols = 0;
-        let rows = 0;
-        let frameId = 0;
-        let lastFrame = 0;
-        let resizeTimer = 0;
-        let hasImage = false;
-        let triedEmbeddedFace = false;
-        let faceCrop = null;
-
-        const tryEmbeddedFace = () => {
-          if (triedEmbeddedFace || !fallbackFaceUrl) {
-            return false;
-          }
-          triedEmbeddedFace = true;
-          hasImage = false;
-          stop();
-          faceImage.src = fallbackFaceUrl;
-          return true;
-        };
-
-        const prepareFaceSource = () => {
-          // Keep the full image without cropping, but clean the background so no stray ASCII appears.
-          faceCrop = null;
-          if (!faceSourceCtx || !faceImage.naturalWidth || !faceImage.naturalHeight) {
-            return;
-          }
-
-          const width = faceImage.naturalWidth;
-          const height = faceImage.naturalHeight;
-          faceSourceCanvas.width = width;
-          faceSourceCanvas.height = height;
-          faceSourceCtx.drawImage(faceImage, 0, 0, width, height);
-
-          let imageData;
-          try {
-            imageData = faceSourceCtx.getImageData(0, 0, width, height);
-          } catch (error) {
-            return;
-          }
-
-          const pixels = imageData.data;
-          for (let y = 0; y < height; y += 1) {
-            for (let x = 0; x < width; x += 1) {
-              const offset = ((y * width) + x) * 4;
-              const red = pixels[offset];
-              const green = pixels[offset + 1];
-              const blue = pixels[offset + 2];
-              const maxChannel = Math.max(red, green, blue);
-              const minChannel = Math.min(red, green, blue);
-              const saturation = maxChannel === 0 ? 0 : ((maxChannel - minChannel) / maxChannel);
-              const luma = lumaFromRGB(red, green, blue);
-
-              const neutralBackground = luma > 0.74 && saturation < 0.18;
-              const faintHalo = luma > 0.9 && saturation < 0.24;
-              if (neutralBackground || faintHalo) {
-                pixels[offset] = 255;
-                pixels[offset + 1] = 255;
-                pixels[offset + 2] = 255;
-              }
-            }
-          }
-
-          faceSourceCtx.putImageData(imageData, 0, 0);
-        };
-
-        const buildGlyphRamp = () => {
-          const fontFamily = window.getComputedStyle(asciiFace).fontFamily || 'monospace';
-          glyphCtx.textAlign = 'center';
-          glyphCtx.textBaseline = 'middle';
-          glyphCtx.font = `700 52px ${fontFamily}`;
-          const profiles = [];
-
-          for (let i = 0; i < candidateChars.length; i += 1) {
-            const char = candidateChars[i];
-            glyphCtx.fillStyle = '#000';
-            glyphCtx.fillRect(0, 0, glyphCanvas.width, glyphCanvas.height);
-            glyphCtx.fillStyle = '#fff';
-            glyphCtx.fillText(char, glyphCanvas.width * 0.5, glyphCanvas.height * 0.52);
-
-            const pixels = glyphCtx.getImageData(0, 0, glyphCanvas.width, glyphCanvas.height).data;
-            let sum = 0;
-            for (let offset = 0; offset < pixels.length; offset += 4) {
-              sum += pixels[offset] / 255;
-            }
-
-            profiles.push({
-              char,
-              density: sum / (pixels.length / 4),
-            });
-          }
-
-          profiles.sort((a, b) => {
-            if (a.density === b.density) {
-              return a.char.localeCompare(b.char);
-            }
-            return a.density - b.density;
-          });
-
-          const deduped = [];
-          let lastDensity = -1;
-          for (let i = 0; i < profiles.length; i += 1) {
-            const profile = profiles[i];
-            if (Math.abs(profile.density - lastDensity) < 0.002) {
-              continue;
-            }
-            deduped.push(profile);
-            lastDensity = profile.density;
-          }
-
-          if (deduped.length) {
-            glyphRamp = deduped;
-            const firstVisible = deduped.findIndex((profile) => profile.density > 0.06);
-            glyphRampStart = firstVisible === -1 ? 0 : firstVisible;
-          }
-        };
-
-        const updateGridSize = () => {
-          const styles = window.getComputedStyle(asciiFace);
-          const width = Math.max(44, Math.round(asciiFace.clientWidth || parseFloat(styles.width) || 96));
-          const height = Math.max(44, Math.round(asciiFace.clientHeight || parseFloat(styles.height) || 96));
-          const paddingX = (parseFloat(styles.paddingLeft) || 0) + (parseFloat(styles.paddingRight) || 0);
-          const paddingY = (parseFloat(styles.paddingTop) || 0) + (parseFloat(styles.paddingBottom) || 0);
-          const usableWidth = Math.max(24, width - paddingX);
-          const usableHeight = Math.max(24, height - paddingY);
-          const fontSize = parseFloat(styles.fontSize) || 4;
-          const parsedLineHeight = parseFloat(styles.lineHeight);
-          const lineHeight = Number.isFinite(parsedLineHeight) ? parsedLineHeight : (fontSize * 0.82);
-          const charWidth = fontSize * 0.66;
-          const nextCols = Math.max(14, Math.round(usableWidth / Math.max(charWidth, 1)));
-          // Use floor to avoid clipping the final ASCII row at the bottom edge.
-          const nextRows = Math.max(14, Math.floor(usableHeight / Math.max(lineHeight, 1)));
-
-          if (nextCols === cols && nextRows === rows) {
-            return;
-          }
-
-          cols = nextCols;
-          rows = nextRows;
-          sampleCanvas.width = cols * 2;
-          sampleCanvas.height = rows * 3;
-        };
-
-        const drawFace = (time) => {
-          const width = sampleCanvas.width;
-          const height = sampleCanvas.height;
-          const source = faceSourceCanvas.width && faceSourceCanvas.height ? faceSourceCanvas : faceImage;
-          const sourceRect = faceCrop
-            ? faceCrop
-            : {
-                x: 0,
-                y: 0,
-                width: source === faceImage ? faceImage.naturalWidth : faceSourceCanvas.width,
-                height: source === faceImage ? faceImage.naturalHeight : faceSourceCanvas.height,
-              };
-          const sourceWidth = sourceRect.width;
-          const sourceHeight = sourceRect.height;
-          if (!width || !height || !sourceWidth || !sourceHeight) {
-            return;
-          }
-
-          const staticFrame = reducedMotion.matches;
-          const pulse = staticFrame ? 0 : (Math.sin(time * 0.0012) * 0.004);
-          const driftX = staticFrame ? 0 : (Math.sin(time * 0.0009) * width * 0.004);
-          const driftY = staticFrame ? 0 : (Math.cos(time * 0.0011) * height * 0.004);
-          const rotation = staticFrame ? 0 : (Math.sin(time * 0.00045) * 0.004);
-          const containScale = Math.min(width / sourceWidth, height / sourceHeight) * (0.98 + pulse);
-          const drawWidth = sourceWidth * containScale;
-          const drawHeight = sourceHeight * containScale;
-
-          sampleCtx.save();
-          sampleCtx.clearRect(0, 0, width, height);
-          sampleCtx.fillStyle = '#fff';
-          sampleCtx.fillRect(0, 0, width, height);
-          sampleCtx.translate((width * 0.5) + driftX, (height * 0.5) + driftY);
-          sampleCtx.rotate(rotation);
-          sampleCtx.filter = 'grayscale(1) contrast(1.05) brightness(1.05) blur(0.4px)';
-          sampleCtx.drawImage(
-            source,
-            sourceRect.x,
-            sourceRect.y,
-            sourceWidth,
-            sourceHeight,
-            -drawWidth * 0.5,
-            -drawHeight * 0.5,
-            drawWidth,
-            drawHeight,
-          );
-          sampleCtx.restore();
-        };
-
-        const faceBlackPoint = 0.1;
-        const faceWhitePoint = 0.99;
-        const normalizeFaceLuma = (luma) => clamp01(
-          (luma - faceBlackPoint) / (faceWhitePoint - faceBlackPoint),
-        );
-
-        const glyphForLuma = (luma) => {
-          const darkness = clamp01(Math.pow(clamp01(1 - luma), 1.12) * 0.78);
-          if (darkness < 0.04) {
-            return ' ';
-          }
-
-          const first = Math.min(glyphRampStart, glyphRamp.length - 1);
-          const available = glyphRamp.length - first - 1;
-          if (available <= 0) {
-            return glyphRamp[glyphRamp.length - 1].char;
-          }
-
-          const index = first + Math.round(darkness * available);
-          return glyphRamp[index].char;
-        };
-
-        const render = (time) => {
-          if (!hasImage || !cols || !rows) {
-            return;
-          }
-
-          let pixels;
-          try {
-            drawFace(time);
-            pixels = sampleCtx.getImageData(0, 0, sampleCanvas.width, sampleCanvas.height).data;
-          } catch (error) {
-            if (tryEmbeddedFace()) {
-              return;
-            }
-            hasImage = false;
-            asciiFace.textContent = fallbackText;
-            stop();
-            return;
-          }
-
-          const width = sampleCanvas.width;
-          const count = rows * cols;
-          const lumaGrid = new Float32Array(count);
-
-          for (let y = 0; y < rows; y += 1) {
-            for (let x = 0; x < cols; x += 1) {
-              const startX = x * 2;
-              const startY = y * 3;
-              let lumaSum = 0;
-
-              for (let subY = 0; subY < 3; subY += 1) {
-                for (let subX = 0; subX < 2; subX += 1) {
-                  const sx = startX + subX;
-                  const sy = startY + subY;
-                  const offset = (sy * width + sx) * 4;
-                  const red = pixels[offset];
-                  const green = pixels[offset + 1];
-                  const blue = pixels[offset + 2];
-                  lumaSum += lumaFromRGB(red, green, blue);
-                }
-              }
-
-              const luma = lumaSum / 6;
-              const index = (y * cols) + x;
-              lumaGrid[index] = luma;
-            }
-          }
-
-          const lines = new Array(rows);
-          for (let y = 0; y < rows; y += 1) {
-            let line = '';
-            for (let x = 0; x < cols; x += 1) {
-              const index = (y * cols) + x;
-              let normalized = normalizeFaceLuma(lumaGrid[index]);
-
-              line += glyphForLuma(normalized);
-            }
-            lines[y] = line;
-          }
-
-          asciiFace.textContent = lines.join('\n');
-        };
-
-        const stop = () => {
-          if (frameId) {
-            window.cancelAnimationFrame(frameId);
-            frameId = 0;
-          }
-          lastFrame = 0;
-        };
-
-        const shouldAnimateFace = () => (
-          !reducedMotion.matches &&
-          !document.hidden
-        );
-
-        const animate = (timestamp) => {
-          if (!shouldAnimateFace()) {
-            stop();
-            return;
-          }
-
-          const frameInterval = lowPowerViewport.matches ? 180 : 120;
-          if (!lastFrame) {
-            lastFrame = timestamp;
-          }
-
-          const elapsed = timestamp - lastFrame;
-          if (elapsed >= frameInterval) {
-            lastFrame = timestamp - (elapsed % frameInterval);
-            render(timestamp);
-          }
-
-          frameId = window.requestAnimationFrame(animate);
-        };
-
-        const start = () => {
-          if (!hasImage) {
-            return;
-          }
-
-          stop();
-          updateGridSize();
-          render(performance.now());
-
-          if (shouldAnimateFace()) {
-            frameId = window.requestAnimationFrame(animate);
-          }
-        };
-
-        const handleResize = () => {
-          window.clearTimeout(resizeTimer);
-          resizeTimer = window.setTimeout(() => {
-            start();
-          }, 120);
-        };
-
-        const handleVisibility = () => {
-          if (!hasImage) {
-            return;
-          }
-
-          if (document.hidden) {
-            stop();
-            return;
-          }
-          start();
-        };
-
-        const handleMotionChange = () => {
-          if (!hasImage) {
-            return;
-          }
-          start();
-        };
-
-        window.addEventListener('resize', handleResize);
-        document.addEventListener('visibilitychange', handleVisibility);
-        if (typeof reducedMotion.addEventListener === 'function') {
-          reducedMotion.addEventListener('change', handleMotionChange);
-        } else if (typeof reducedMotion.addListener === 'function') {
-          reducedMotion.addListener(handleMotionChange);
-        }
-        if (typeof lowPowerViewport.addEventListener === 'function') {
-          lowPowerViewport.addEventListener('change', handleMotionChange);
-        } else if (typeof lowPowerViewport.addListener === 'function') {
-          lowPowerViewport.addListener(handleMotionChange);
-        }
-
-        const handleFaceLoad = () => {
-          if (!faceImage.naturalWidth || !faceImage.naturalHeight) {
-            handleFaceError();
-            return;
-          }
-
-          hasImage = true;
-          prepareFaceSource();
-          buildGlyphRamp();
-          start();
-        };
-        const handleFaceError = () => {
-          if (tryEmbeddedFace()) {
-            return;
-          }
-          hasImage = false;
-          asciiFace.textContent = fallbackText;
-          stop();
-        };
-
-        faceImage.addEventListener('load', handleFaceLoad);
-        faceImage.addEventListener('error', handleFaceError);
-        asciiFace.textContent = fallbackText;
-        faceImage.src = faceImageUrl;
-      })();
-    </script>
-    <script src="assets/site.js"></script>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
