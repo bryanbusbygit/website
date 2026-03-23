@@ -232,6 +232,97 @@
         font-weight: 600;
       }
 
+      .pdf-icon-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.55rem;
+        height: 1.2rem;
+        margin-left: 0.35rem;
+        vertical-align: -0.14em;
+        text-decoration: none;
+      }
+
+      .pdf-icon {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.12rem;
+        background: linear-gradient(180deg, #5e5e5e 0%, #3f3f3f 100%);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14);
+        position: relative;
+      }
+
+      .pdf-icon::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0.4rem;
+        height: 0.4rem;
+        background: linear-gradient(135deg, #d7d7d7 0%, #d7d7d7 49%, #ffffff 50%, #ffffff 100%);
+        border-top-right-radius: 0.12rem;
+      }
+
+      .pdf-icon::after {
+        content: "PDF";
+        position: absolute;
+        left: 50%;
+        bottom: 0.14rem;
+        transform: translateX(-50%);
+        color: #ffffff;
+        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 0.46rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        line-height: 1;
+      }
+
+      .pdf-icon-link:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 3px;
+      }
+
+      .materials-group {
+        width: var(--section-measure);
+        max-width: var(--section-measure);
+      }
+
+      .materials-group + .materials-group {
+        margin-top: 2.75rem;
+      }
+
+      .materials-group h3 {
+        margin-bottom: 1rem;
+      }
+
+      .materials-group p:last-child {
+        margin-bottom: 0;
+      }
+
+      .contact-list {
+        width: var(--section-measure);
+        max-width: var(--section-measure);
+        margin: 0;
+      }
+
+      .contact-item {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 1rem;
+        align-items: baseline;
+        margin: 0;
+        padding: 0.25rem 0;
+      }
+
+      .contact-label {
+        min-width: 5rem;
+        color: var(--muted);
+        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 0.95rem;
+        letter-spacing: 0.02em;
+      }
+
       .menu-shell {
         position: sticky;
         top: 1rem;
@@ -385,6 +476,15 @@
           min-height: 0;
         }
 
+        .contact-item {
+          gap: 0.2rem;
+          padding: 0.3rem 0;
+        }
+
+        .contact-label {
+          min-width: 100%;
+        }
+
         .anchor {
           top: -8rem;
         }
@@ -406,10 +506,8 @@
       </button>
       <nav id="menu" aria-label="Primary">
         <a href="#about">About</a>
-        <a href="#works">Projects</a>
-        <a href="#presentations">Presentations</a>
-        <a href="#manuscripts">Manuscripts</a>
-        <a href="#materials">Documents</a>
+        <a href="#works">Research</a>
+        <a href="#materials">Writing</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -419,29 +517,25 @@
         <span class="anchor" id="about" aria-hidden="true"></span>
         <h2>About</h2>
         <p>
-          <strong>I’m Bryan C. Busby.</strong> My research is in combinatorics, discrete
-          dynamical systems, and RF propagation.
-        </p>
-        <p class="section-intro">
-          My recent work includes arithmetical structures on graphs, transient
-          length bounds for Boolean monomial systems, and propagation
-          measurements from microwave to millimeter-wave bands.
+          Research interests include combinatorics, discrete dynamical
+          systems, and RF propagation, with recent work on arithmetical
+          structures on graphs, transient length bounds for Boolean monomial
+          systems, and propagation measurements across microwave and
+          millimeter-wave bands.
         </p>
       </section>
 
       <section>
         <span class="anchor" id="works" aria-hidden="true"></span>
         <h2>Research</h2>
-        <p class="section-intro">
-          Selected projects in combinatorics, discrete dynamical systems, and
-          RF propagation.
-        </p>
 
         <div class="project">
           <h3>Arithmetical Structures on Graphs</h3>
           <p>
             This project studies arithmetical structures on cycles with a
-            multi-edge. <span class="advisor">Advised by
+            multi-edge. The work focuses on the classification and enumeration
+            of arithmetical structures, including constructive descriptions
+            and counting formulas for the families that arise on these graphs. <span class="advisor">Advised by
             <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Diaz</a>
             and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
           </p>
@@ -461,7 +555,10 @@
           <h3>Nonlinear Boolean Monomial Systems</h3>
           <p>
             This project studies transient length bounds for Boolean monomial
-            systems through dependency graphs and acyclic subgraphs. <span class="advisor">Advised by
+            systems. Using dependency graphs and acyclic subgraphs, the work
+            derives upper bounds on transient length and relates those bounds
+            to combinatorial properties of the underlying digraph, including
+            number-theoretic arguments based on the Frobenius number. <span class="advisor">Advised by
             <a href="https://pegasus.uprm.edu/ocolon/">Omar Colon</a>.</span>
           </p>
           <div class="gallery gallery-boolean">
@@ -479,9 +576,11 @@
         <div class="project">
           <h3>5G RF Propagation</h3>
           <p>
-            This work involves SDR-based propagation measurements, GNU Radio,
-            and Vivaldi antenna design across microwave and millimeter-wave
-            bands. <span class="advisor">Advised by
+            This work uses SDR-based propagation measurements in microwave and
+            millimeter-wave bands relevant to 5G systems. It includes GNU
+            Radio instrumentation, Vivaldi antenna design, and channel
+            measurements for studying attenuation and directional effects in
+            real RF environments. <span class="advisor">Advised by
             <a href="https://inec.uprm.edu/rafaelr/">Rafael Solis</a>.</span>
           </p>
           <div class="gallery gallery-rf">
@@ -498,50 +597,64 @@
       </section>
 
       <section>
-        <span class="anchor" id="presentations" aria-hidden="true"></span>
-        <h2>Presentations</h2>
-        <p>
-          MAA MathFest, Sacramento, CA, August 2025. Poster presentation on
-          arithmetical structures on cycles with a multi-edge.
-        </p>
-        <p>
-          SIDIM, UPR Ponce, May 2024. Poster presentation on transient length
-          bounds for Boolean monomial systems.
-        </p>
-        <p>
-          UPR Mayaguez research presentation, 2023. Presentation on RF
-          propagation measurements and antenna design for 5G-related bands.
-        </p>
-      </section>
-
-      <section>
-        <span class="anchor" id="manuscripts" aria-hidden="true"></span>
-        <h2>Manuscripts</h2>
-        <p>
-          <a href="VPR3.pdf">Arithmetical Structures on Cycles with a Multi-Edge</a>,
-          <span class="status">draft manuscript</span>
-        </p>
-        <p>
-          <span>Transient Length Bounds for Boolean Monomial Systems</span>,
-          <span class="status">in preparation</span>
-        </p>
-      </section>
-
-      <section>
         <span class="anchor" id="materials" aria-hidden="true"></span>
-        <h2>Documents</h2>
-        <p><a href="assets/Bryan_Busby_CV.pdf">CV (PDF)</a></p>
-        <p><a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">Boolean dynamical systems poster (PDF)</a></p>
-        <p><a href="assets/posters/2025_arithmetical_structures_poster.pdf">Arithmetical structures poster (PDF)</a></p>
-        <p><a href="assets/posters/CarsePoster2023.pdf">5G RF propagation poster (PDF)</a></p>
+        <h2>Writing</h2>
+
+        <div class="materials-group">
+          <h3>Manuscripts</h3>
+          <p>
+            Arithmetical Structures on Cycles with a Multi-Edge
+            <a class="pdf-icon-link" href="VPR3.pdf" aria-label="Open PDF for Arithmetical Structures on Cycles with a Multi-Edge"><span class="pdf-icon" aria-hidden="true"></span></a>
+            <span class="status">(draft manuscript)</span>
+          </p>
+          <p>
+            <span>Transient Length Bounds for Boolean Monomial Systems</span>
+            <span class="status">(in preparation)</span>
+          </p>
+        </div>
+
+        <div class="materials-group">
+          <h3>Presentations</h3>
+          <p>
+            MAA MathFest, Sacramento, CA, August 2025. Poster presentation on
+            arithmetical structures on cycles with a multi-edge.
+            <a class="pdf-icon-link" href="assets/posters/2025_arithmetical_structures_poster.pdf" aria-label="Open PDF poster for arithmetical structures on cycles with a multi-edge"><span class="pdf-icon" aria-hidden="true"></span></a>
+          </p>
+          <p>
+            SIDIM, UPR Ponce, May 2024. Poster presentation on transient length
+            bounds for Boolean monomial systems.
+            <a class="pdf-icon-link" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf" aria-label="Open PDF poster for transient length bounds for Boolean monomial systems"><span class="pdf-icon" aria-hidden="true"></span></a>
+          </p>
+          <p>
+            UPR Mayaguez research presentation, 2023. Presentation on RF
+            propagation measurements and antenna design for 5G-related bands.
+            <a class="pdf-icon-link" href="assets/posters/CarsePoster2023.pdf" aria-label="Open PDF poster for 5G RF propagation"><span class="pdf-icon" aria-hidden="true"></span></a>
+          </p>
+        </div>
+
       </section>
 
       <section>
         <span class="anchor" id="contact" aria-hidden="true"></span>
         <h2>Contact</h2>
-        <p>
-          <a href="mailto:bryan.busby@upr.edu">bryan.busby@upr.edu</a>
-        </p>
+        <div class="contact-list">
+          <p class="contact-item">
+            <span class="contact-label">CV</span>
+            <a class="pdf-icon-link" href="assets/Bryan_Busby_CV.pdf" aria-label="Open PDF for CV"><span class="pdf-icon" aria-hidden="true"></span></a>
+          </p>
+          <p class="contact-item">
+            <span class="contact-label">Email</span>
+            <a href="mailto:bryan.busby@upr.edu">bryan.busby@upr.edu</a>
+          </p>
+          <p class="contact-item">
+            <span class="contact-label">YouTube</span>
+            <a href="https://www.youtube.com/@busbymath">@busbymath</a>
+          </p>
+          <p class="contact-item">
+            <span class="contact-label">X</span>
+            <a href="https://x.com/brybusby">@brybusby</a>
+          </p>
+        </div>
       </section>
     </main>
 
