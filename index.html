@@ -35,7 +35,9 @@
 
       body {
         margin: 0;
-        padding: 3rem 2rem 5rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
         background: var(--bg);
         color: var(--text);
         overflow-wrap: anywhere;
@@ -44,6 +46,11 @@
         line-height: 1.6;
         font-optical-sizing: auto;
         text-rendering: optimizeLegibility;
+      }
+
+      .site-shell {
+        flex: 1 0 auto;
+        padding: 3rem 2rem 5rem;
       }
 
       h1,
@@ -125,8 +132,7 @@
       }
 
       h1,
-      section,
-      footer {
+      section {
         max-width: min(1100px, calc(100% - 15rem));
       }
 
@@ -341,81 +347,32 @@
         margin-bottom: 0;
       }
 
-      .contact-list {
-        width: var(--section-measure);
-        max-width: var(--section-measure);
-        margin: 0;
-      }
-
-      .contact-item {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.35rem 1rem;
-        align-items: baseline;
-        margin: 0;
-        padding: 0.25rem 0;
-      }
-
-      .contact-label {
-        min-width: 5rem;
-        color: var(--muted);
-        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: 0.95rem;
-        letter-spacing: 0.02em;
-      }
-
       .menu-shell {
         position: sticky;
         top: 1rem;
         z-index: 10;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: flex-start;
         gap: 0.75rem;
         margin-bottom: 2.5rem;
       }
 
       .menu-toggle {
-        appearance: none;
-        border: 0;
-        background: transparent;
-        color: var(--text);
-        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: 1.05rem;
-        line-height: 1.4;
-        font-weight: 500;
-        padding: 0;
-        cursor: pointer;
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 0.18em;
-      }
-
-      .menu-toggle:hover,
-      .menu-toggle:focus-visible {
-        color: #000000;
-      }
-
-      .menu-toggle:focus-visible {
-        outline: 2px solid currentColor;
-        outline-offset: 4px;
+        display: none;
       }
 
       #menu {
-        display: none;
-        flex-direction: column;
+        display: flex;
+        flex-wrap: wrap;
         gap: 0.75rem;
-        min-width: 12rem;
-        max-width: min(18rem, calc(100vw - 2rem));
+        min-width: 0;
+        max-width: min(100%, var(--measure));
         padding: 0;
         border: 0;
         background: transparent;
         backdrop-filter: none;
         box-shadow: none;
-      }
-
-      body[data-menu-open="true"] #menu {
-        display: flex;
       }
 
       #menu a {
@@ -426,17 +383,79 @@
       }
 
       #menu a:hover,
-      #menu a:focus-visible,
-      #menu a[aria-current="location"] {
+      #menu a:focus-visible {
         color: var(--text);
         text-decoration: underline;
       }
 
       footer {
-        margin-top: 5rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--line);
-        color: var(--muted);
+        align-self: stretch;
+        margin-top: auto;
+        width: 100%;
+        padding: 0.65rem 2rem 0.7rem;
+        background: #111111;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .footer-inner {
+        width: 100%;
+        max-width: var(--measure);
+        margin: 0;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, max-content));
+        gap: 0.75rem 2.8rem;
+        align-items: end;
+      }
+
+      .footer-group h3 {
+        margin-bottom: 0.2rem;
+        color: #ffffff;
+        font-size: 0.86rem;
+        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .footer-group p {
+        margin-bottom: 0.1rem;
+        line-height: 1.4;
+      }
+
+      .footer-affiliation {
+        color: rgba(255, 255, 255, 0.62);
+      }
+
+      .footer-inline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 0.9rem;
+        align-items: center;
+      }
+
+      footer a {
+        color: #ffffff;
+      }
+
+      footer .pdf-icon {
+        background: linear-gradient(180deg, #e4e4e4 0%, #cfcfcf 100%);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      footer .pdf-icon::before {
+        background: linear-gradient(135deg, #9c9c9c 0%, #9c9c9c 49%, #ffffff 50%, #ffffff 100%);
+      }
+
+      footer .pdf-icon::after {
+        color: #111111;
+      }
+
+      .footer-note {
+        margin-top: 0.45rem;
+        color: rgba(255, 255, 255, 0.58);
+        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 0.8rem;
+        line-height: 1.3;
       }
 
       @media (min-width: 960px) {
@@ -444,15 +463,8 @@
           position: fixed;
           top: 1rem;
           right: 1rem;
+          align-items: flex-end;
           margin-bottom: 0;
-        }
-
-        .menu-toggle {
-          display: none;
-        }
-
-        #menu {
-          display: flex;
         }
 
         .anchor {
@@ -463,7 +475,7 @@
       @media (max-width: 959px) {
         h1,
         section,
-        footer {
+        .footer-inner {
           max-width: none;
         }
       }
@@ -497,15 +509,13 @@
 
         .menu-shell {
           top: 0.75rem;
-          align-items: stretch;
+          align-items: flex-start;
         }
 
         #menu {
           width: 100%;
-          max-width: none;
-          padding: 0.85rem 1rem;
-          border: 1px solid var(--line);
-          background: rgba(255, 255, 255, 0.96);
+          max-width: 100%;
+          gap: 0.4rem 0.9rem;
         }
 
         #menu a {
@@ -531,13 +541,17 @@
           max-width: calc(var(--section-measure) - 0.9rem);
         }
 
-        .contact-item {
-          gap: 0.2rem;
-          padding: 0.3rem 0;
+        footer {
+          padding: 0.6rem 1rem 0.65rem;
         }
 
-        .contact-label {
-          min-width: 100%;
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 0.35rem;
+        }
+
+        .footer-inline {
+          gap: 0.25rem 0.7rem;
         }
 
         .anchor {
@@ -546,41 +560,32 @@
       }
     </style>
   </head>
-  <body data-menu-open="false">
+  <body>
     <a class="skip-link" href="#content">Skip to content</a>
-    <h1>Bryan C. Busby</h1>
+    <div class="site-shell">
+      <h1>Bryan C. Busby</h1>
 
-    <div class="menu-shell">
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="menu"
-      >
-        Menu
-      </button>
-      <nav id="menu" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#works">Research</a>
-        <a href="#materials">Writing</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+      <div class="menu-shell">
+        <nav id="menu" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#works">Research</a>
+          <a href="#materials">Writing</a>
+        </nav>
+      </div>
 
-    <main id="content">
-      <section>
+      <main id="content">
+        <section>
         <span class="anchor" id="about" aria-hidden="true"></span>
         <h2>About</h2>
         <div class="intro-copy">
           <p>
-            Research interests include combinatorics, discrete dynamical
-            systems, and RF propagation, with recent work on arithmetical
-            structures on graphs, transient length bounds for Boolean monomial
-            systems, and propagation measurements across microwave and
-            millimeter-wave bands.
+            I am an undergraduate at the University of Puerto Rico, with a
+            particular interest in discrete dynamical systems and their
+            connections to number theory. I keep this page to collect projects
+            and share links.
           </p>
         </div>
-      </section>
+        </section>
 
       <section>
         <span class="anchor" id="works" aria-hidden="true"></span>
@@ -590,10 +595,10 @@
           <div class="project-copy">
             <h3>Arithmetical Structures on Graphs</h3>
             <p>
-              This project studies arithmetical structures on cycles with a
-              multi-edge. The work focuses on the classification and enumeration
-              of arithmetical structures, including constructive descriptions
-              and counting formulas for the families that arise on these graphs. <span class="advisor">Advised by
+              Arithmetical structures on cycles with a multi-edge are studied
+              here, with a focus on classification and enumeration, including
+              constructive descriptions and counting formulas for the families
+              that arise on these graphs. <span class="advisor">Advised by
               <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a>
               and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
             </p>
@@ -614,10 +619,10 @@
           <div class="project-copy">
             <h3>Nonlinear Boolean Monomial Systems</h3>
             <p>
-              This project studies transient length bounds for Boolean monomial
-              systems. Using dependency graphs and acyclic subgraphs, the work
-              derives upper bounds on transient length and relates those bounds
-              to combinatorial properties of the underlying digraph, including
+              This work studies transient length bounds for Boolean monomial
+              systems using dependency graphs and acyclic subgraphs. The work
+              derives upper bounds on transient length and relates those bounds to
+              combinatorial properties of the underlying digraph, including
               number-theoretic arguments based on the Frobenius number. <span class="advisor">Advised by
               <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.</span>
             </p>
@@ -636,13 +641,15 @@
 
         <div class="project">
           <div class="project-copy">
-            <h3>5G RF Propagation</h3>
+            <h3>5G RF Propagation Measurements</h3>
             <p>
-              This work uses SDR-based propagation measurements in microwave and
-              millimeter-wave bands relevant to 5G systems. It includes GNU
-              Radio instrumentation, Vivaldi antenna design, and channel
-              measurements for studying attenuation and directional effects in
-              real RF environments. <span class="advisor">Advised by
+              SDR-based propagation measurements in microwave and
+              millimeter-wave bands are used here for 5G-related RF studies,
+              along with GNU Radio instrumentation, Vivaldi antenna design,
+              and channel measurements for studying attenuation and directional
+              effects in real RF environments. The work also includes
+              debugging issues that arose in GNU Radio during measurement and
+              signal-processing workflows. <span class="advisor">Advised by
               <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.</span>
             </p>
           </div>
@@ -697,40 +704,36 @@
 
       </section>
 
-      <section>
-        <span class="anchor" id="contact" aria-hidden="true"></span>
-        <h2>Contact</h2>
-        <div class="contact-list">
-          <p class="contact-item">
-            <span class="contact-label">CV</span>
-            <a class="pdf-icon-link" href="assets/Bryan_Busby_CV.pdf" aria-label="Open PDF for CV"><span class="pdf-icon" aria-hidden="true"></span></a>
-          </p>
-          <p class="contact-item">
-            <span class="contact-label">Email</span>
-            <a href="mailto:bryan.busby@upr.edu">bryan.busby@upr.edu</a>
-          </p>
-          <p class="contact-item">
-            <span class="contact-label">YouTube</span>
-            <a href="https://www.youtube.com/@busbymath">@busbymath</a>
-          </p>
-          <p class="contact-item">
-            <span class="contact-label">X</span>
-            <a href="https://x.com/brybusby">@brybusby</a>
-          </p>
-        </div>
-      </section>
-    </main>
+      </main>
+    </div>
 
     <footer>
-      Bryan C. Busby, 2026
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-group">
+            <h3>Contact</h3>
+            <p><a href="mailto:bryan.busby@upr.edu">bryan.busby@upr.edu</a></p>
+            <p class="footer-affiliation">University of Puerto Rico</p>
+          </div>
+          <div class="footer-group">
+            <h3>Links</h3>
+            <div class="footer-inline">
+              <p>
+                <a href="assets/Bryan_Busby_CV.pdf">CV</a>
+              </p>
+              <p><a href="https://www.youtube.com/@busbymath">YouTube</a></p>
+              <p><a href="https://x.com/brybusby">X</a></p>
+            </div>
+          </div>
+        </div>
+        <p class="footer-note">Bryan C. Busby, 2026</p>
+      </div>
     </footer>
 
     <script>
-      const menuButton = document.querySelector(".menu-toggle");
       const menu = document.getElementById("menu");
       const menuLinks = menu ? Array.from(menu.querySelectorAll("a")) : [];
       const sections = Array.from(document.querySelectorAll("section"));
-      const menuShell = document.querySelector(".menu-shell");
 
       const updateActiveLink = (activeId) => {
         menuLinks.forEach((link) => {
@@ -749,83 +752,6 @@
       };
 
       updateActiveLink(getSectionIdFromHash());
-
-      const syncMenuButton = (isOpen) => {
-        if (!menuButton) {
-          return;
-        }
-
-        menuButton.setAttribute("aria-expanded", String(isOpen));
-        menuButton.textContent = isOpen ? "Close" : "Menu";
-      };
-
-      const setMenuOpen = (isOpen) => {
-        document.body.dataset.menuOpen = isOpen ? "true" : "false";
-        syncMenuButton(isOpen);
-      };
-
-      const closeMenu = () => {
-        if (window.innerWidth >= 960) {
-          setMenuOpen(false);
-          return;
-        }
-
-        syncMenuButton(document.body.dataset.menuOpen === "true");
-      };
-
-      if (menuButton) {
-        menuButton.addEventListener("click", () => {
-          const isOpen = document.body.dataset.menuOpen === "true";
-          setMenuOpen(!isOpen);
-        });
-      }
-
-      menuLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          if (window.innerWidth < 960) {
-            setMenuOpen(false);
-          }
-        });
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") {
-          return;
-        }
-
-        if (window.innerWidth >= 960) {
-          return;
-        }
-
-        if (document.body.dataset.menuOpen !== "true") {
-          return;
-        }
-
-        setMenuOpen(false);
-        if (menuButton) {
-          menuButton.focus();
-        }
-      });
-
-      document.addEventListener("click", (event) => {
-        if (window.innerWidth >= 960) {
-          return;
-        }
-
-        if (document.body.dataset.menuOpen !== "true") {
-          return;
-        }
-
-        if (!menuShell) {
-          return;
-        }
-
-        if (event.target instanceof Node && menuShell.contains(event.target)) {
-          return;
-        }
-
-        setMenuOpen(false);
-      });
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
@@ -855,9 +781,6 @@
       window.addEventListener("hashchange", () => {
         updateActiveLink(getSectionIdFromHash());
       });
-
-      closeMenu();
-      window.addEventListener("resize", closeMenu);
     </script>
   </body>
 </html>
