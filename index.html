@@ -27,6 +27,7 @@
         -webkit-text-size-adjust: 100%;
         overflow-x: hidden;
         background: #111111;
+        overscroll-behavior-y: none;
       }
 
       *,
@@ -44,6 +45,7 @@
         grid-template-rows: minmax(0, 1fr) auto;
         overflow-x: hidden;
         background: var(--bg);
+        overscroll-behavior-y: none;
         color: var(--text);
         overflow-wrap: anywhere;
         font-family: "Newsreader", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
@@ -55,7 +57,7 @@
 
       .site-shell {
         width: 100%;
-        padding: 3rem 0 5rem;
+        padding: 3rem 0 0;
         background: var(--bg);
       }
 
@@ -172,15 +174,7 @@
         max-width: var(--section-measure);
       }
 
-      .anchor {
-        position: relative;
-        top: -6.5rem;
-        display: block;
-        visibility: hidden;
-      }
-
-      section[id],
-      .anchor[id] {
+      section[id] {
         scroll-margin-top: 7rem;
       }
 
@@ -479,10 +473,6 @@
           align-items: flex-end;
           margin-bottom: 0;
         }
-
-        .anchor {
-          top: -2rem;
-        }
       }
 
       @media (max-width: 959px) {
@@ -495,7 +485,7 @@
 
       @media (max-width: 720px) {
         body {
-          padding: 1.75rem 1rem 4rem;
+          padding: 0;
           font-size: 1.1rem;
         }
 
@@ -515,8 +505,7 @@
           margin: 4.25rem 0;
         }
 
-        section[id],
-        .anchor[id] {
+        section[id] {
           scroll-margin-top: 8.5rem;
         }
 
@@ -526,7 +515,7 @@
         }
 
         .site-shell {
-          padding: 1.75rem 0 4rem;
+          padding: 1.75rem 0 0;
         }
 
         .site-shell > h1,
@@ -578,9 +567,6 @@
           gap: 0.25rem 0.7rem;
         }
 
-        .anchor {
-          top: -8rem;
-        }
       }
     </style>
   </head>
@@ -598,8 +584,7 @@
       </div>
 
       <main id="content">
-        <section>
-        <span class="anchor" id="about" aria-hidden="true"></span>
+        <section id="about">
         <h2>About</h2>
         <div class="intro-copy">
           <p>
@@ -611,8 +596,7 @@
         </div>
         </section>
 
-      <section>
-        <span class="anchor" id="works" aria-hidden="true"></span>
+      <section id="works">
         <h2>Research</h2>
 
         <div class="project">
@@ -690,8 +674,7 @@
         </div>
       </section>
 
-      <section>
-        <span class="anchor" id="materials" aria-hidden="true"></span>
+      <section id="materials">
         <h2>Writing</h2>
 
         <div class="materials-group">
@@ -757,7 +740,7 @@
     <script>
       const menu = document.getElementById("menu");
       const menuLinks = menu ? Array.from(menu.querySelectorAll("a")) : [];
-      const sections = Array.from(document.querySelectorAll("section"));
+      const sections = Array.from(document.querySelectorAll("main section[id]"));
 
       const updateActiveLink = (activeId) => {
         menuLinks.forEach((link) => {
@@ -772,7 +755,7 @@
 
       const getSectionIdFromHash = () => {
         const hash = window.location.hash.replace(/^#/, "");
-        return hash || sections[0]?.querySelector(".anchor")?.id || "";
+        return hash || sections[0]?.id || "";
       };
 
       updateActiveLink(getSectionIdFromHash());
@@ -787,8 +770,7 @@
             if (!visibleEntry) {
               return;
             }
-
-            const activeId = visibleEntry.target.querySelector(".anchor")?.id;
+            const activeId = visibleEntry.target.id;
             if (activeId) {
               updateActiveLink(activeId);
             }
