@@ -25,6 +25,8 @@
       html {
         scroll-behavior: smooth;
         -webkit-text-size-adjust: 100%;
+        overflow-x: hidden;
+        background: #111111;
       }
 
       *,
@@ -35,9 +37,12 @@
 
       body {
         margin: 0;
+        width: 100%;
         min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+        min-height: 100dvh;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        overflow-x: hidden;
         background: var(--bg);
         color: var(--text);
         overflow-wrap: anywhere;
@@ -49,8 +54,16 @@
       }
 
       .site-shell {
-        flex: 1 0 auto;
-        padding: 3rem 2rem 5rem;
+        width: 100%;
+        padding: 3rem 0 5rem;
+        background: var(--bg);
+      }
+
+      .site-shell > h1,
+      .site-shell > .menu-shell,
+      .site-shell > main {
+        padding-left: 2rem;
+        padding-right: 2rem;
       }
 
       h1,
@@ -389,11 +402,11 @@
       }
 
       footer {
-        align-self: stretch;
-        margin-top: auto;
         width: 100%;
-        padding: 0.65rem 2rem 0.7rem;
+        padding: 0.65rem 2rem calc(0.7rem + env(safe-area-inset-bottom));
         background: #111111;
+        box-shadow: 0 0 0 100vmax #111111;
+        clip-path: inset(0 -100vmax);
         color: rgba(255, 255, 255, 0.78);
       }
 
@@ -512,6 +525,17 @@
           align-items: flex-start;
         }
 
+        .site-shell {
+          padding: 1.75rem 0 4rem;
+        }
+
+        .site-shell > h1,
+        .site-shell > .menu-shell,
+        .site-shell > main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
         #menu {
           width: 100%;
           max-width: 100%;
@@ -542,7 +566,7 @@
         }
 
         footer {
-          padding: 0.6rem 1rem 0.65rem;
+          padding: 0.6rem 1rem calc(0.65rem + env(safe-area-inset-bottom));
         }
 
         .footer-grid {
