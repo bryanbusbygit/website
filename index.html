@@ -41,8 +41,6 @@
         width: 100%;
         min-height: 100vh;
         min-height: 100dvh;
-        display: grid;
-        grid-template-rows: minmax(0, 1fr) auto;
         overflow-x: hidden;
         background: var(--bg);
         overscroll-behavior-y: none;
@@ -72,8 +70,7 @@
       h2,
       h3,
       p,
-      nav,
-      footer {
+      nav {
         margin-top: 0;
       }
 
@@ -81,15 +78,19 @@
         margin-bottom: 1.75rem;
         font-size: 2.9rem;
         font-weight: 500;
+        letter-spacing: normal;
         line-height: 1.12;
         font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
       }
 
       h2 {
         margin-bottom: 1.35rem;
+        color: var(--text);
         font-size: 1.75rem;
         font-weight: 500;
+        letter-spacing: normal;
         line-height: 1.25;
+        text-transform: none;
         font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
       }
 
@@ -97,6 +98,7 @@
         margin-bottom: 0.9rem;
         font-size: 1.4rem;
         font-weight: 500;
+        letter-spacing: normal;
         line-height: 1.3;
         font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
       }
@@ -153,7 +155,7 @@
 
       section {
         --section-measure: min(100%, var(--measure));
-        margin: 5.5rem 0;
+        margin: 3.5rem 0;
       }
 
       section + section {
@@ -179,7 +181,7 @@
       }
 
       .project {
-        margin: 4.25rem 0 0;
+        margin: 3.25rem 0 0;
         width: var(--section-measure);
         max-width: var(--section-measure);
       }
@@ -286,15 +288,41 @@
         font-weight: 600;
       }
 
+      .project-materials {
+        display: grid;
+        gap: 0.35rem;
+        margin: 1.4rem 0 0 1.1rem;
+        padding-left: 1.1rem;
+        width: calc(var(--section-measure) - 1.1rem);
+        max-width: calc(var(--section-measure) - 1.1rem);
+        border-left: 1px solid var(--line);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .material-label {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .project-materials p {
+        margin: 0;
+      }
+
       .pdf-icon-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 1.55rem;
-        height: 1.2rem;
+        width: 1.8rem;
+        height: 1.4rem;
         margin-left: 0.35rem;
         vertical-align: -0.14em;
+        border: 1px solid var(--text);
+        box-shadow: 2px 2px 0 var(--text);
+        cursor: pointer;
         text-decoration: none;
+        transition: transform 140ms ease, box-shadow 140ms ease;
       }
 
       .pdf-icon {
@@ -310,7 +338,7 @@
       .pdf-icon::before {
         content: "";
         position: absolute;
-        top: 0;
+        top: 1rem;
         right: 0;
         width: 0.4rem;
         height: 0.4rem;
@@ -337,21 +365,10 @@
         outline-offset: 3px;
       }
 
-      .materials-group {
-        width: var(--section-measure);
-        max-width: var(--section-measure);
-      }
-
-      .materials-group + .materials-group {
-        margin-top: 2.75rem;
-      }
-
-      .materials-group h3 {
-        margin-bottom: 1rem;
-      }
-
-      .materials-group p:last-child {
-        margin-bottom: 0;
+      .pdf-icon-link:hover,
+      .pdf-icon-link:focus-visible {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0 var(--text);
       }
 
       .menu-shell {
@@ -386,83 +403,25 @@
         color: var(--muted);
         text-decoration: none;
         font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        padding: 0;
+        border-radius: 0;
         font-size: 1.02rem;
+        font-weight: 400;
+        letter-spacing: normal;
+        text-transform: none;
       }
 
       #menu a:hover,
       #menu a:focus-visible {
         color: var(--text);
+        background: transparent;
         text-decoration: underline;
       }
 
-      footer {
-        width: 100%;
-        padding: 0.65rem 2rem calc(0.7rem + env(safe-area-inset-bottom));
-        background: #111111;
-        box-shadow: 0 0 0 100vmax #111111;
-        clip-path: inset(0 -100vmax);
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .footer-inner {
-        width: 100%;
-        max-width: var(--measure);
-        margin: 0;
-      }
-
-      .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, max-content));
-        gap: 0.75rem 2.8rem;
-        align-items: end;
-      }
-
-      .footer-group h3 {
-        margin-bottom: 0.2rem;
-        color: #ffffff;
-        font-size: 0.86rem;
-        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
-
-      .footer-group p {
-        margin-bottom: 0.1rem;
-        line-height: 1.4;
-      }
-
-      .footer-affiliation {
-        color: rgba(255, 255, 255, 0.62);
-      }
-
-      .footer-inline {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.35rem 0.9rem;
-        align-items: center;
-      }
-
-      footer a {
-        color: #ffffff;
-      }
-
-      footer .pdf-icon {
-        background: linear-gradient(180deg, #e4e4e4 0%, #cfcfcf 100%);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-      }
-
-      footer .pdf-icon::before {
-        background: linear-gradient(135deg, #9c9c9c 0%, #9c9c9c 49%, #ffffff 50%, #ffffff 100%);
-      }
-
-      footer .pdf-icon::after {
-        color: #111111;
-      }
-
-      .footer-note {
-        margin-top: 0.45rem;
-        color: rgba(255, 255, 255, 0.58);
-        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: 0.8rem;
-        line-height: 1.3;
+      #menu a[aria-current="location"] {
+        background: transparent;
+        color: var(--text);
+        text-decoration: underline;
       }
 
       @media (min-width: 960px) {
@@ -477,8 +436,7 @@
 
       @media (max-width: 959px) {
         h1,
-        section,
-        .footer-inner {
+        section {
           max-width: none;
         }
       }
@@ -502,7 +460,7 @@
         }
 
         section {
-          margin: 4.25rem 0;
+          margin: 2.75rem 0;
         }
 
         section[id] {
@@ -554,17 +512,10 @@
           max-width: calc(var(--section-measure) - 0.9rem);
         }
 
-        footer {
-          padding: 0.6rem 1rem calc(0.65rem + env(safe-area-inset-bottom));
-        }
-
-        .footer-grid {
-          grid-template-columns: 1fr;
-          gap: 0.35rem;
-        }
-
-        .footer-inline {
-          gap: 0.25rem 0.7rem;
+        .project-materials {
+          margin-left: 0.9rem;
+          width: calc(var(--section-measure) - 0.9rem);
+          max-width: calc(var(--section-measure) - 0.9rem);
         }
 
       }
@@ -579,7 +530,6 @@
         <nav id="menu" aria-label="Primary">
           <a href="#about">About</a>
           <a href="#works">Research</a>
-          <a href="#materials">Writing</a>
         </nav>
       </div>
 
@@ -588,27 +538,39 @@
         <h2>About</h2>
         <div class="intro-copy">
           <p>
-            I am an undergraduate at the University of Puerto Rico, with a
-            particular interest in discrete dynamical systems and their
-            connections to number theory. I keep this page to collect projects
-            and share links.
+            Bryan C. Busby holds a B.S. in pure mathematics and
+            works at <a href="https://openai.com/">OpenAI</a>. His mathematical
+            interests are graph theory and combinatorics. He can be reached at
+            <a href="mailto:bryanbusby@openai.com">bryanbusby@openai.com</a>.
           </p>
         </div>
         </section>
 
       <section id="works">
-        <h2>Research</h2>
+        <h2>Selected Research</h2>
 
         <div class="project">
           <div class="project-copy">
             <h3>Arithmetical Structures on Graphs</h3>
             <p>
-              Arithmetical structures on cycles with a multi-edge are studied
-              here, with a focus on classification and enumeration, including
-              constructive descriptions and counting formulas for the families
-              that arise on these graphs. <span class="advisor">Advised by
+              We consider arithmetical structures on cycles with a multi-edge.
+              We classify and enumerate the resulting families, giving
+              constructive descriptions and counting formulas. <span class="advisor">Advised by
               <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a>
               and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
+            </p>
+          </div>
+          <div class="project-materials">
+            <p>
+              <span class="material-label">Manuscript.</span> Arithmetical
+              Structures on Cycles with a Multi-Edge
+              <a class="pdf-icon-link" href="VPR3.pdf" aria-label="Open PDF for Arithmetical Structures on Cycles with a Multi-Edge"><span class="pdf-icon" aria-hidden="true"></span></a>
+              <span class="status">(draft manuscript)</span>
+            </p>
+            <p>
+              <span class="material-label">Poster.</span> MAA MathFest,
+              Sacramento, CA, August 2025.
+              <a class="pdf-icon-link" href="assets/posters/2025_arithmetical_structures_poster.pdf" aria-label="Open poster PDF for arithmetical structures on cycles with a multi-edge"><span class="pdf-icon" aria-hidden="true"></span></a>
             </p>
           </div>
           <div class="gallery gallery-arith">
@@ -627,12 +589,23 @@
           <div class="project-copy">
             <h3>Nonlinear Boolean Monomial Systems</h3>
             <p>
-              This work studies transient length bounds for Boolean monomial
-              systems using dependency graphs and acyclic subgraphs. The work
-              derives upper bounds on transient length and relates those bounds to
-              combinatorial properties of the underlying digraph, including
-              number-theoretic arguments based on the Frobenius number. <span class="advisor">Advised by
+              We consider transient length bounds for Boolean monomial systems.
+              Using dependency graphs and acyclic subgraphs, we derive upper
+              bounds and relate them to properties of the underlying digraph.
+              The Frobenius number enters the argument. <span class="advisor">Advised by
               <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.</span>
+            </p>
+          </div>
+          <div class="project-materials">
+            <p>
+              <span class="material-label">Manuscript.</span> Transient Length
+              Bounds for Boolean Monomial Systems
+              <span class="status">(in preparation)</span>
+            </p>
+            <p>
+              <span class="material-label">Poster.</span> SIDIM, UPR Ponce,
+              May 2024.
+              <a class="pdf-icon-link" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf" aria-label="Open poster PDF for transient length bounds for Boolean monomial systems"><span class="pdf-icon" aria-hidden="true"></span></a>
             </p>
           </div>
           <div class="gallery gallery-boolean">
@@ -651,14 +624,21 @@
           <div class="project-copy">
             <h3>5G RF Propagation Measurements</h3>
             <p>
-              SDR-based propagation measurements in microwave and
-              millimeter-wave bands are used here for 5G-related RF studies,
-              along with GNU Radio instrumentation, Vivaldi antenna design,
-              and channel measurements for studying attenuation and directional
-              effects in real RF environments. The work also includes
-              debugging issues that arose in GNU Radio during measurement and
-              signal-processing workflows. <span class="advisor">Advised by
+              We study 5G propagation in microwave and millimeter-wave bands
+              using SDR measurements. The work includes GNU Radio
+              instrumentation, Vivaldi antenna design, and channel measurements
+              for attenuation and directional effects. It also treats the
+              measurement and signal-processing problems that arise in GNU
+              Radio. <span class="advisor">Advised by
               <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.</span>
+            </p>
+          </div>
+          <div class="project-materials">
+            <p>
+              <span class="material-label">Presentation.</span> UPR Mayaguez,
+              2023. RF propagation measurements and antenna design for
+              5G-related bands.
+              <a class="pdf-icon-link" href="assets/posters/CarsePoster2023.pdf" aria-label="Open PDF presentation for 5G RF propagation"><span class="pdf-icon" aria-hidden="true"></span></a>
             </p>
           </div>
           <div class="gallery gallery-rf">
@@ -674,68 +654,8 @@
         </div>
       </section>
 
-      <section id="materials">
-        <h2>Writing</h2>
-
-        <div class="materials-group">
-          <h3>Manuscripts</h3>
-          <p>
-            Arithmetical Structures on Cycles with a Multi-Edge
-            <a class="pdf-icon-link" href="VPR3.pdf" aria-label="Open PDF for Arithmetical Structures on Cycles with a Multi-Edge"><span class="pdf-icon" aria-hidden="true"></span></a>
-            <span class="status">(draft manuscript)</span>
-          </p>
-          <p>
-            <span>Transient Length Bounds for Boolean Monomial Systems</span>
-            <span class="status">(in preparation)</span>
-          </p>
-        </div>
-
-        <div class="materials-group">
-          <h3>Presentations</h3>
-          <p>
-            MAA MathFest, Sacramento, CA, August 2025. Poster presentation on
-            arithmetical structures on cycles with a multi-edge.
-            <a class="pdf-icon-link" href="assets/posters/2025_arithmetical_structures_poster.pdf" aria-label="Open PDF poster for arithmetical structures on cycles with a multi-edge"><span class="pdf-icon" aria-hidden="true"></span></a>
-          </p>
-          <p>
-            SIDIM, UPR Ponce, May 2024. Poster presentation on transient length
-            bounds for Boolean monomial systems.
-            <a class="pdf-icon-link" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf" aria-label="Open PDF poster for transient length bounds for Boolean monomial systems"><span class="pdf-icon" aria-hidden="true"></span></a>
-          </p>
-          <p>
-            UPR Mayaguez research presentation, 2023. Presentation on RF
-            propagation measurements and antenna design for 5G-related bands.
-            <a class="pdf-icon-link" href="assets/posters/CarsePoster2023.pdf" aria-label="Open PDF poster for 5G RF propagation"><span class="pdf-icon" aria-hidden="true"></span></a>
-          </p>
-        </div>
-
-      </section>
-
       </main>
     </div>
-
-    <footer>
-      <div class="footer-inner">
-        <div class="footer-grid">
-          <div class="footer-group">
-            <h3>Contact</h3>
-            <p><a href="mailto:bryan.busby@upr.edu">bryan.busby@upr.edu</a></p>
-            <p class="footer-affiliation">University of Puerto Rico</p>
-          </div>
-          <div class="footer-group">
-            <h3>Links</h3>
-            <div class="footer-inline">
-              <p>
-                <a href="assets/Bryan_Busby_CV.pdf">CV</a>
-              </p>
-              <p><a href="https://www.youtube.com/@busbymath">YouTube</a></p>
-              <p><a href="https://x.com/brybusby">X</a></p>
-            </div>
-          </div>
-        </div>
-        <p class="footer-note">Bryan C. Busby, 2026</p>
-      </div>
-    </footer>
 
     <script>
       const menu = document.getElementById("menu");
