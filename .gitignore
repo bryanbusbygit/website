@@ -1,3 +1,8 @@
 .DS_Store
 artifacts/visual-context/
 website/
+.texpadtmp/
+*.aux
+*.log
+*.out
+*.synctex.gz

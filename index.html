@@ -3,11 +3,11 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>Bryan C. Busby</title>
-    <meta name="author" content="Bryan C. Busby">
+    <title>Bryan Busby</title>
+    <meta name="author" content="Bryan Busby">
     <meta
       name="description"
-      content="Academic homepage for Bryan C. Busby."
+      content="Academic homepage for Bryan Busby."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,9 +18,11 @@
         --text: #111111;
         --muted: #505050;
         --line: #d8d8d8;
+        --link: #3f3f3f;
         --measure: 760px;
         --figure-measure: 660px;
         --vignette-strength: 0.85;
+        --end-scroll-space: clamp(18rem, 40vh, 32rem);
       }
 
       html {
@@ -71,12 +73,11 @@
 
       .site-shell {
         width: 100%;
-        padding: 3rem 0 0;
+        padding: 3rem 0 var(--end-scroll-space);
         background: var(--bg);
       }
 
       .site-shell > h1,
-      .site-shell > .menu-shell,
       .site-shell > main {
         padding-left: 2rem;
         padding-right: 2rem;
@@ -132,7 +133,7 @@
       }
 
       a {
-        color: var(--text);
+        color: var(--link);
         overflow-wrap: anywhere;
         word-break: break-word;
         text-decoration-thickness: 1px;
@@ -146,7 +147,7 @@
 
       a:hover,
       a:focus-visible {
-        color: #000000;
+        color: var(--link);
       }
 
       .skip-link {
@@ -208,32 +209,12 @@
 
       .project-copy {
         position: relative;
-        padding-left: 1.1rem;
+        padding-left: 0;
       }
 
       .intro-copy {
         position: relative;
-        padding-left: 1.1rem;
-      }
-
-      .project-copy::before {
-        content: "";
-        position: absolute;
-        top: 0.1rem;
-        bottom: 0.2rem;
-        left: 0;
-        width: 1px;
-        background: var(--line);
-      }
-
-      .intro-copy::before {
-        content: "";
-        position: absolute;
-        top: 0.1rem;
-        bottom: 0.2rem;
-        left: 0;
-        width: 1px;
-        background: var(--line);
+        padding-left: 0;
       }
 
       .project-copy h3,
@@ -318,165 +299,39 @@
         position: absolute;
         top: 0.18rem;
         left: 0;
-        width: 5.9rem;
+        width: 7.1rem;
         color: var(--muted);
         font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         font-size: 0.68rem;
         font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        letter-spacing: normal;
+        text-transform: none;
+        white-space: nowrap;
       }
 
       .project-materials p {
         margin: 0;
         position: relative;
-        padding-left: 6.6rem;
+        padding-left: 7.75rem;
       }
 
       .material-link {
         display: block;
-        color: var(--text);
-        text-decoration: none;
+        color: var(--link);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.14em;
       }
 
       .material-link:hover,
       .material-link:focus-visible {
-        color: var(--text);
+        color: var(--link);
         text-decoration: underline;
-      }
-
-      .material-link .pdf-icon {
-        display: inline-block;
-        align-items: center;
-        justify-content: center;
-        width: 1.4rem;
-        height: 1.45rem;
-        margin-left: 0.35rem;
-        vertical-align: -0.14em;
-        border: 0;
-        border-radius: 0.1rem;
-        box-shadow: none;
-        cursor: pointer;
-        transition: transform 140ms ease;
-      }
-
-      .pdf-icon {
-        display: inline-block;
-        width: 1.05rem;
-        height: 1.3rem;
-        border: 1px solid #6d6d6d;
-        border-radius: 0.08rem;
-        background: transparent;
-        box-shadow: none;
-        position: relative;
-        transition: background 140ms ease, box-shadow 140ms ease;
-      }
-
-      .pdf-icon::before {
-        content: "↗";
-        position: absolute;
-        right: -0.32rem;
-        bottom: -0.24rem;
-        z-index: 1;
-        display: grid;
-        width: 0.68rem;
-        height: 0.68rem;
-        place-items: center;
-        border-radius: 50%;
-        background: #3f3f3f;
-        color: #ffffff;
-        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: 0.42rem;
-        font-weight: 700;
-        line-height: 1;
-      }
-
-      .pdf-icon::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          linear-gradient(#8a8a8a, #8a8a8a) center 42% / 56% 1px no-repeat,
-          linear-gradient(#8a8a8a, #8a8a8a) center 64% / 56% 1px no-repeat;
       }
 
       .material-link:focus-visible {
         outline: 2px solid currentColor;
         outline-offset: 3px;
-      }
-
-      .material-link:hover .pdf-icon,
-      .material-link:focus-visible .pdf-icon {
-        transform: translateY(-1px);
-      }
-
-      .material-link:hover .pdf-icon,
-      .material-link:focus-visible .pdf-icon {
-        border-color: #111111;
-        box-shadow: 0 2px 4px rgba(17, 17, 17, 0.14);
-      }
-
-      .menu-shell {
-        position: sticky;
-        top: 1rem;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-        margin-bottom: 2.5rem;
-      }
-
-      .menu-toggle {
-        display: none;
-      }
-
-      #menu {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        min-width: 0;
-        max-width: min(100%, var(--measure));
-        padding: 0;
-        border: 0;
-        background: transparent;
-        backdrop-filter: none;
-        box-shadow: none;
-      }
-
-      #menu a {
-        color: var(--muted);
-        text-decoration: none;
-        font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        padding: 0;
-        border-radius: 0;
-        font-size: 1.02rem;
-        font-weight: 400;
-        letter-spacing: normal;
-        text-transform: none;
-      }
-
-      #menu a:hover,
-      #menu a:focus-visible {
-        color: var(--text);
-        background: transparent;
-        text-decoration: underline;
-      }
-
-      #menu a[aria-current="location"] {
-        background: transparent;
-        color: var(--text);
-        text-decoration: underline;
-      }
-
-      @media (min-width: 960px) {
-        .menu-shell {
-          position: fixed;
-          top: 1rem;
-          right: 1rem;
-          align-items: flex-end;
-          margin-bottom: 0;
-        }
       }
 
       @media (max-width: 959px) {
@@ -521,30 +376,14 @@
           scroll-margin-top: 8.5rem;
         }
 
-        .menu-shell {
-          top: 0.75rem;
-          align-items: flex-start;
-        }
-
         .site-shell {
-          padding: 1.75rem 0 0;
+          padding: 1.75rem 0 var(--end-scroll-space);
         }
 
         .site-shell > h1,
-        .site-shell > .menu-shell,
         .site-shell > main {
           padding-left: 1rem;
           padding-right: 1rem;
-        }
-
-        #menu {
-          width: 100%;
-          max-width: 100%;
-          gap: 0.4rem 0.9rem;
-        }
-
-        #menu a {
-          line-height: 1.5;
         }
 
         .figure-frame {
@@ -553,11 +392,11 @@
         }
 
         .project-copy {
-          padding-left: 0.9rem;
+          padding-left: 0;
         }
 
         .intro-copy {
-          padding-left: 0.9rem;
+          padding-left: 0;
         }
 
         .project .gallery {
@@ -580,23 +419,18 @@
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
     <div class="site-shell">
-      <h1>Bryan C. Busby</h1>
-
-      <div class="menu-shell">
-        <nav id="menu" aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#works">Research</a>
-        </nav>
-      </div>
+      <h1>Bryan Busby</h1>
 
       <main id="content">
         <section id="about">
         <h2>About</h2>
         <div class="intro-copy">
           <p>
-            Hello. My interests are graph theory and combinatorics. You can
-            email me at <a href="mailto:bryan.busby@upr.edu">bryan.busby@upr.edu</a>.
-            A <a href="assets/Bryan_Busby_CV.pdf">CV</a> is available here.
+            Hello. My interests are graph theory and combinatorics. I work in
+            pure mathematics, where the useful parts have been carefully removed. A
+            <a href="assets/Bryan_Busby_CV.pdf">CV</a> is available here.
+            <a href="mailto:bryan.busby@upr.edu">Click here to send me a message</a>
+            (If that did not work, try <a href="email.html">this</a>.)
           </p>
         </div>
         </section>
@@ -620,14 +454,12 @@
               <a class="material-link" href="VPR3.pdf" aria-label="Open PDF for Arithmetical Structures on Cycles with a Multi-Edge">
                 <span class="material-label">Draft manuscript.</span> Arithmetical
                 Structures on Cycles with a Multi-Edge
-                <span class="pdf-icon" aria-hidden="true"></span>
               </a>
             </p>
             <p>
               <a class="material-link" href="assets/posters/2025_arithmetical_structures_poster.pdf" aria-label="Open poster PDF for arithmetical structures on cycles with a multi-edge">
                 <span class="material-label">Poster.</span> MAA MathFest,
                 Sacramento, CA, August 2025.
-                <span class="pdf-icon" aria-hidden="true"></span>
               </a>
             </p>
           </div>
@@ -664,7 +496,6 @@
               <a class="material-link" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf" aria-label="Open poster PDF for transient length bounds for Boolean monomial systems">
                 <span class="material-label">Poster.</span> SIDIM, UPR Ponce,
                 May 2024.
-                <span class="pdf-icon" aria-hidden="true"></span>
               </a>
             </p>
           </div>
@@ -699,7 +530,6 @@
                 <span class="material-label">Presentation.</span> UPR Mayaguez,
                 2023. RF propagation measurements and antenna design for
                 5G-related bands.
-                <span class="pdf-icon" aria-hidden="true"></span>
               </a>
             </p>
           </div>
@@ -720,56 +550,6 @@
     </div>
 
     <script>
-      const menu = document.getElementById("menu");
-      const menuLinks = menu ? Array.from(menu.querySelectorAll("a")) : [];
-      const sections = Array.from(document.querySelectorAll("main section[id]"));
-
-      const updateActiveLink = (activeId) => {
-        menuLinks.forEach((link) => {
-          const isActive = link.getAttribute("href") === "#" + activeId;
-          if (isActive) {
-            link.setAttribute("aria-current", "location");
-          } else {
-            link.removeAttribute("aria-current");
-          }
-        });
-      };
-
-      const getSectionIdFromHash = () => {
-        const hash = window.location.hash.replace(/^#/, "");
-        return hash || sections[0]?.id || "";
-      };
-
-      updateActiveLink(getSectionIdFromHash());
-
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            const visibleEntry = entries
-              .filter((entry) => entry.isIntersecting)
-              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-            if (!visibleEntry) {
-              return;
-            }
-            const activeId = visibleEntry.target.id;
-            if (activeId) {
-              updateActiveLink(activeId);
-            }
-          },
-          {
-            rootMargin: "-20% 0px -60% 0px",
-            threshold: [0.25, 0.5, 0.75]
-          }
-        );
-
-        sections.forEach((section) => observer.observe(section));
-      }
-
-      window.addEventListener("hashchange", () => {
-        updateActiveLink(getSectionIdFromHash());
-      });
-
       const updateVignette = () => {
         const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = documentHeight > 0 ? Math.min(window.scrollY / documentHeight, 1) : 0;

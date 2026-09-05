@@ -1,0 +1,92 @@
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[top=0.62in,bottom=0.62in,left=0.72in,right=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage{titlesec}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.12}
+\urlstyle{same}
+
+\titleformat{\section}
+  {\fontsize{12.5}{14}\selectfont\bfseries}
+  {}{0pt}{}
+  [\vspace{0.3ex}\titlerule]
+\titlespacing*{\section}{0pt}{1.75ex}{0.8ex}
+
+\newcommand{\datedline}[2]{%
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{1.25em}}r@{}}
+    #1 & #2
+  \end{tabularx}\par
+}
+
+\newcommand{\researchentry}[3]{%
+  \datedline{\textbf{#1} -- Advisor: #2}{#3}\par
+}
+
+\newcommand{\entrygap}{\vspace{1.05ex}}
+\newcommand{\cvsection}[1]{\vfill\section{#1}}
+
+\begin{document}
+\fontsize{11.5}{15.4}\selectfont
+
+{\fontsize{21}{23}\selectfont\bfseries Bryan C. Busby}\par
+\href{mailto:bryan.busby@upr.edu}{bryan.busby@upr.edu}
+\quad\textbar\quad
+\href{https://bryanbusbygit.github.io}{bryanbusbygit.github.io}\par
+\vspace{0.55ex}
+
+\cvsection{Education}
+\datedline{\textbf{B.Sc. in Pure Mathematics, University of Puerto Rico}}{2023--2026}
+
+\cvsection{Research Experience}
+\researchentry{Villanova University (REU)}{Alexander D\'iaz-L\'opez}{Summer 2025}
+Worked with other undergraduates on arithmetical structures on graphs, especially cycles with multiple edges.
+
+\entrygap
+\researchentry{UPR}{Omar Col\'on-Reyes}{Spring 2024}
+Studied transient-length bounds for Boolean monomial systems by graph-theoretic methods, including walks and the Frobenius number.
+
+\entrygap
+\researchentry{UPR (CARSE)}{Rafael Rodr\'iguez Sol\'is}{2023}
+Analyzed the effects of instrument tolerances on 5G propagation measurements. Debugged software--hardware communication in GNU Radio.
+
+\entrygap
+\researchentry{High School}{Edwin Benvenutti}{2021}
+Studied powers of adjacency matrices and their relation to walks on graphs.
+
+\cvsection{Manuscripts in Preparation}
+Arithmetical Structures on Cycles with a multi-edge (with Alexander D\'iaz-L\'opez)\par
+\vspace{0.45ex}
+Transient Length Boundary for Finite Dynamical Systems (with Omar Col\'on-Reyes)
+
+\cvsection{Presentations}
+\datedline{\textit{Arithmetical Structures on Cycles with a multi-edge} -- MAA MathFest, Sacramento, CA}{Aug 2025}
+\vspace{0.5ex}
+\datedline{\textit{Finite Dynamical Systems: Transient Bounds for Boolean Monomial Systems} -- SIDIM}{May 2024}
+(PR Interdisciplinary Mathematics Symposium), UPR Ponce\par
+\vspace{0.5ex}
+\datedline{\textit{Development of Radio Wave Propagation Setup and Propagation Measurements at 5G Bands}\newline -- UPR Mayag\"uez}{2023}
+\vspace{0.5ex}
+\datedline{\textit{On the Adjacency Matrix and Walks} -- Regional Math Fair (PR Dept. of Education)}{2021}
+
+\cvsection{Teaching Experience}
+\datedline{\textbf{Private Mathematics Tutor}}{2022--present}
+Tutored students individually in high-school and early undergraduate mathematics. Completed more than 100 hours of instruction.
+
+\cvsection{Employment}
+\datedline{\textbf{Production Worker, Ruiz Foods, TX}}{2026--present}
+\datedline{\textbf{Food Server, Resort \& Casino, PR}}{2025--2026}
+\datedline{\textbf{Food Server, Romano's Macaroni Grill, PR}}{2023--2024}
+
+\cvsection{Languages}
+Spanish (native); English (fluent).
+
+\end{document}
