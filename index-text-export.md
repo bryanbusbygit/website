@@ -108,7 +108,7 @@ Boolean Monomial Dynamical Systems
 
 [BODY PARAGRAPH]
 
-A Boolean system on *n* variables can have 2^*n* states. I replace that state space with an *n*-vertex dependency digraph and use acyclic reductions, directed walks, and Frobenius arithmetic to control the time before periodic behavior begins. [MUTED: Advised by [LINK: Omar Colón -> `https://pegasus.uprm.edu/ocolon/`].]
+A Boolean system on *n* variables can have 2^*n* states. I replace that state space with an *n*-vertex dependency graph and use acyclic reductions, directed walks, and Frobenius arithmetic to control the time before periodic behavior begins. [MUTED: Advised by [LINK: Omar Colón -> `https://pegasus.uprm.edu/ocolon/`].]
 
 [SEPARATE LINK PARAGRAPH]
 
@@ -330,7 +330,7 @@ Boolean Monomial Dynamics
 
 [LEDE; larger than body text]
 
-Attractors tell us where a finite Boolean system ends up. They do not tell us how long it takes to get there. My work attacks that missing question by replacing an exponentially large state space with a dependency digraph, then translating iteration into the arithmetic of directed-walk lengths.
+Attractors tell us where a finite Boolean system ends up. They do not tell us how long it takes to get there. My work attacks that missing question by replacing an exponentially large state space with a dependency graph, then translating iteration into the arithmetic of directed-walk lengths.
 
 [CENTERED LEAD FIGURE; approximately 32rem wide]
 
@@ -375,7 +375,7 @@ The empty product is \(1\). The state-transition digraph has one vertex for each
 
 [BODY PARAGRAPH]
 
-The system also specifies a zero–one matrix \(A_f\): its \(ij\)-entry is \(1\) precisely when \(x_j\) occurs in \(f_i\). With the output-to-input convention, \(A_f\) is the adjacency matrix of the dependency digraph \(D_f\). The matrix, the graph, and the coordinate rules therefore encode exactly the same dependency data.
+The system also specifies a zero–one matrix \(A_f\): its \(ij\)-entry is \(1\) precisely when \(x_j\) occurs in \(f_i\). With the output-to-input convention, \(A_f\) is the adjacency matrix of the dependency graph \(D_f\). The matrix, the graph, and the coordinate rules therefore encode exactly the same dependency data.
 
 [BODY PARAGRAPH]
 
@@ -396,7 +396,7 @@ f(x_1,x_2,x_3,x_4)=(x_2,\,x_1x_3,\,x_4,\,x_2).
 - Source: `assets/figures/busby-dynamics-fig-1.png`
 - Alt text: Dependency graph of the Boolean monomial system f equals x 2, x 1 x 3, x 4, x 2.
 - Caption label: Dependency graph
-- Caption: The dependency digraph \(D_f\) for the displayed system. The source figure labels vertex \(i\) as \(a_i\). Cropped from Figure 1 of our [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
+- Caption: The dependency graph \(D_f\) for the displayed system, with each vertex labeled by its index. Redrawn from Figure 1 of our [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
 
 ## The bridge: iteration becomes walking
 

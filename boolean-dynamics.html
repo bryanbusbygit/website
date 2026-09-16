@@ -30,7 +30,7 @@
           Every orbit of a map on a finite set eventually repeats. We study how
           long a Boolean monomial system can take to reach that repeating cycle.
           The key is to relate the system's iterates to directed walks in its
-          dependency digraph. For the graph classes considered here, acyclic
+          dependency graph. For the graph classes considered here, acyclic
           subdigraphs, connecting-path distances, and the arithmetic of cycle
           lengths give lower and upper bounds on the waiting time.
         </p>
@@ -73,7 +73,7 @@
       </section>
 
       <section aria-labelledby="compression">
-        <h2 id="compression">The dependency digraph</h2>
+        <h2 id="compression">The dependency graph</h2>
         <p>
           Let \(f:\{0,1\}^n\to\{0,1\}^n\) be a Boolean monomial map,
           with state vector \(\mathbf x=(x_1,\ldots,x_n)\) and coordinate
@@ -92,7 +92,7 @@
           simultaneously.
         </p>
         <p>
-          The dependency digraph \(D_f\) has vertex set
+          The dependency graph \(D_f\) has vertex set
           \(\{1,\ldots,n\}\) and an edge \(i\to j\) if and only if
           \(j\in N_i\), equivalently, if \(x_j\) divides \(f_i\).
           We use the output-to-input convention: an edge points from a
@@ -118,12 +118,12 @@
         </p>
         <figure class="source-figure source-figure--dependency">
           <div class="dependency-diagram">
-            <img src="assets/figures/dependency-digraph.svg" alt="Dependency digraph of the displayed four-variable Boolean monomial system." decoding="async">
+            <img src="assets/figures/dependency-digraph.svg" alt="Dependency graph of the displayed four-variable Boolean monomial system, with vertices labeled 1, 2, 3, and 4." decoding="async">
           </div>
           <figcaption>
-            <span class="figure-label">Dependency digraph.</span>
-            The dependency digraph \(D_f\) of the displayed system. The source
-            figure labels vertex \(i\) by \(a_i\). Redrawn from Figure 1 of the
+            <span class="figure-label">Dependency graph.</span>
+            The dependency graph \(D_f\) of the displayed system, with each
+            vertex labeled by its index. Redrawn from Figure 1 of the
             <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
           </figcaption>
         </figure>
@@ -213,7 +213,7 @@
       <section aria-labelledby="payoff">
         <h2 id="payoff">Bounds on the transient</h2>
         <p>
-          For the dependency digraphs considered in our work, graph distances
+          For the dependency graphs considered in our work, graph distances
           account for connecting paths, while Frobenius numbers control gaps
           in attainable walk lengths. The correspondence between walks and
           coordinate monomials translates these estimates into lower and
