@@ -30,12 +30,11 @@
           Lorenzini introduced arithmetical graphs in connection with
           intersection matrices arising from degenerating algebraic curves.
           <a href="https://doi.org/10.1007/BF01455069">[1]</a>
-          An arithmetical structure labels the vertices of a graph with
-          positive integers that satisfy a divisibility rule based on adjacency.
-          We study how many such structures occur on cycles with one multi-edge.
-          Our approach combines smoothing, subdivision counts given by ballot
-          numbers, and a constructive description of the arithmetic data at the
-          multi-edge.
+          An arithmetical structure is a primitive positive-integer vertex
+          labeling that satisfies a divisibility condition determined by
+          adjacency. We enumerate these structures on cycles with one multi-edge.
+          The proof combines smoothing, subdivision counts given by ballot
+          numbers, and a constructive description of the data at the multi-edge.
         </p>
       </header>
 
@@ -52,21 +51,20 @@
       <section aria-labelledby="question">
         <h2 id="question">Definitions and enumeration</h2>
         <p>
-          Let \(G=(V,E)\) be a loopless multigraph, with
-          vertex set \(V\) and edge multiset \(E\). Write \(uv\in E\) when
-          \(u\) and \(v\) are adjacent, and let \(m(u,v)\) count the copies
-          of that edge. An arithmetical structure on \(G\) assigns a positive
-          integer \(r(v)\) to each vertex such that \(r(v)\) divides the sum
-          of the adjacent labels, with parallel edges counted separately. We
-          call the resulting positive integer quotient \(d(v)\).
+          Let \(G=(V,E)\) be a loopless multigraph with vertex set \(V\) and
+          edge multiset \(E\). For adjacent vertices \(u\) and \(v\), let
+          \(m(u,v)\) be the number of edges joining them. An arithmetical
+          structure assigns a positive integer \(r(v)\) to every vertex so
+          that \(r(v)\) divides the sum of the neighboring labels, with
+          parallel edges counted separately. Denote the quotient by \(d(v)\).
         </p>
         <p>
-          Multiplying every label by the same positive integer preserves the
-          divisibility conditions, so we impose the normalization
+          Multiplying all labels by the same positive integer preserves the
+          divisibility conditions. We therefore impose the normalization
           \(\gcd\{r(v):v\in V\}=1\). Write
           \(\mathbf r=(r(v))_{v\in V}\) for the vector of labels and
-          \(\mathbf d=(d(v))_{v\in V}\) for the quotients. Together they form
-          an arithmetical structure, whose defining equation is
+          \(\mathbf d=(d(v))_{v\in V}\) for the quotient vector. The pair
+          \((\mathbf d,\mathbf r)\) is an arithmetical structure when
         </p>
         <div class="equation">
           \[
@@ -81,15 +79,14 @@
         </p>
         <div class="equation">
           \[
-            d(v)r(v)=\sum_{u\in V}m(v,u)r(u),
+            d(v)r(v)=\sum_{u\in V}m(v,u)r(u).
           \]
         </div>
         <p>
-          The terms for nonadjacent vertices vanish because \(m(v,u)=0\).
-          Therefore, \(\mathbf r\) uniquely determines \(\mathbf d\), and the
-          enumeration reduces to counting primitive positive integer vectors
-          \(\mathbf r\) for which all the resulting quotients are positive
-          integers.
+          Here \(m(v,u)=0\) when \(u\) and \(v\) are not adjacent. Thus
+          \(\mathbf r\) determines \(\mathbf d\), and enumeration amounts to
+          finding the primitive positive vectors \(\mathbf r\) for which every
+          quotient \(d(v)\) is an integer.
         </p>
         <p>
           Braun et al. enumerated arithmetical structures on paths and
@@ -105,10 +102,9 @@
         <p>
           Let \(\widetilde C_{n,k}\) denote the multigraph obtained by
           replacing one edge of an \(n\)-cycle by \(k\) parallel edges,
-          where \(k\geq2\). At each endpoint of the multi-edge, the label at
-          the other endpoint appears \(k\) times in the
-          adjacency sum. The resulting divisibility conditions depend on
-          \(k\), requiring an extension of the ordinary cycle enumeration.
+          where \(k\geq2\). At either endpoint of the multi-edge, the label at
+          the opposite endpoint appears \(k\) times in the adjacency sum. The
+          ordinary cycle formula does not account for this dependence on \(k\).
           Glass and Wagner studied the analogous enumeration problem for
           paths with a doubled edge.
           <a href="https://arxiv.org/abs/1903.01398">[3]</a>
@@ -129,49 +125,42 @@
       <section aria-labelledby="route">
         <h2 id="route">Reduction by smoothing</h2>
         <p>
-          Smoothing reduces the underlying graph while preserving an
-          arithmetical structure. Suppose a vertex \(v\) away from the
-          multi-edge has neighbors \(u\) and \(w\) and satisfies
+          Smoothing removes a vertex while preserving the arithmetical
+          structure. Suppose a vertex \(v\), away from the multi-edge, has
+          neighbors \(u\) and \(w\) and satisfies
           \(d(v)=1\). The vertex equation gives \(r(v)=r(u)+r(w)\).
           Deleting \(v\), joining \(u\) and \(w\), and adjusting their
-          \(d\)-labels yields an arithmetical structure on the smaller graph.
+          \(d\)-labels produces an arithmetical structure on the smaller graph.
         </p>
         <p>
-          The inverse operation subdivides an edge and assigns the new vertex
-          the sum of its endpoint labels. We can therefore organize the count
-          by reduced structures and the subdivisions allowed for each one.
-          Our reduction expresses the total count in terms of strongly smooth
-          arithmetical structures, with subdivision multiplicities given by
-          ballot numbers. The precise reduction conditions and the definition
-          of strong smoothness are given in the
+          Conversely, subdivision inserts a vertex whose label is the sum of
+          the labels at the ends of the edge. The enumeration can therefore be
+          organized by reduced structures and their possible subdivisions. The
+          total is a weighted sum over strongly smooth structures, with ballot
+          numbers supplying the subdivision weights. The reduction conditions
+          and the definition of strong smoothness appear in the
           <a href="VPR3.pdf">current manuscript</a>.
         </p>
         <p>
-          The arithmetic constraints at the multi-edge require a separate
-          analysis. Let \(r_1\) and
-          \(r_2\) be the \(r\)-labels at its endpoints. The equations there
-          force \(r_1\), \(r_2\), and \(k\) to be pairwise coprime, meaning
-          that each pair has greatest common divisor \(1\). The construction
-          construction below proves the converse: it produces a structure from
-          any data that satisfies this condition.
+          Let \(r_1\) and \(r_2\) be the endpoint labels of the multi-edge.
+          Their vertex equations force \(r_1\), \(r_2\), and \(k\) to be
+          pairwise coprime. The converse also holds: every pairwise-coprime
+          triple occurs in an arithmetical structure.
         </p>
       </section>
 
       <section aria-labelledby="results">
         <h2 id="results">Construction and enumeration</h2>
         <p>
-          For positive integers \(r_1,r_2,k\), pairwise coprimality is both
-          necessary and sufficient for the triple to occur at the multi-edge
-          of an arithmetical structure. A modified Euclidean algorithm proves
-          sufficiency by constructing a structure with the chosen endpoint
-          labels and multiplicity.
+          Given pairwise-coprime positive integers \(r_1,r_2,k\), a modified
+          Euclidean algorithm constructs an arithmetical structure whose
+          multi-edge has endpoint labels \(r_1,r_2\) and multiplicity \(k\).
         </p>
         <p>
-          The number of structures on \(\widetilde C_{n,k}\) is expressed
-          as a weighted sum over strongly smooth structures on at most
-          \(n\) vertices. Each weight counts the subdivisions contributing
-          to a structure on the original graph. The
-          complete formula and the construction appear in the
+          The number of structures on \(\widetilde C_{n,k}\) is a weighted sum
+          over strongly smooth structures on at most \(n\) vertices. Each
+          weight counts the subdivisions that return a structure on the
+          original graph. The complete formula and construction appear in the
           <a href="VPR3.pdf">current manuscript</a>.
         </p>
         <figure class="source-figure">

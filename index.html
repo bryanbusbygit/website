@@ -446,9 +446,9 @@
         <div class="intro-copy">
           <p>
             Graph theory and combinatorics, mostly. Pure mathematics where the
-            useful parts have been carefully removed. Here a
-            <a href="assets/Bryan_Busby_CV.pdf">cv</a> and an
-            <a href="mailto:bryan.busby@upr.edu">email.</a> If the email link
+            useful parts have been carefully removed. Here are my
+            <a href="assets/Bryan_Busby_CV.pdf">CV</a> and
+            <a href="mailto:bryan.busby@upr.edu">email</a>. If the email link
             fails, try <a href="email.html">here</a>.
           </p>
         </div>
@@ -461,16 +461,15 @@
           <div class="project-copy">
             <h3>Arithmetical Structures on Graphs</h3>
             <p>
-              An arithmetical structure labels each vertex of a graph with a
-              positive integer. Each label must divide the sum of the neighboring
-              labels, with parallel edges counted separately. We study how many
-              such structures occur on cycles with one multi-edge. Smoothing and
-              subdivision reduce the problem to smaller, strongly smooth
-              structures, counted with ballot numbers. We also show that the two
-              endpoint labels and the number of parallel edges must be pairwise
-              coprime. A modified Euclidean algorithm constructs every possible
-              case. Together, these ideas connect the arithmetic at the
-              multi-edge with the number of structures on the full cycle.
+              An arithmetical structure is a primitive positive-integer labeling
+              of a graph in which each vertex label divides the sum of the
+              labels of its neighbors, with parallel edges counted separately. We
+              enumerate these structures on cycles with one multi-edge.
+              Smoothing reduces a labeling to a strongly smooth core, while
+              ballot numbers count the subdivisions that recover the original
+              cycle. At the multi-edge, the endpoint labels and edge multiplicity
+              are pairwise coprime; a modified Euclidean algorithm gives the
+              converse construction.
               <span class="advisor">Advised by
               <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a>
               and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
@@ -507,15 +506,14 @@
           <div class="project-copy">
             <h3>Boolean Monomial Dynamical Systems</h3>
             <p>
-              We study how long a Boolean monomial system can take to settle into
-              a repeating cycle. Repeated substitution turns this question into
-              one about directed walks in the system's dependency graph. This
-              connection gives lower and upper bounds on the maximum transient
-              length for the graph classes we consider. The bounds use acyclic
-              subdigraphs, lengths of connecting paths, and Frobenius
-              numbers associated with cycle lengths. This lets us study transient
-              behavior directly from the dependency graph, without listing all
-              2<sup>n</sup> possible states.
+              A Boolean monomial system updates each coordinate by a product of
+              Boolean variables. Its transient is the number of iterations before
+              an orbit becomes periodic. We translate iterates into directed walks
+              in the dependency graph and use acyclic subgraphs, connecting-path
+              lengths, and Frobenius numbers to bound the longest transient. The
+              argument works directly with the dependency graph, avoiding an
+              explicit construction of the state-transition graph on all
+              2<sup>n</sup> states.
               <span class="advisor">Advised by
               <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.</span>
             </p>
@@ -539,7 +537,7 @@
               <img
                 class="preview-figure boolean-state"
                 src="assets/figures/boolean-state-graph.svg"
-                alt="State-transition digraph of the Boolean monomial system."
+                alt="State-transition graph of the Boolean monomial system."
                 loading="lazy"
               />
             </div>
@@ -550,12 +548,11 @@
           <div class="project-copy">
             <h3>5G RF Propagation Measurements</h3>
             <p>
-              We measured how radio signals weaken and vary by direction in
-              microwave and millimeter-wave bands used by 5G systems. The project
-              included designing wideband Vivaldi antennas, building a measurement
-              system with software-defined radios and GNU Radio, and processing
-              the recorded signals. It brings antenna design and signal analysis
-              together to study radio propagation under the tested conditions.
+              We measured signal attenuation and directional response in microwave
+              and millimeter-wave bands used by 5G systems. The work included the
+              design of wideband Vivaldi antennas, construction of a GNU Radio
+              measurement system with software-defined radios, and analysis of the
+              recorded signals.
               <span class="advisor">Advised by
               <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.</span>
             </p>

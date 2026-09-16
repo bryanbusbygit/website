@@ -27,12 +27,11 @@
       <header>
         <h1 class="visually-hidden">Boolean Monomial Dynamics</h1>
         <p class="lede">
-          Every orbit of a map on a finite set eventually repeats. We study how
-          long a Boolean monomial system can take to reach that repeating cycle.
-          The key is to relate the system's iterates to directed walks in its
-          dependency graph. For the graph classes considered here, acyclic
-          subdigraphs, connecting-path distances, and the arithmetic of cycle
-          lengths give lower and upper bounds on the waiting time.
+          Every orbit of a map on a finite set eventually becomes periodic. For
+          Boolean monomial systems, we bound the longest transient by translating
+          iterates into directed walks in the dependency graph. Acyclic subgraphs
+          control the paths between cycles, while the arithmetic of the cycle
+          lengths controls which walk lengths occur.
         </p>
       </header>
 
@@ -63,12 +62,11 @@
           when the initial state is periodic.
         </p>
         <p>
-          The state-transition graph has an edge from each state to its
-          image and determines all transient lengths. A system on \(n\)
-          Boolean variables, however, has \(2^n\) states, so explicit
-          construction of this graph grows exponentially with \(n\).
-          We instead seek bounds derived directly from the coordinate
-          functions and their dependency structure.
+          In the state-transition graph, each state has one outgoing edge, to
+          its image. This graph determines every transient length, but a system
+          on \(n\) Boolean variables has \(2^n\) states. Our bounds use the
+          coordinate functions and their dependency graph rather than the full
+          state-transition graph.
         </p>
       </section>
 
@@ -99,8 +97,8 @@
           coordinate to a variable on which its update depends.
         </p>
         <p>
-          Since the sets \(N_i\) determine the coordinate functions,
-          \(D_f\) encodes the system on \(n\) vertices. Colón-Reyes,
+          The sets \(N_i\) determine the coordinate functions, so \(D_f\)
+          records the full system on \(n\) vertices. Colón-Reyes,
           Laubenbacher, and Pareigis used this representation to study the
           periodic behavior of Boolean monomial systems.
           <a href="https://arxiv.org/abs/math/0403166">[2]</a>
@@ -135,9 +133,9 @@
           Successive substitution expresses each coordinate of an iterate
           in terms of the initial variables. In the displayed example,
           \((f^2)_2(\mathbf x)=f_1(\mathbf x)f_3(\mathbf x)=x_2x_4\).
-          The corresponding length-two walks from vertex \(2\) are
+          The two corresponding walks of length \(2\) from vertex \(2\) are
           \(2\to1\to2\) and \(2\to3\to4\), whose endpoints index
-          precisely the variables occurring in \((f^2)_2\).
+          the variables occurring in \((f^2)_2\).
         </p>
         <p>
           More generally, let
@@ -145,16 +143,16 @@
           \((f^m)_i\) be its \(i\)th coordinate. For \(m\geq1\), the
           variable \(x_j\) occurs in \((f^m)_i\) if and only if \(D_f\)
           has a directed walk of length \(m\) from \(i\) to \(j\).
-          A directed walk may repeat vertices and edges, and its length is
-          the number of edges traversed. Multiple walks with the same endpoint
-          may produce repeated factors under substitution, but these reduce
-          to a single factor by the Boolean identity \(x_j^2=x_j\). A related
+          A directed walk may repeat vertices and edges; its length is the
+          number of edges traversed. If several walks have the same endpoint,
+          substitution may produce repeated factors. These collapse to one
+          factor by the Boolean identity \(x_j^2=x_j\). The same type of
           correspondence holds for monomial systems over arbitrary finite fields.
           <a href="https://www.complex-systems.com/abstracts/v16_i04_a04/">[4]</a>
         </p>
         <p>
-          This correspondence reduces the analysis of iterates to the
-          attainable walk lengths between ordered pairs of vertices. Let
+          It remains to determine the attainable walk lengths between ordered
+          pairs of vertices. Let
           \(\tau_f(\mathbf x)\) denote the transient length of an initial
           state \(\mathbf x\). The maximum transient length is
         </p>
@@ -168,26 +166,24 @@
       <section aria-labelledby="route">
         <h2 id="route">Paths and cycles</h2>
         <p>
-          Directed cycles determine how walks can be extended without
-          changing their endpoints. Inserting \(q\) traversals of an
-          accessible cycle of length \(c\) increases a walk's length by
-          \(qc\). When several cycles are accessible along a walk,
-          repeated traversals contribute nonnegative integer combinations
-          of their lengths.
+          Traversing a directed cycle before continuing along a walk increases
+          its length without changing its endpoint. If the cycle has length
+          \(c\), an additional \(q\) traversals add \(qc\). With several
+          accessible cycles, the possible additions are nonnegative integer
+          combinations of their lengths.
         </p>
         <p>
-          We organize the analysis by deleting selected edges to obtain an
-          acyclic subdigraph. Every directed walk in this subdigraph is a
-          path and consequently has bounded length. Restoring the deleted
-          edges permits repeated cycle traversals; the resulting walk
-          lengths depend on both cycle multiplicities and the lengths of
-          paths connecting the cycles.
+          Deleting selected edges leaves an acyclic subgraph, where every
+          directed walk is a path and therefore has bounded length. Restoring
+          the deleted edges allows repeated traversals of cycles. The resulting
+          walk lengths depend on the cycle lengths and on the paths connecting
+          the cycles.
         </p>
         <figure class="source-figure source-figure--acyclic">
-          <img src="assets/figures/acyclic-reduction.svg" alt="A directed graph beside the same graph with selected edges removed to leave an acyclic subdigraph." decoding="async">
+          <img src="assets/figures/acyclic-reduction.svg" alt="A directed graph beside the same graph with selected edges removed to leave an acyclic subgraph." decoding="async">
           <figcaption>
-            <span class="figure-label">Acyclic subdigraph.</span>
-            A digraph (left) and an acyclic subdigraph obtained by deleting
+            <span class="figure-label">Acyclic subgraph.</span>
+            A directed graph (left) and an acyclic subgraph obtained by deleting
             selected edges (right). Redrawn from Figure 3 of the
             <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
           </figcaption>
@@ -213,11 +209,10 @@
       <section aria-labelledby="payoff">
         <h2 id="payoff">Bounds on the transient</h2>
         <p>
-          For the dependency graphs considered in our work, graph distances
-          account for connecting paths, while Frobenius numbers control gaps
-          in attainable walk lengths. The correspondence between walks and
-          coordinate monomials translates these estimates into lower and
-          upper bounds on \(\tau_{\max}(f)\).
+          For the dependency graphs in our work, graph distances measure the
+          connecting paths and Frobenius numbers measure the gaps in attainable
+          walk lengths. The walk-monomial correspondence turns these estimates
+          into lower and upper bounds on \(\tau_{\max}(f)\).
         </p>
         <p>
           In one example treated in the current work, the bounds are
@@ -228,11 +223,10 @@
           \]
         </div>
         <p>
-          This means that at least one initial state has transient length at
-          least nine, while every initial state reaches a periodic orbit within
-          fifteen iterations. These estimates apply under the assumptions of
-          this graph analysis; they are not a closed formula for every Boolean
-          monomial system.
+          Thus some initial state has transient length at least nine, and every
+          initial state reaches a periodic orbit within fifteen iterations. The
+          bounds depend on the hypotheses of the graph analysis; they are not a
+          formula for arbitrary Boolean monomial systems.
         </p>
       </section>
 
