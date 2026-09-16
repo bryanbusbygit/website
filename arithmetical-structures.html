@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Arithmetical Structures on Graphs | Bryan Busby</title>
+    <meta name="author" content="Bryan Busby">
+    <meta name="description" content="An introduction to arithmetical structures on cycles with a multi-edge.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&amp;family=Newsreader:opsz,wght@6..72,400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="research.css">
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] },
+        svg: { fontCache: "global", displayAlign: "left", displayIndent: "1.25em" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <main id="main-content">
+      <a class="back-link" href="index.html#works">← Back to research</a>
+
+      <header>
+        <h1 class="visually-hidden">Arithmetical Structures on Graphs</h1>
+        <p class="lede">
+          Lorenzini introduced arithmetical graphs in connection with
+          intersection matrices arising from degenerating algebraic curves.
+          <a href="https://doi.org/10.1007/BF01455069">[1]</a>
+          An arithmetical structure consists of primitive positive integer
+          vertex labels satisfying a divisibility condition determined by
+          adjacency. We study the enumeration of these structures on cycles
+          with a single multiple edge. Our approach combines reduction by
+          smoothing, subdivision counts expressed through ballot numbers, and
+          a constructive characterization of the arithmetic data at the
+          multiple edge.
+        </p>
+      </header>
+
+      <figure class="lead-figure lead-figure--compact">
+        <img src="assets/figures/multiedge-cycle.svg" alt="A five-vertex cycle in which the edge between v 1 and v 2 has multiplicity 2." decoding="async">
+        <figcaption>
+          <span class="figure-label">Figure 1.</span>
+          The multigraph \(\widetilde{C}_{5,2}\): a \(5\)-cycle whose edge
+          \(v_1v_2\) has multiplicity \(2\). Redrawn from Figure 1 of the
+          <a href="VPR3.pdf">current manuscript</a>.
+        </figcaption>
+      </figure>
+
+      <section aria-labelledby="question">
+        <h2 id="question">Definitions and enumeration</h2>
+        <p>
+          Let \(G=(V,E)\) be a loopless multigraph, with
+          vertex set \(V\) and edge multiset \(E\). Write \(uv\in E\) when
+          \(u\) and \(v\) are adjacent, and let \(m(u,v)\) count the copies
+          of that edge. An arithmetical structure on \(G\) assigns a positive
+          integer \(r(v)\) to each vertex such that \(r(v)\) divides the sum
+          of the adjacent labels, counted with edge multiplicity. Denote the
+          resulting positive integer quotient by \(d(v)\).
+        </p>
+        <p>
+          Multiplying every label by the same positive integer preserves the
+          divisibility conditions; we therefore impose the normalization
+          \(\gcd\{r(v):v\in V\}=1\). Write
+          \(\mathbf r=(r(v))_{v\in V}\) for the vector of labels and
+          \(\mathbf d=(d(v))_{v\in V}\) for the quotients. Together they form
+          an arithmetical structure, whose defining equation is
+        </p>
+        <div class="equation">
+          \[
+            (\operatorname{diag}\mathbf d-A_G)\mathbf r=0.
+          \]
+        </div>
+        <p>
+          Here \(\operatorname{diag}\mathbf d\) is the diagonal matrix whose
+          entry at vertex \(v\) is \(d(v)\), and
+          \(A_G=(m(v,u))_{v,u\in V}\) is the adjacency matrix of \(G\).
+          The corresponding equation at a vertex \(v\) is
+        </p>
+        <div class="equation">
+          \[
+            d(v)r(v)=\sum_{u\in V}m(v,u)r(u),
+          \]
+        </div>
+        <p>
+          The terms for nonadjacent vertices vanish because \(m(v,u)=0\).
+          Thus \(\mathbf r\) uniquely determines \(\mathbf d\), and the
+          enumeration reduces to counting primitive positive integer vectors
+          \(\mathbf r\) for which all the resulting quotients are positive
+          integers.
+        </p>
+        <p>
+          Braun et al. enumerated arithmetical structures on paths and
+          cycles.
+          <a href="https://arxiv.org/abs/1701.06377">[2]</a>
+          For a cycle on \(n\) vertices, the number of structures is
+        </p>
+        <div class="equation">
+          \[
+            \binom{2n-1}{n-1}.
+          \]
+        </div>
+        <p>
+          Let \(\widetilde C_{n,k}\) denote the multigraph obtained by
+          replacing one edge of an \(n\)-cycle by \(k\) parallel edges,
+          where \(k\geq2\). At each endpoint of the multiple edge, the
+          opposite endpoint contributes \(k\) times its label to the
+          adjacency sum. The resulting divisibility conditions depend on
+          \(k\), requiring an extension of the ordinary cycle enumeration.
+          Glass and Wagner studied the analogous enumeration problem for
+          paths with a doubled edge.
+          <a href="https://arxiv.org/abs/1903.01398">[3]</a>
+        </p>
+        <figure class="source-figure">
+          <img src="assets/figures/doubled-edge-paths.svg" alt="The doubled-edge paths P 3,2 and P 1,5." decoding="async">
+          <figcaption>
+            <span class="figure-label">Literature figure.</span>
+            The doubled-edge paths denoted \(\mathcal{P}_{3,2}\) and
+            \(\mathcal{P}_{1,5}\) in the source, from
+            Figure 1 of <a href="https://math.colgate.edu/~integers/u68/u68.pdf">Glass and
+            Wagner</a>. Redrawn with small vertex markers under
+            <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="route">
+        <h2 id="route">Reduction by smoothing</h2>
+        <p>
+          Smoothing reduces the underlying graph while preserving an
+          arithmetical structure. Suppose a vertex \(v\) away from the
+          multiple edge has neighbors \(u\) and \(w\) and satisfies
+          \(d(v)=1\). The vertex equation gives \(r(v)=r(u)+r(w)\).
+          Deleting \(v\), joining \(u\) and \(w\), and adjusting their
+          \(d\)-labels yields an arithmetical structure on the smaller graph.
+        </p>
+        <p>
+          The inverse operation subdivides an edge and assigns the new vertex
+          the sum of its endpoint labels. Enumeration can therefore be
+          organized by reduced structures and their admissible subdivisions.
+          Our reduction expresses the total count in terms of strongly smooth
+          arithmetical structures, with subdivision multiplicities given by
+          ballot numbers. The precise reduction conditions and the definition
+          of strong smoothness are given in the
+          <a href="VPR3.pdf">current manuscript</a>.
+        </p>
+        <p>
+          The arithmetic constraints at the multiple edge require a separate
+          analysis. Let \(r_1\) and
+          \(r_2\) be the \(r\)-labels at its endpoints. The equations there
+          force \(r_1\), \(r_2\), and \(k\) to be pairwise coprime, meaning
+          that each pair has greatest common divisor \(1\). The construction
+          below establishes the converse by producing a structure from
+          prescribed data satisfying this condition.
+        </p>
+      </section>
+
+      <section aria-labelledby="results">
+        <h2 id="results">Construction and enumeration</h2>
+        <p>
+          For positive integers \(r_1,r_2,k\), pairwise coprimality is both
+          necessary and sufficient for the triple to occur at the multiple
+          edge of an arithmetical structure. Sufficiency follows from a
+          modified Euclidean algorithm that constructs a structure with the
+          prescribed endpoint labels and multiplicity.
+        </p>
+        <p>
+          The number of structures on \(\widetilde C_{n,k}\) is expressed
+          as a weighted sum over strongly smooth structures on at most
+          \(n\) vertices. Each weight counts the subdivisions contributing
+          to a structure on the original graph. The
+          complete formula and the construction appear in the
+          <a href="VPR3.pdf">current manuscript</a>.
+        </p>
+        <figure class="source-figure">
+          <img src="assets/figures/multiedge-labelings.svg" alt="Two arithmetical structures on four-vertex multi-edge cycles, each displayed by its d- and r-labelings." decoding="async">
+          <div class="figure-key" aria-hidden="true">
+            <span>\(\mathbf d\)</span>
+            <span>\(\mathbf r\)</span>
+            <span>\(\mathbf d\)</span>
+            <span>\(\mathbf r\)</span>
+          </div>
+          <figcaption>
+            <span class="figure-label">Figure 2.</span>
+            Each adjacent pair represents one arithmetical structure: the left
+            graph gives \(\mathbf d\), and the right graph gives the
+            corresponding \(\mathbf r\). The first pair is on
+            \(\widetilde{C}_{4,3}\), and the second is on
+            \(\widetilde{C}_{4,4}\). Redrawn from the
+            <a href="VPR3.pdf">current manuscript</a>.
+          </figcaption>
+        </figure>
+        <p>
+          The rightmost example illustrates the divisibility condition.
+          The vertex labeled \(7\) has four edges to the vertex labeled
+          \(5\) and one edge to the vertex labeled \(1\). Its neighboring
+          labels contribute \(4\cdot5+1=21\), so its \(d\)-label is \(3\).
+          The remaining vertex equations similarly determine the displayed
+          \(\mathbf d\)-labeling.
+        </p>
+      </section>
+
+      <section aria-labelledby="references">
+        <h2 id="references">References</h2>
+        <ol class="references">
+          <li id="ref-lorenzini">
+            D. J. Lorenzini, “Arithmetical graphs,” <em>Mathematische
+            Annalen</em> 285 (1989), 481–501.
+            <span class="reference-links"><a href="https://link.springer.com/article/10.1007/BF01455069">Paper</a> · <a href="https://doi.org/10.1007/BF01455069">DOI</a></span>
+          </li>
+          <li id="ref-braun">
+            B. Braun et al., “Counting arithmetical structures on paths and
+            cycles,” <em>Discrete Mathematics</em> 341 (2018), 2949–2963.
+            <span class="reference-links"><a href="https://arxiv.org/abs/1701.06377">Paper</a> · <a href="https://doi.org/10.1016/j.disc.2018.07.002">DOI</a></span>
+          </li>
+          <li id="ref-glass">
+            D. Glass and J. Wagner, “Arithmetical structures on paths with a
+            doubled edge,” <em>Integers</em> 20 (2020), A68.
+            <span class="reference-links"><a href="https://math.colgate.edu/~integers/u68/u68.pdf">Paper</a> · <a href="https://arxiv.org/abs/1903.01398">arXiv</a></span>
+          </li>
+          <li>
+            C. Keyes and T. Reiter, “Bounding the number of arithmetical
+            structures on graphs,” <em>Discrete Mathematics</em> 344 (2021),
+            112494. <span class="reference-links"><a href="https://arxiv.org/abs/2007.15100">Paper</a> · <a href="https://doi.org/10.1016/j.disc.2021.112494">DOI</a></span>
+          </li>
+        </ol>
+      </section>
+
+      <nav class="research-nav" aria-label="Other research note">
+        <a href="boolean-dynamics.html">Boolean Monomial Dynamics →</a>
+      </nav>
+    </main>
+  </body>
+</html>

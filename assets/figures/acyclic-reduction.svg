@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" role="img" aria-labelledby="title desc">
+  <title id="title">Acyclic reduction of a directed graph</title>
+  <desc id="desc">The original nine-vertex directed graph is shown beside the same graph after three cycle-forming edges have been removed.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="3.5" markerHeight="3.5" orient="auto-start-reverse">
+      <path d="M0 0 8 4 0 8Z" fill="#111"/>
+    </marker>
+    <g id="nodes" fill="#111">
+      <circle cx="55" cy="45" r="3.2"/><circle cx="145" cy="45" r="3.2"/><circle cx="235" cy="45" r="3.2"/>
+      <circle cx="55" cy="140" r="3.2"/><circle cx="145" cy="140" r="3.2"/><circle cx="235" cy="140" r="3.2"/>
+      <circle cx="55" cy="235" r="3.2"/><circle cx="145" cy="235" r="3.2"/><circle cx="235" cy="235" r="3.2"/>
+    </g>
+    <g id="acyclic-edges" fill="none" stroke="#111" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M55 129V56"/><path d="M66 45H133"/><path d="M63 132L137 53"/>
+      <path d="M145 56V129"/><path d="M145 224V151"/><path d="M156 140H224"/>
+      <path d="M153 227L227 148"/><path d="M235 129V56"/><path d="M55 224V151"/>
+      <path d="M66 235H133"/><path d="M156 235H224"/><path d="M235 224V151"/>
+    </g>
+  </defs>
+
+  <g transform="translate(20 20)">
+    <use href="#acyclic-edges"/>
+    <g fill="none" stroke="#111" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M134 140H66"/><path d="M137 148L63 227"/><path d="M224 45H156"/>
+    </g>
+    <use href="#nodes"/>
+    <text x="145" y="278" text-anchor="middle" font-family="Georgia, serif" font-size="17" fill="#111">original graph</text>
+  </g>
+
+  <g transform="translate(480 20)">
+    <use href="#acyclic-edges"/>
+    <use href="#nodes"/>
+    <text x="145" y="278" text-anchor="middle" font-family="Georgia, serif" font-size="17" fill="#111">edges removed</text>
+  </g>
+</svg>

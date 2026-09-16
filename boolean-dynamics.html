@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Boolean Monomial Dynamics | Bryan Busby</title>
+    <meta name="author" content="Bryan Busby">
+    <meta name="description" content="An introduction to transient lengths in Boolean monomial dynamical systems.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&amp;family=Newsreader:opsz,wght@6..72,400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="research.css">
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] },
+        svg: { fontCache: "global", displayAlign: "left", displayIndent: "1.25em" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <main id="main-content">
+      <a class="back-link" href="index.html#works">← Back to research</a>
+
+      <header>
+        <h1 class="visually-hidden">Boolean Monomial Dynamics</h1>
+        <p class="lede">
+          Every orbit of a map on a finite set is eventually periodic.
+          We study the maximum transient length of Boolean monomial dynamical
+          systems by relating their iterates to directed walks in the
+          dependency digraph. For the classes of digraphs considered here,
+          acyclic subdigraphs, connecting-path distances, and arithmetic
+          properties of cycle lengths yield lower and upper bounds on the
+          time required to reach a periodic orbit.
+        </p>
+      </header>
+
+      <figure class="lead-figure lead-figure--literature">
+        <img src="assets/figures/rafimanzelat-2025-fig-1.png" alt="State-transition graph of a four-variable Boolean network, with transient states leading to three fixed points and one two-state cycle." decoding="async">
+        <figcaption>
+          <span class="figure-label">Literature figure.</span>
+          A state-transition graph with three fixed-point attractors and one
+          \(2\)-cycle, shown in monochrome from Figure 1 of
+          <a href="https://www.nature.com/articles/s41598-025-97684-y">Rafimanzelat</a>.
+          This is a general Boolean-network example, not the state graph of the
+          monomial system considered below. Licensed under
+          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.
+          <a href="https://doi.org/10.1038/s41598-025-97684-y">[1]</a>
+        </figcaption>
+      </figure>
+
+      <section aria-labelledby="motivation">
+        <h2 id="motivation">Transients</h2>
+        <p>
+          Boolean networks provide discrete models of gene regulation in
+          which binary variables represent gene activity and coordinate
+          update functions encode regulatory interactions.
+          <a href="https://doi.org/10.1016/0022-5193(69)90015-0">[3]</a>
+          Periodic orbits represent persistent activity patterns. The
+          transient length of an initial state is the least number of
+          iterations required to reach a periodic state; it is zero precisely
+          when the initial state is periodic.
+        </p>
+        <p>
+          The state-transition graph has an edge from each state to its
+          image and determines all transient lengths. A system on \(n\)
+          Boolean variables, however, has \(2^n\) states, so explicit
+          construction of this graph grows exponentially with \(n\).
+          We instead seek bounds derived directly from the coordinate
+          functions and their dependency structure.
+        </p>
+      </section>
+
+      <section aria-labelledby="compression">
+        <h2 id="compression">The dependency digraph</h2>
+        <p>
+          Let \(f:\{0,1\}^n\to\{0,1\}^n\) be a Boolean monomial map,
+          with state vector \(\mathbf x=(x_1,\ldots,x_n)\) and coordinate
+          functions \(f_1,\ldots,f_n\). For each \(i\), an index set
+          \(N_i\subseteq\{1,\ldots,n\}\) specifies the variables in the
+          coordinate monomial:
+        </p>
+        <div class="equation">
+          \[
+            f_i(\mathbf x)=\prod_{j\in N_i}x_j.
+          \]
+        </div>
+        <p>
+          Each product is the logical conjunction of its factors. The empty
+          product is taken to be \(1\), and all coordinates are updated
+          simultaneously.
+        </p>
+        <p>
+          The dependency digraph \(D_f\) has vertex set
+          \(\{1,\ldots,n\}\) and an edge \(i\to j\) if and only if
+          \(j\in N_i\), equivalently, if \(x_j\) divides \(f_i\).
+          We use the output-to-input convention: an edge points from a
+          coordinate to a variable on which its update depends.
+        </p>
+        <p>
+          Since the sets \(N_i\) determine the coordinate functions,
+          \(D_f\) encodes the system on \(n\) vertices. Colón-Reyes,
+          Laubenbacher, and Pareigis used this representation to study the
+          periodic behavior of Boolean monomial systems.
+          <a href="https://arxiv.org/abs/math/0403166">[2]</a>
+        </p>
+        <p>For example, consider</p>
+        <div class="equation">
+          \[
+            f(x_1,x_2,x_3,x_4)=(x_2,\,x_1x_3,\,x_4,\,x_2).
+          \]
+        </div>
+        <p>
+          Here \(N_2=\{1,3\}\), giving the edges \(2\to1\) and
+          \(2\to3\); the remaining coordinate functions give
+          \(1\to2\), \(3\to4\), and \(4\to2\).
+        </p>
+        <figure class="source-figure source-figure--dependency">
+          <div class="dependency-diagram">
+            <img src="assets/figures/dependency-digraph.svg" alt="Dependency digraph of the displayed four-variable Boolean monomial system." decoding="async">
+          </div>
+          <figcaption>
+            <span class="figure-label">Dependency digraph.</span>
+            The dependency digraph \(D_f\) of the displayed system. The source
+            figure labels vertex \(i\) by \(a_i\). Redrawn from Figure 1 of the
+            <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="bridge">
+        <h2 id="bridge">Iterates and directed walks</h2>
+        <p>
+          Successive substitution expresses each coordinate of an iterate
+          in terms of the initial variables. In the displayed example,
+          \((f^2)_2(\mathbf x)=f_1(\mathbf x)f_3(\mathbf x)=x_2x_4\).
+          The corresponding length-two walks from vertex \(2\) are
+          \(2\to1\to2\) and \(2\to3\to4\), whose endpoints index
+          precisely the variables occurring in \((f^2)_2\).
+        </p>
+        <p>
+          More generally, let
+          \(f^m\) denote \(m\) successive applications of \(f\), and let
+          \((f^m)_i\) be its \(i\)th coordinate. For \(m\geq1\), the
+          variable \(x_j\) occurs in \((f^m)_i\) if and only if \(D_f\)
+          has a directed walk of length \(m\) from \(i\) to \(j\).
+          A directed walk may repeat vertices and edges, and its length is
+          the number of edges traversed. Multiple walks with the same endpoint
+          may produce repeated factors under substitution, but these reduce
+          to a single factor by the Boolean identity \(x_j^2=x_j\). A related
+          correspondence holds for monomial systems over arbitrary finite fields.
+          <a href="https://www.complex-systems.com/abstracts/v16_i04_a04/">[4]</a>
+        </p>
+        <p>
+          This correspondence reduces the analysis of iterates to the
+          attainable walk lengths between ordered pairs of vertices. Let
+          \(\tau_f(\mathbf x)\) denote the transient length of an initial
+          state \(\mathbf x\). The maximum transient length is
+        </p>
+        <div class="equation">
+          \[
+            \tau_{\max}(f)=\max_{\mathbf x\in\{0,1\}^n}\tau_f(\mathbf x).
+          \]
+        </div>
+      </section>
+
+      <section aria-labelledby="route">
+        <h2 id="route">Paths and cycles</h2>
+        <p>
+          Directed cycles determine how walks can be extended without
+          changing their endpoints. Inserting \(q\) traversals of an
+          accessible cycle of length \(c\) increases a walk's length by
+          \(qc\). When several cycles are accessible along a walk,
+          repeated traversals contribute nonnegative integer combinations
+          of their lengths.
+        </p>
+        <p>
+          We organize the analysis by deleting selected edges to obtain an
+          acyclic subdigraph. Every directed walk in this subdigraph is a
+          path and consequently has bounded length. Restoring the deleted
+          edges permits repeated cycle traversals; the resulting walk
+          lengths depend on both cycle multiplicities and the lengths of
+          paths connecting the cycles.
+        </p>
+        <figure class="source-figure source-figure--acyclic">
+          <img src="assets/figures/acyclic-reduction.svg" alt="A directed graph beside the same graph with selected edges removed to leave an acyclic subdigraph." decoding="async">
+          <figcaption>
+            <span class="figure-label">Acyclic subdigraph.</span>
+            A digraph (left) and an acyclic subdigraph obtained by deleting
+            selected edges (right). Redrawn from Figure 3 of the
+            <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
+          </figcaption>
+        </figure>
+        <p>
+          For cycle lengths \(c_1,\ldots,c_s\) with greatest common divisor
+          \(1\), the nonnegative integer combinations
+          \(q_1c_1+\cdots+q_sc_s\) form a numerical semigroup. Its
+          Frobenius number is the largest integer not expressible as a
+          nonnegative integer linear combination of the cycle lengths.
+          Every larger integer admits such a representation.
+          <a href="https://doi.org/10.1016/j.jnt.2016.05.027">[5]</a>
+        </p>
+        <p>
+          For example, \(2\) and \(3\) generate every integer at least
+          \(2\), but do not generate \(1\), so their Frobenius number is
+          \(1\). Applying this arithmetic criterion to walk lengths also
+          requires accessibility of the relevant cycles and inclusion of
+          the lengths of the connecting paths.
+        </p>
+      </section>
+
+      <section aria-labelledby="payoff">
+        <h2 id="payoff">Bounds on the transient</h2>
+        <p>
+          For the dependency digraphs considered in our work, graph distances
+          account for connecting paths, while Frobenius numbers control gaps
+          in attainable walk lengths. The correspondence between walks and
+          coordinate monomials translates these estimates into lower and
+          upper bounds on \(\tau_{\max}(f)\).
+        </p>
+        <p>
+          In one example treated in the current work, the bounds are
+        </p>
+        <div class="equation">
+          \[
+            9\leq \tau_{\max}(f)\leq15.
+          \]
+        </div>
+        <p>
+          Hence at least one initial state has transient length at least
+          nine, while every initial state reaches a periodic orbit within
+          fifteen iterations. These estimates apply under the hypotheses of
+          the corresponding graph analysis; they do not constitute a closed
+          formula for arbitrary Boolean monomial systems.
+        </p>
+      </section>
+
+      <section aria-labelledby="references">
+        <h2 id="references">References</h2>
+        <ol class="references">
+          <li id="ref-rafimanzelat">
+            M. R. Rafimanzelat, “Global stabilization of Boolean networks with
+            applications to biomolecular network control,” <em>Scientific
+            Reports</em> 15 (2025), 15201.
+            <span class="reference-links"><a href="https://www.nature.com/articles/s41598-025-97684-y">Paper</a> · <a href="https://doi.org/10.1038/s41598-025-97684-y">DOI</a></span>
+          </li>
+          <li id="ref-boolean">
+            O. Colón-Reyes, R. Laubenbacher, and B. Pareigis, “Boolean monomial
+            dynamical systems,” <em>Annals of Combinatorics</em> 8 (2004),
+            425–439. <span class="reference-links"><a href="https://arxiv.org/abs/math/0403166">Paper</a> · <a href="https://doi.org/10.1007/s00026-004-0230-6">DOI</a></span>
+          </li>
+          <li id="ref-kauffman">
+            S. A. Kauffman, “Metabolic stability and epigenesis in randomly
+            constructed genetic nets,” <em>Journal of Theoretical Biology</em>
+            22 (1969), 437–467.
+            <span class="reference-links"><a href="https://www.sciencedirect.com/science/article/pii/0022519369900150">Paper</a> · <a href="https://doi.org/10.1016/0022-5193(69)90015-0">DOI</a></span>
+          </li>
+          <li id="ref-finite-fields">
+            O. Colón-Reyes, A. S. Jarrah, R. Laubenbacher, and B. Sturmfels,
+            “Monomial dynamical systems over finite fields,” <em>Complex
+            Systems</em> 16 (2006), 333–342.
+            <span class="reference-links"><a href="https://www.complex-systems.com/abstracts/v16_i04_a04/">Paper</a> · <a href="https://doi.org/10.25088/ComplexSystems.16.4.333">DOI</a></span>
+          </li>
+          <li id="ref-frobenius">
+            A. Tripathi, “Formulae for the Frobenius number in three
+            variables,” <em>Journal of Number Theory</em> 170 (2017), 368–389.
+            <span class="reference-links"><a href="https://www.sciencedirect.com/science/article/pii/S0022314X16301743">Paper</a> · <a href="https://doi.org/10.1016/j.jnt.2016.05.027">DOI</a></span>
+          </li>
+        </ol>
+      </section>
+
+      <nav class="research-nav" aria-label="Other research note">
+        <a href="arithmetical-structures.html">← Arithmetical Structures on Graphs</a>
+      </nav>
+    </main>
+  </body>
+</html>

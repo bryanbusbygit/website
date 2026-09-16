@@ -8,7 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="theme.js"></script>
     <style>
+      :root {
+        color-scheme: light;
+        --bg: #ffffff;
+        --text: #111111;
+        --link: #3f3f3f;
+      }
+
       * {
         box-sizing: border-box;
       }
@@ -16,8 +24,8 @@
       body {
         margin: 0;
         padding: 3rem 2rem;
-        color: #111111;
-        background: #ffffff;
+        color: var(--text);
+        background: var(--bg);
         font-family: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
         font-size: 1.2rem;
         line-height: 1.6;
@@ -39,8 +47,15 @@
       }
 
       a {
-        color: #3f3f3f;
+        color: var(--link);
         text-underline-offset: 0.14em;
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #000000;
+        --text: #eeeeea;
+        --link: #ddddda;
       }
 
       @media (max-width: 640px) {

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Source Figure Library | Bryan Busby</title>
+    <meta name="author" content="Bryan Busby">
+    <meta name="description" content="Source figures used in Bryan Busby's research notes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&amp;family=Newsreader:opsz,wght@6..72,400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="research.css">
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [["\\(", "\\)"]] },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <main id="main-content">
+      <a class="back-link" href="index.html#works">← Back to research</a>
+      <header>
+        <p class="eyebrow">Sources</p>
+        <h1>Figure Library</h1>
+        <p class="lede">
+          Figures and redraws from the underlying research sources. Each entry
+          identifies the original figure and links directly to its paper,
+          manuscript, or poster.
+        </p>
+      </header>
+
+      <section id="arithmetical-structures">
+        <h2>Cycles with parallel edges</h2>
+        <p>
+          Source: <a href="VPR3.pdf">Busby, Dogbatse, and Palma, current
+          manuscript</a>. The notation \(\widetilde C_{n,k}\) means an
+          \(n\)-vertex cycle in which one edge has been replaced by \(k\)
+          parallel edges.
+        </p>
+        <div class="figure-grid">
+          <figure>
+            <img src="assets/figures/multiedge-cycle.svg" alt="Five-vertex cycle with a doubled edge.">
+            <figcaption>Redrawn from Fig. 1: \(\widetilde{C}_{5,2}\), a \(5\)-cycle with \(2\) parallel edges between \(v_1\) and \(v_2\).</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/multiedge-labelings.svg" alt="Examples of labeled cycles with parallel edges.">
+            <figcaption>Redrawn from Fig. 2: arithmetical structures on \(\widetilde{C}_{4,3}\) and \(\widetilde{C}_{4,4}\).</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>Paths with a doubled edge</h2>
+        <p>
+          Source: D. Glass and J. Wagner,
+          <a href="https://math.colgate.edu/~integers/u68/u68.pdf">“Arithmetical
+          Structures on Paths With a Doubled Edge”</a>
+          (<a href="https://arxiv.org/abs/1903.01398">arXiv</a>). Redrawn
+          with small vertex markers under
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>;
+          the <a href="https://cupola.gettysburg.edu/mathfac/59/">repository
+          record</a> gives the license statement.
+        </p>
+        <div class="figure-grid">
+          <figure>
+            <img src="assets/figures/doubled-edge-paths.svg" alt="The paths P 3,2 and P 1,5, each with a doubled edge.">
+            <figcaption>Redrawn from Fig. 1: the doubled-edge paths denoted \(\mathcal{P}_{3,2}\) and \(\mathcal{P}_{1,5}\) in the paper.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/doubled-edge-labelings.svg" alt="Smooth and nonsmooth arithmetical structures on doubled-edge paths.">
+            <figcaption>Redrawn from Fig. 2: one smooth and one nonsmooth arithmetical structure.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="boolean-dynamics">
+        <h2>Boolean monomial dynamics</h2>
+        <p>
+          Source: <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">Busby,
+          “On Acyclic Subgraphs and Transient Length Bounds,” 2024 poster</a>.
+          For a Boolean monomial system \(f\), \(D_f\) denotes its dependency
+          digraph: vertex \(i\) points to vertex \(j\) when the output
+          coordinate \(f_i\) depends on the input variable \(x_j\).
+        </p>
+        <div class="figure-grid">
+          <figure>
+            <img src="assets/figures/dependency-digraph.svg" alt="Dependency digraph of a four-variable Boolean system.">
+            <figcaption>Redrawn from Fig. 1: the dependency digraph. Vertex labels \(a_i\) correspond to indices \(i\).</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/acyclic-reduction.svg" alt="An original digraph and an acyclic subdigraph.">
+            <figcaption>Redrawn from Fig. 3: the original digraph and the acyclic subdigraph obtained by deleting selected edges.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>Top-down state-space layout</h2>
+        <p>
+          Source: M. R. Rafimanzelat,
+          <a href="https://www.nature.com/articles/s41598-025-97684-y">“Global
+          Stabilization of Boolean Networks With Applications to Biomolecular
+          Network Control”</a>,
+          <a href="https://doi.org/10.1038/s41598-025-97684-y">DOI
+          10.1038/s41598-025-97684-y</a>. Figure 1 is reproduced unchanged
+          under
+          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC
+          BY-NC-ND 4.0</a>. It is a general Boolean-network example, not a
+          state-transition digraph from the current monomial-systems project.
+        </p>
+        <div class="figure-grid">
+          <figure>
+            <img class="published-state-figure" src="assets/figures/rafimanzelat-2025-fig-1.png" alt="Top-down state-transition graph with transient states flowing into three fixed points and one two-state cycle.">
+            <figcaption>Source, Fig. 1: a top-down state-transition digraph.</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

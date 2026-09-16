@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 390" role="img" aria-labelledby="title desc">
+  <title id="title">A five-vertex cycle with a doubled edge</title>
+  <desc id="desc">Small solid vertices v 1 through v 5 form a cycle. Two parallel edges join v 1 and v 2, and labels sit beside each vertex.</desc>
+  <g fill="none" stroke="#000" stroke-width="2">
+    <path d="M258 39L88 94V272L258 327L362 183"/>
+    <path d="M258 39Q329 99 362 183"/>
+    <path d="M258 39Q278 130 362 183"/>
+  </g>
+  <g fill="#111">
+    <circle cx="258" cy="39" r="4"/>
+    <circle cx="362" cy="183" r="4"/>
+    <circle cx="258" cy="327" r="4"/>
+    <circle cx="88" cy="272" r="4"/>
+    <circle cx="88" cy="94" r="4"/>
+  </g>
+  <g fill="#000" font-family="STIX Two Math, Cambria Math, Times New Roman, serif" font-size="27" text-anchor="middle">
+    <text x="258" y="21"><tspan font-style="italic">v</tspan><tspan font-size="19" dy="5">1</tspan></text>
+    <text x="389" y="189"><tspan font-style="italic">v</tspan><tspan font-size="19" dy="5">2</tspan></text>
+    <text x="258" y="361"><tspan font-style="italic">v</tspan><tspan font-size="19" dy="5">3</tspan></text>
+    <text x="61" y="278"><tspan font-style="italic">v</tspan><tspan font-size="19" dy="5">4</tspan></text>
+    <text x="61" y="100"><tspan font-style="italic">v</tspan><tspan font-size="19" dy="5">5</tspan></text>
+  </g>
+</svg>

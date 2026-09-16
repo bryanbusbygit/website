@@ -12,8 +12,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="theme.js"></script>
     <style>
       :root {
+        color-scheme: light;
         --bg: #ffffff;
         --text: #111111;
         --muted: #505050;
@@ -29,7 +31,7 @@
         scroll-behavior: smooth;
         -webkit-text-size-adjust: 100%;
         overflow-x: hidden;
-        background: #111111;
+        background: var(--bg);
         overscroll-behavior-y: none;
       }
 
@@ -143,6 +145,8 @@
       img {
         max-width: 100%;
         height: auto;
+        background-color: transparent;
+        filter: grayscale(1);
       }
 
       a:hover,
@@ -251,6 +255,7 @@
         aspect-ratio: 11 / 7;
         max-width: 100%;
         overflow: hidden;
+        background-color: transparent;
       }
 
       .preview-figure {
@@ -341,6 +346,19 @@
         }
       }
 
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #000000;
+        --text: #eeeeea;
+        --muted: #b8b8b2;
+        --line: #41413e;
+        --link: #ddddda;
+      }
+
+      :root[data-theme="dark"] img {
+        filter: grayscale(1) invert(1);
+      }
+
       @media (max-width: 720px) {
         body::after {
           background: radial-gradient(
@@ -414,6 +432,7 @@
         }
 
       }
+
     </style>
   </head>
   <body>
@@ -426,11 +445,11 @@
         <h2>About</h2>
         <div class="intro-copy">
           <p>
-            Hello. My interests are graph theory and combinatorics. I work in
-            pure mathematics, where the useful parts have been carefully removed. A
-            <a href="assets/Bryan_Busby_CV.pdf">CV</a> is available here.
-            <a href="mailto:bryan.busby@upr.edu">Click here to send me a message</a>
-            (If that did not work, try <a href="email.html">this</a>.)
+            Graph theory and combinatorics, mostly. Pure mathematics where the
+            useful parts have been carefully removed. Here a
+            <a href="assets/Bryan_Busby_CV.pdf">cv</a> and an
+            <a href="mailto:bryan.busby@upr.edu">email.</a> If the email link
+            fails, try <a href="email.html">here</a>.
           </p>
         </div>
         </section>
@@ -442,13 +461,24 @@
           <div class="project-copy">
             <h3>Arithmetical Structures on Graphs</h3>
             <p>
-              We consider arithmetical structures on cycles with a multi-edge.
-              We classify and enumerate the resulting families, giving
-              constructive descriptions and counting formulas. <span class="advisor">Advised by
+              Arithmetical structures on a graph are primitive positive integer
+              vertex labelings for which each label divides the sum of the
+              adjacent labels, counted with edge multiplicity. We study their
+              enumeration on cycles with a single multiple edge. Smoothing and
+              subdivision reduce the enumeration to a weighted sum over strongly
+              smooth structures on cycles with at most the original number of
+              vertices, with weights given by ballot numbers. We characterize
+              the admissible endpoint labels and edge multiplicities by pairwise
+              coprimality and establish sufficiency through a constructive
+              procedure based on a modified Euclidean algorithm. These results
+              relate the arithmetic constraints at the multiple edge to the
+              combinatorial enumeration of the resulting structures.
+              <span class="advisor">Advised by
               <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a>
               and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
             </p>
           </div>
+          <p><a href="arithmetical-structures.html">Read more.</a></p>
           <div class="project-materials">
             <p>
               <a class="material-link" href="VPR3.pdf" aria-label="Open PDF for Arithmetical Structures on Cycles with a Multi-Edge">
@@ -457,7 +487,7 @@
               </a>
             </p>
             <p>
-              <a class="material-link" href="assets/posters/2025_arithmetical_structures_poster.pdf" aria-label="Open poster PDF for arithmetical structures on cycles with a multi-edge">
+              <a class="material-link" href="assets/posters/2025_arithmetical_structures_poster.pdf" aria-label="Open poster PDF for Arithmetical Structures on Cycles with a Multi-Edge">
                 <span class="material-label">Poster.</span> MAA MathFest,
                 Sacramento, CA, August 2025.
               </a>
@@ -467,8 +497,8 @@
             <div class="figure-frame">
               <img
                 class="preview-figure arith-merge"
-                src="assets/fig-arith-merge.svg"
-                alt="Merged tilde-cycle obtained by identifying two endpoints in the construction."
+                src="assets/figures/arithmetical-merge.svg"
+                alt="Multi-edge cycle obtained by identifying two endpoints in the construction."
                 loading="lazy"
               />
             </div>
@@ -477,15 +507,25 @@
 
         <div class="project">
           <div class="project-copy">
-            <h3>Nonlinear Boolean Monomial Systems</h3>
+            <h3>Boolean Monomial Dynamical Systems</h3>
             <p>
-              We consider transient length bounds for Boolean monomial systems.
-              Using dependency graphs and acyclic subgraphs, we derive upper
-              bounds and relate them to properties of the underlying digraph.
-              The Frobenius number enters the argument. <span class="advisor">Advised by
+              We investigate the maximum transient length of Boolean monomial
+              dynamical systems, whose coordinate functions are products of
+              Boolean variables. Successive substitution identifies the variables
+              occurring in each iterate with the endpoints of directed walks of
+              the corresponding length in the dependency digraph. Using this
+              correspondence, we derive lower and upper bounds on the maximum
+              transient for the classes of digraphs under consideration. The
+              analysis combines acyclic subdigraphs and connecting-path distances
+              with Frobenius numbers associated with cycle lengths to control
+              gaps in attainable walk lengths. This approach bounds transient
+              behavior from the dependency digraph without enumerating the
+              exponentially large state space.
+              <span class="advisor">Advised by
               <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.</span>
             </p>
           </div>
+          <p><a href="boolean-dynamics.html">Read more.</a></p>
           <div class="project-materials">
             <p>
               <span class="material-label">Manuscript.</span> Transient Length
@@ -493,7 +533,7 @@
               <span class="status">(in preparation)</span>
             </p>
             <p>
-              <a class="material-link" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf" aria-label="Open poster PDF for transient length bounds for Boolean monomial systems">
+              <a class="material-link" href="assets/posters/2024_discrete_dynamical_systems_poster.pdf" aria-label="Open poster PDF for Transient Length Bounds for Boolean Monomial Systems">
                 <span class="material-label">Poster.</span> SIDIM, UPR Ponce,
                 May 2024.
               </a>
@@ -503,8 +543,8 @@
             <div class="figure-frame">
               <img
                 class="preview-figure boolean-state"
-                src="assets/fig-boolean.svg"
-                alt="State graph of the Boolean monomial system."
+                src="assets/figures/boolean-state-graph.svg"
+                alt="State-transition digraph of the Boolean monomial system."
                 loading="lazy"
               />
             </div>
@@ -515,12 +555,15 @@
           <div class="project-copy">
             <h3>5G RF Propagation Measurements</h3>
             <p>
-              We study 5G propagation in microwave and millimeter-wave bands
-              using SDR measurements. The work includes GNU Radio
-              instrumentation, Vivaldi antenna design, and channel measurements
-              for attenuation and directional effects. It also treats the
-              measurement and signal-processing problems that arise in GNU
-              Radio. <span class="advisor">Advised by
+              We investigate radio-frequency propagation in microwave and
+              millimeter-wave bands relevant to 5G communication systems through
+              measurements of signal attenuation and directional dependence.
+              The experimental workflow integrates wideband Vivaldi antenna
+              design, measurement-system construction using software-defined
+              radios and GNU Radio, and processing of the recorded signals.
+              The study combines antenna design and experimental signal analysis
+              to examine propagation behavior in the measured configurations.
+              <span class="advisor">Advised by
               <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.</span>
             </p>
           </div>
@@ -538,7 +581,7 @@
               <img
                 class="preview-figure rf-diagram"
                 src="assets/fig-rf-digraph.svg"
-                alt="Monochrome diagram of simulated H-plane and E-plane gain patterns with multiple noisy traces."
+                alt="Simulated H-plane and E-plane antenna gain patterns shown as multiple monochrome traces."
                 loading="lazy"
               />
             </div>
