@@ -461,18 +461,16 @@
           <div class="project-copy">
             <h3>Arithmetical Structures on Graphs</h3>
             <p>
-              Arithmetical structures on a graph are primitive positive integer
-              vertex labelings for which each label divides the sum of the
-              adjacent labels, counted with edge multiplicity. We study their
-              enumeration on cycles with a single multiple edge. Smoothing and
-              subdivision reduce the enumeration to a weighted sum over strongly
-              smooth structures on cycles with at most the original number of
-              vertices, with weights given by ballot numbers. We characterize
-              the admissible endpoint labels and edge multiplicities by pairwise
-              coprimality and establish sufficiency through a constructive
-              procedure based on a modified Euclidean algorithm. These results
-              relate the arithmetic constraints at the multiple edge to the
-              combinatorial enumeration of the resulting structures.
+              An arithmetical structure labels each vertex of a graph with a
+              positive integer. Each label must divide the sum of the neighboring
+              labels, with parallel edges counted separately. We study how many
+              such structures occur on cycles with one multi-edge. Smoothing and
+              subdivision reduce the problem to smaller, strongly smooth
+              structures, counted with ballot numbers. We also show that the two
+              endpoint labels and the number of parallel edges must be pairwise
+              coprime. A modified Euclidean algorithm constructs every possible
+              case. Together, these ideas connect the arithmetic at the
+              multi-edge with the number of structures on the full cycle.
               <span class="advisor">Advised by
               <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a>
               and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
@@ -509,18 +507,15 @@
           <div class="project-copy">
             <h3>Boolean Monomial Dynamical Systems</h3>
             <p>
-              We investigate the maximum transient length of Boolean monomial
-              dynamical systems, whose coordinate functions are products of
-              Boolean variables. Successive substitution identifies the variables
-              occurring in each iterate with the endpoints of directed walks of
-              the corresponding length in the dependency digraph. Using this
-              correspondence, we derive lower and upper bounds on the maximum
-              transient for the classes of digraphs under consideration. The
-              analysis combines acyclic subdigraphs and connecting-path distances
-              with Frobenius numbers associated with cycle lengths to control
-              gaps in attainable walk lengths. This approach bounds transient
-              behavior from the dependency digraph without enumerating the
-              exponentially large state space.
+              We study how long a Boolean monomial system can take to settle into
+              a repeating cycle. Repeated substitution turns this question into
+              one about directed walks in the system's dependency digraph. This
+              connection gives lower and upper bounds on the maximum transient
+              length for the graph classes we consider. The bounds use acyclic
+              subdigraphs, lengths of connecting paths, and Frobenius
+              numbers associated with cycle lengths. This lets us study transient
+              behavior directly from the dependency digraph, without listing all
+              2<sup>n</sup> possible states.
               <span class="advisor">Advised by
               <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.</span>
             </p>
@@ -555,14 +550,12 @@
           <div class="project-copy">
             <h3>5G RF Propagation Measurements</h3>
             <p>
-              We investigate radio-frequency propagation in microwave and
-              millimeter-wave bands relevant to 5G communication systems through
-              measurements of signal attenuation and directional dependence.
-              The experimental workflow integrates wideband Vivaldi antenna
-              design, measurement-system construction using software-defined
-              radios and GNU Radio, and processing of the recorded signals.
-              The study combines antenna design and experimental signal analysis
-              to examine propagation behavior in the measured configurations.
+              We measured how radio signals weaken and vary by direction in
+              microwave and millimeter-wave bands used by 5G systems. The project
+              included designing wideband Vivaldi antennas, building a measurement
+              system with software-defined radios and GNU Radio, and processing
+              the recorded signals. It brings antenna design and signal analysis
+              together to study radio propagation under the tested conditions.
               <span class="advisor">Advised by
               <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.</span>
             </p>
@@ -581,7 +574,7 @@
               <img
                 class="preview-figure rf-diagram"
                 src="assets/fig-rf-digraph.svg"
-                alt="Simulated H-plane and E-plane antenna gain patterns shown as multiple monochrome traces."
+                alt="Simulated H-plane and E-plane antenna gain patterns shown as several monochrome traces."
                 loading="lazy"
               />
             </div>
