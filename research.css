@@ -6,6 +6,9 @@
   --line: #d8d8d8;
   --soft: #f6f6f3;
   --measure: 760px;
+  --figure-gap-before: 0.75rem;
+  --figure-gap-after: 2.5rem;
+  --caption-gap: 0.75rem;
 }
 
 * { box-sizing: border-box; }
@@ -148,7 +151,13 @@ section { margin-top: 3.75rem; }
 
 .equation mjx-container { margin: 0 !important; }
 
-figure { margin: 3rem 0 0; }
+/* Attach each figure to its introduction; separate it from subsequent prose. */
+figure { margin: var(--figure-gap-before) 0 var(--figure-gap-after); }
+
+figure + p { margin-top: var(--figure-gap-after); }
+
+p:has(+ figure),
+header:has(+ figure) > :last-child { margin-bottom: 0; }
 
 figure img {
   display: block;
@@ -187,7 +196,6 @@ figure img {
 
 .source-figure--dependency {
   width: 100%;
-  margin-top: 1.5rem;
   margin-right: 0;
   margin-left: 0;
 }
@@ -228,7 +236,7 @@ figure img {
 .figure-key span:nth-child(4) { left: 89%; }
 
 figcaption {
-  margin-top: 0.55rem;
+  margin-top: var(--caption-gap);
   color: var(--muted);
   font-size: 0.94rem;
   line-height: 1.5;
@@ -302,6 +310,21 @@ figcaption .figure-label {
   width: min(100%, 20rem);
 }
 
+/* Motion starts only on request, including for reduced-motion visitors. */
+.demo-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.demo-figure .demo-media img,
+:root[data-theme="dark"] .demo-figure .demo-media img {
+  filter: none;
+}
+
 :root[data-theme="dark"] {
   color-scheme: dark;
   --bg: #000000;
@@ -317,7 +340,8 @@ figcaption .figure-label {
 }
 
 :root[data-theme="dark"] figure img {
-  filter: grayscale(1) invert(0.92) brightness(1.04) contrast(1.14);
+  /* Fully invert white image backgrounds to match the page's black. */
+  filter: grayscale(1) contrast(1.08) invert(1) brightness(0.93);
 }
 
 :root[data-theme="dark"] .result {

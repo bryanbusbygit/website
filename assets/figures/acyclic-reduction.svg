@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 54 760 256" role="img" aria-labelledby="title desc">
   <title id="title">Acyclic reduction of a directed graph</title>
   <desc id="desc">The original nine-vertex directed graph is shown beside the same graph after three cycle-forming edges have been removed.</desc>
   <defs>

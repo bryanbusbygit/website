@@ -6,9 +6,9 @@
   </defs>
   <!-- Arrow tails and tips stop 12 units from vertex centers. -->
   <g fill="none" stroke="#111" stroke-width="1.3" marker-end="url(#arrow)">
-    <path d="M165.47 104.14L269.53 45.86"/>
-    <path d="M280 52L280 168"/>
-    <path d="M269.53 174.14L165.47 115.86"/>
+    <path d="M269.53 45.86L165.47 104.14"/>
+    <path d="M280 168L280 52"/>
+    <path d="M165.47 115.86L269.53 174.14"/>
     <path d="M45.73 104.64Q95 76 144.27 104.64"/>
     <path d="M144.27 115.36Q95 144 45.73 115.36"/>
   </g>

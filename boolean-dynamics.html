@@ -23,7 +23,7 @@
     <button class="theme-toggle" type="button" aria-label="Switch color theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.1 15.2A8.5 8.5 0 0 1 8.8 3.9 8.5 8.5 0 1 0 20.1 15.2Z"></path></svg></button>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <main id="main-content">
-      <a class="back-link" href="index.html#works">← Back to research</a>
+      <a class="back-link" href="index.html#works">Back to research</a>
 
       <header>
         <h1 class="visually-hidden">Boolean Monomial Dynamics</h1>
@@ -75,8 +75,7 @@
           in every coordinate. Write the state vector as
           \(\mathbf x=(x_1,\ldots,x_n)\) and the coordinate
           functions as \(f_1,\ldots,f_n\). For each \(i\), an index set
-          \(N_i\subseteq\{1,\ldots,n\}\) specifies the variables in the
-          coordinate monomial:
+          \(N_i\subseteq\{1,\ldots,n\}\) determines the coordinate function
         </p>
         <div class="equation">
           \[
@@ -89,10 +88,9 @@
           simultaneously. Some definitions also allow a coordinate that is
           identically zero; those maps are outside the scope of this note.
           The dependency graph \(D_f\) has vertex set
-          \(\{1,\ldots,n\}\) and an edge \(i\to j\) if and only if
-          \(j\in N_i\), equivalently, if \(x_j\) divides \(f_i\).
-          Throughout, the output-to-input convention is used: an edge points
-          from a coordinate to a variable on which its update depends.
+          \(\{1,\ldots,n\}\) and an edge \(j\to i\) if and only if
+          \(j\in N_i\), equivalently, if \(x_j\) divides \(f_i\). Thus each
+          arrow follows the influence of a variable on an updated coordinate.
         </p>
         <p>
           The sets \(N_i\) determine the coordinate functions; therefore
@@ -108,9 +106,9 @@
           \]
         </div>
         <p>
-          Here \(N_2=\{1,3\}\), giving the edges \(2\to1\) and
-          \(2\to3\); the remaining coordinate functions give
-          \(1\to2\), \(3\to4\), and \(4\to2\).
+          Here \(N_2=\{1,3\}\), giving the edges \(1\to2\) and
+          \(3\to2\); the remaining coordinate functions give
+          \(2\to1\), \(4\to3\), and \(2\to4\).
         </p>
         <figure class="source-figure source-figure--dependency">
           <div class="dependency-diagram">
@@ -119,7 +117,7 @@
           <figcaption>
             <span class="figure-label">Figure 2.</span>
             The dependency graph \(D_f\) of the displayed system, with each
-            vertex labeled by its index. Redrawn from Figure 1 of the
+            vertex labeled by its index. Adapted from Figure 1 of the
             <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
           </figcaption>
         </figure>
@@ -134,19 +132,31 @@
           Successive substitution expresses each coordinate of an iterate
           in terms of the initial variables. In the displayed example,
           \((f^2)_2(\mathbf x)=f_1(\mathbf x)f_3(\mathbf x)=x_2x_4\).
-          The two corresponding walks of length \(2\) from vertex \(2\) are
-          \(2\to1\to2\) and \(2\to3\to4\), whose endpoints index
+          The two corresponding walks of length \(2\) ending at vertex \(2\)
+          are \(2\to1\to2\) and \(4\to3\to2\); their initial vertices index
           the variables occurring in \((f^2)_2\).
         </p>
+        <figure class="source-figure demo-figure">
+          <img class="demo-media" src="assets/demos/boolean-system-visualizer-poster.webp"
+            alt="The dependency graph and all 16 states, with the six-step orbit from 1110 to the fixed point 0000 highlighted."
+            decoding="async">
+          <figcaption id="visualizer-caption">
+            <span class="figure-label">Figure 3.</span>
+            Dependency graph, phase space, and a longest transient for the
+            displayed four-variable Boolean monomial system. The highlighted
+            orbit reaches \(0000\) from \(1110\) after six updates; \(0000\)
+            then maps to itself. <a href="assets/demos/boolean-system-visualizer.gif">View the 15-second GIF</a>.
+          </figcaption>
+        </figure>
         <p>
           More generally, let
           \(f^m\) denote \(m\) successive applications of \(f\), and let
           \((f^m)_i\) be its \(i\)th coordinate. For \(m\geq1\), the
           variable \(x_j\) occurs in \((f^m)_i\) if and only if \(D_f\)
-          has a directed walk of length \(m\) from \(i\) to \(j\).
+          has a directed walk of length \(m\) from \(j\) to \(i\).
           A directed walk may repeat vertices and edges; its length is the
-          number of edges traversed. If several walks have the same endpoint,
-          substitution may produce repeated factors. These collapse to one
+          number of edges traversed. If several such walks have the same
+          initial vertex, substitution may produce repeated factors. These collapse to one
           factor by the Boolean identity \(x_j^2=x_j\). This is the
           coefficient-\(1\) case established by Colón-Reyes et al.
           <a href="#ref-boolean">[2, Proposition 2.3]</a>.
@@ -181,7 +191,7 @@
         <figure class="source-figure source-figure--acyclic">
           <img src="assets/figures/acyclic-reduction.svg" alt="A directed graph beside the same graph with selected edges removed to leave an acyclic subgraph." decoding="async">
           <figcaption>
-            <span class="figure-label">Figure 3.</span>
+            <span class="figure-label">Figure 4.</span>
             A directed graph (left) and the acyclic subgraph obtained by
             deleting three edges (right).
             Redrawn from Figure 3 of the
@@ -275,7 +285,7 @@
       </section>
 
       <nav class="research-nav" aria-label="Other research note">
-        <a href="arithmetical-structures.html">← Arithmetical Structures on Graphs</a>
+        <a href="arithmetical-structures.html">Arithmetical Structures on Graphs</a>
       </nav>
     </main>
   </body>

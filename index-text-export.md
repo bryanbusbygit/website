@@ -75,7 +75,7 @@ Arithmetical Structures on Graphs
 
 [BODY PARAGRAPH]
 
-Replacing one edge of a cycle by parallel edges changes the classical enumeration. This project recovers its structure through smoothing, an exact reduction to strongly smooth cores, and a Euclidean-type construction from coprime boundary data. [MUTED: Advised by [LINK: Alexander Díaz -> `https://sites.google.com/site/diazlopezalexander/home`] and [LINK: Joel Louwsma -> `https://www.joellouwsma.com`].]
+Replacing one edge of a cycle by parallel edges changes the classical enumeration. This project recovers its structure through smoothing, an exact reduction to strongly smooth cores, and a Euclidean-type construction from coprime boundary values. [MUTED: Advised by [LINK: Alexander Díaz -> `https://sites.google.com/site/diazlopezalexander/home`] and [LINK: Joel Louwsma -> `https://www.joellouwsma.com`].]
 
 [SEPARATE LINK PARAGRAPH]
 
@@ -181,7 +181,7 @@ Source: `arithmetical-structures.html`
 
 [TOP BACK LINK]
 
-[LINK: ← Back to research -> `index.html#works`]
+[LINK: Back to research -> `index.html#works`]
 
 ## Accessible page title
 
@@ -193,7 +193,7 @@ Arithmetical Structures on Graphs
 
 [LEDE; larger than body text]
 
-Replacing one edge of a cycle by \(k\) parallel edges changes the associated enumeration problem. The resulting structure is analyzed by reducing each labeling to a smooth core, identifying the number-theoretic data at the multi-edge, and reconstructing the full family.
+Replacing one edge of a cycle by \(k\) parallel edges changes the associated enumeration problem. The resulting structure is analyzed by reducing each labeling to a smooth core, identifying the number-theoretic constraints at the multi-edge, and reconstructing the full family.
 
 [CENTERED LEAD FIGURE; compact width, approximately 19rem]
 
@@ -247,7 +247,7 @@ Deriving a count from the local equations
 
 3. **Read the multi-edge boundary.** The exceptional equations force \(r_1\), \(r_2\), and \(k\) to be pairwise coprime. A common divisor would propagate around the entire cycle, contradicting the primitive labeling.
 
-4. **Run the construction backward.** Starting with pairwise-coprime boundary data, a modified Euclidean algorithm generates two decreasing arms. Their last terms are \(1\), so the arms join and close into a valid multi-edge cycle.
+4. **Run the construction backward.** Starting with pairwise-coprime boundary values, a modified Euclidean algorithm generates two decreasing arms. Their last terms are \(1\), so the arms join and close into a valid multi-edge cycle.
 
 ## Results
 
@@ -259,7 +259,7 @@ Results
 
 [UPPERCASE MUTED LABEL: Construction theorem — manuscript in preparation]
 
-Positive integers \(r_1,r_2,k\) can serve as the boundary data of a multi-edge arithmetical structure exactly when they are pairwise coprime. The condition is both necessary and sufficient, and the proof supplies an algorithm that constructs the graph.
+Positive integers \(r_1,r_2,k\) can serve as the boundary values of a multi-edge arithmetical structure exactly when they are pairwise coprime. The condition is both necessary and sufficient, and the proof supplies an algorithm that constructs the graph.
 
 [SHADED RESULT BOX 2]
 
@@ -297,7 +297,7 @@ References
 
 [BOTTOM CROSS-PAGE NAVIGATION; separated from the article by a horizontal rule]
 
-[LINK: Boolean Monomial Dynamics → -> `boolean-dynamics.html`]
+[LINK: Boolean Monomial Dynamics -> `boolean-dynamics.html`]
 
 ---
 
@@ -318,7 +318,7 @@ Source: `boolean-dynamics.html`
 
 [TOP BACK LINK]
 
-[LINK: ← Back to research -> `index.html#works`]
+[LINK: Back to research -> `index.html#works`]
 
 ## Accessible page title
 
@@ -375,7 +375,7 @@ The empty product is \(1\). The state-transition digraph has one vertex for each
 
 [BODY PARAGRAPH]
 
-The system also specifies a zero–one matrix \(A_f\): its \(ij\)-entry is \(1\) precisely when \(x_j\) occurs in \(f_i\). With the output-to-input convention, \(A_f\) is the adjacency matrix of the dependency graph \(D_f\). The matrix, the graph, and the coordinate rules therefore encode exactly the same dependency data.
+The system also specifies a zero–one matrix \(A_f\): its \(ij\)-entry is \(1\) precisely when \(x_j\) occurs in \(f_i\). The dependency graph \(D_f\) has an edge \(j\to i\) in this case, so each arrow follows the influence of a variable on an updated coordinate. The matrix, the graph, and the coordinate rules therefore encode exactly the same dependency relationships.
 
 [BODY PARAGRAPH]
 
@@ -396,9 +396,16 @@ f(x_1,x_2,x_3,x_4)=(x_2,\,x_1x_3,\,x_4,\,x_2).
 - Source: `assets/figures/busby-dynamics-fig-1.png`
 - Alt text: Dependency graph of the Boolean monomial system f equals x 2, x 1 x 3, x 4, x 2.
 - Caption label: Figure 2
-- Caption: The dependency graph \(D_f\) for the displayed system, with each vertex labeled by its index. Redrawn from Figure 1 of the [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
+- Caption: The dependency graph \(D_f\) for the displayed system, with each vertex labeled by its index. Adapted from Figure 1 of the [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
 
 ## The bridge: iteration becomes walking
+
+[VISUALIZER DEMONSTRATION — placed after the concrete second-iterate calculation in boolean-dynamics.html]
+
+- Poster: `assets/demos/boolean-system-visualizer-poster.webp`.
+- GIF: `assets/demos/boolean-system-visualizer.gif`.
+- Caption: Figure 3. Dependency graph, phase space, and a longest transient for the displayed four-variable Boolean monomial system. The highlighted orbit reaches 0000 from 1110 after six updates; 0000 then maps to itself.
+- Delivery: static poster on the page with a linked GIF, including for reduced-motion visitors.
 
 [H2]
 
@@ -416,7 +423,7 @@ Starting from \(\mathbf x\), repeatedly applying \(f\) produces its orbit. Its t
 
 [BODY PARAGRAPH]
 
-The variable \(x_j\) occurs in the \(i\)th coordinate of \(f^m\) precisely when \(D_f\) contains a directed walk of length \(m\) from \(i\) to \(j\). The same correspondence holds for monomial systems over arbitrary finite fields. [LINK: [4] -> `https://www.complex-systems.com/abstracts/v16_i04_a04/`]
+The variable \(x_j\) occurs in the \(i\)th coordinate of \(f^m\) precisely when \(D_f\) contains a directed walk of length \(m\) from \(j\) to \(i\). The same correspondence holds for monomial systems over arbitrary finite fields. [LINK: [4] -> `https://www.complex-systems.com/abstracts/v16_i04_a04/`]
 
 ## Organizing all possible walks
 
@@ -432,7 +439,7 @@ Inside a strongly connected component, remove just enough edges to leave a maxim
 
 - Source: `assets/figures/acyclic-reduction.svg`
 - Alt text: An original directed graph followed by a right arrow and the same graph with selected edges removed, leaving an acyclic directed graph.
-- Caption label: Figure 3
+- Caption label: Figure 4
 - Caption: Original digraph (left) → the same graph after selected edges are removed (right), leaving a maximal acyclic subdigraph. Redrawn from Figure 3 of the [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
 
 [SHADED RESULT BOX]
@@ -500,7 +507,7 @@ References
 
 [BOTTOM CROSS-PAGE NAVIGATION; separated from the article by a horizontal rule]
 
-[LINK: ← Arithmetical Structures on Graphs -> `arithmetical-structures.html`]
+[LINK: Arithmetical Structures on Graphs -> `arithmetical-structures.html`]
 
 ---
 
