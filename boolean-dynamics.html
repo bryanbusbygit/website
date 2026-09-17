@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&amp;family=Newsreader:opsz,wght@6..72,400;500;600&amp;display=swap" rel="stylesheet">
-    <script src="theme.js"></script>
+    <script src="theme.js?v=3"></script>
     <link rel="stylesheet" href="research.css">
     <script>
       window.MathJax = {
@@ -20,6 +20,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   </head>
   <body>
+    <button class="theme-toggle" type="button" aria-label="Switch color theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.1 15.2A8.5 8.5 0 0 1 8.8 3.9 8.5 8.5 0 1 0 20.1 15.2Z"></path></svg></button>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <main id="main-content">
       <a class="back-link" href="index.html#works">← Back to research</a>
@@ -27,20 +28,20 @@
       <header>
         <h1 class="visually-hidden">Boolean Monomial Dynamics</h1>
         <p class="lede">
-          Every orbit of a map on a finite set eventually becomes periodic. For
-          Boolean monomial systems, iterates can be translated into directed
-          walks in the dependency graph. We investigate how acyclic subgraphs
-          and the arithmetic of cycle lengths can help bound the longest
-          transient.
+          A Boolean system on \(n\) variables has \(2^n\) states but only
+          \(n\) vertices in its dependency graph. For Boolean monomial systems,
+          iteration has an exact interpretation in terms of directed walks.
+          This correspondence turns the search for long transients into a
+          problem about paths, cycles, and attainable walk lengths.
         </p>
       </header>
 
       <figure class="lead-figure lead-figure--literature">
         <img src="assets/figures/rafimanzelat-2025-fig-1.png" alt="State graph of a four-variable Boolean network, with transient states leading to three fixed points and one two-state cycle." decoding="async">
         <figcaption>
-          <span class="figure-label">Literature figure.</span>
+          <span class="figure-label">Figure 1.</span>
           A state graph with three fixed-point attractors and one \(2\)-cycle,
-          shown in monochrome from Figure 1 of
+          displayed in monochrome and reproduced from Figure 1 of
           <a href="https://www.nature.com/articles/s41598-025-97684-y">Rafimanzelat</a>.
           This is a general Boolean-network example, not the state graph of the
           monomial system considered below. Licensed under
@@ -49,29 +50,27 @@
       </figure>
 
       <section aria-labelledby="motivation">
-        <h2 id="motivation">Transients</h2>
+        <h2 id="motivation">The question before periodicity</h2>
         <p>
           Boolean networks provide discrete models of gene regulation in
           which binary variables represent gene activity and coordinate
-          update functions encode regulatory interactions.
-          <a href="https://doi.org/10.1016/0022-5193(69)90015-0">[1]</a>
+          update functions encode regulatory interactions
+          <a href="#ref-kauffman">[1]</a>.
           Periodic orbits represent persistent activity patterns. The
           transient length of an initial state is the least number of
           iterations required to reach a periodic state; it is zero precisely
           when the initial state is periodic.
-        </p>
-        <p>
-          In the state-transition graph, each state has one outgoing edge, to
-          its image. This graph determines every transient length, but a system
-          on \(n\) Boolean variables has \(2^n\) states. Our research asks
-          how to estimate these lengths from the much smaller dependency graph.
+          In the state graph, each state has one outgoing edge to its image.
+          A system on \(n\) variables has \(2^n\) states, whereas its
+          dependency graph has only \(n\) vertices. The objective is to derive
+          transient bounds from this smaller graph.
         </p>
       </section>
 
       <section aria-labelledby="compression">
         <h2 id="compression">The dependency graph</h2>
         <p>
-          Here we consider Boolean monomial maps
+          Consider Boolean monomial maps
           \(f:\{0,1\}^n\to\{0,1\}^n\) with coefficient \(1\)
           in every coordinate. Write the state vector as
           \(\mathbf x=(x_1,\ldots,x_n)\) and the coordinate
@@ -89,20 +88,18 @@
           product is taken to be \(1\), and all coordinates are updated
           simultaneously. Some definitions also allow a coordinate that is
           identically zero; those maps are outside the scope of this note.
-        </p>
-        <p>
           The dependency graph \(D_f\) has vertex set
           \(\{1,\ldots,n\}\) and an edge \(i\to j\) if and only if
           \(j\in N_i\), equivalently, if \(x_j\) divides \(f_i\).
-          We use the output-to-input convention: an edge points from a
-          coordinate to a variable on which its update depends.
+          Throughout, the output-to-input convention is used: an edge points
+          from a coordinate to a variable on which its update depends.
         </p>
         <p>
-          The sets \(N_i\) determine the coordinate functions, so \(D_f\)
-          records the full system on \(n\) vertices. Colón-Reyes,
+          The sets \(N_i\) determine the coordinate functions; therefore
+          \(D_f\) records the system on \(n\) vertices. Colón-Reyes,
           Laubenbacher, and Pareigis used this representation to study the
-          periodic behavior of Boolean monomial systems.
-          <a href="https://arxiv.org/abs/math/0403166">[2]</a>
+          periodic behavior of Boolean monomial systems
+          <a href="#ref-boolean">[2]</a>.
         </p>
         <p>For example, consider</p>
         <div class="equation">
@@ -120,7 +117,7 @@
             <img src="assets/figures/dependency-digraph.svg" alt="Dependency graph of the displayed four-variable Boolean monomial system, with vertices labeled 1, 2, 3, and 4." decoding="async">
           </div>
           <figcaption>
-            <span class="figure-label">Dependency graph.</span>
+            <span class="figure-label">Figure 2.</span>
             The dependency graph \(D_f\) of the displayed system, with each
             vertex labeled by its index. Redrawn from Figure 1 of the
             <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
@@ -131,6 +128,9 @@
       <section aria-labelledby="bridge">
         <h2 id="bridge">Iterates and directed walks</h2>
         <p>
+          The dependency graph records not only which variables occur in each
+          update rule, but also how those dependencies propagate under
+          iteration.
           Successive substitution expresses each coordinate of an iterate
           in terms of the initial variables. In the displayed example,
           \((f^2)_2(\mathbf x)=f_1(\mathbf x)f_3(\mathbf x)=x_2x_4\).
@@ -148,12 +148,12 @@
           number of edges traversed. If several walks have the same endpoint,
           substitution may produce repeated factors. These collapse to one
           factor by the Boolean identity \(x_j^2=x_j\). This is the
-          coefficient-\(1\) case of Proposition 2.3 in Colón-Reyes et al.
-          <a href="https://arxiv.org/abs/math/0403166">[2]</a>
+          coefficient-\(1\) case established by Colón-Reyes et al.
+          <a href="#ref-boolean">[2, Proposition 2.3]</a>.
         </p>
         <p>
-          It remains to determine the attainable walk lengths between ordered
-          pairs of vertices. Let
+          The problem is then to determine the attainable walk lengths between
+          ordered pairs of vertices. Let
           \(\tau_f(\mathbf x)\) denote the transient length of an initial
           state \(\mathbf x\). The maximum transient length is
         </p>
@@ -165,10 +165,32 @@
       </section>
 
       <section aria-labelledby="route">
-        <h2 id="route">Paths and cycles</h2>
+        <h2 id="route">Decomposing walk lengths</h2>
         <p>
-          Fix a directed walk of length \(L\) from \(u\) to \(v\)
-          that visits a vertex on each of some directed cycles of lengths
+          The dynamical quantity \(\tau_{\max}(f)\) is tied to the lengths of
+          walks supported by \(D_f\). Separating the bounded, acyclic portions
+          of those walks from their repeatable cycles exposes the arithmetic
+          that controls large walk lengths. Specifically, deleting selected
+          edges leaves an acyclic subgraph, in which no
+          directed walk can repeat a vertex and every directed walk therefore
+          has length at most \(n-1\) on \(n\) vertices. Restoring
+          the deleted edges allows repeated traversals of cycles. The resulting
+          walk lengths depend on the cycle lengths and on the paths connecting
+          the cycles.
+        </p>
+        <figure class="source-figure source-figure--acyclic">
+          <img src="assets/figures/acyclic-reduction.svg" alt="A directed graph beside the same graph with selected edges removed to leave an acyclic subgraph." decoding="async">
+          <figcaption>
+            <span class="figure-label">Figure 3.</span>
+            A directed graph (left) and the acyclic subgraph obtained by
+            deleting three edges (right).
+            Redrawn from Figure 3 of the
+            <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
+          </figcaption>
+        </figure>
+        <p>
+          Now fix a directed walk of length \(L\) from \(u\) to \(v\) that
+          visits a vertex on each of some directed cycles of lengths
           \(c_1,\ldots,c_s\). At each visit, insert any nonnegative number
           of full traversals of that cycle. This constructs walks from \(u\)
           to \(v\) of lengths
@@ -177,24 +199,6 @@
           not describe every possible walk.
         </p>
         <p>
-          Deleting selected edges leaves an acyclic subgraph, where every
-          directed walk has no repeated vertices and therefore has length at
-          most \(n-1\) on \(n\) vertices. Restoring
-          the deleted edges allows repeated traversals of cycles. The resulting
-          walk lengths depend on the cycle lengths and on the paths connecting
-          the cycles.
-        </p>
-        <figure class="source-figure source-figure--acyclic">
-          <img src="assets/figures/acyclic-reduction.svg" alt="A directed graph beside the same graph with selected edges removed to leave an acyclic subgraph." decoding="async">
-          <figcaption>
-            <span class="figure-label">Acyclic subgraph.</span>
-            A directed graph (left) and an acyclic subgraph obtained by deleting
-            three edges (right), as a separate illustration of acyclicity.
-            Redrawn from Figure 3 of the
-            <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
-          </figcaption>
-        </figure>
-        <p>
           For positive cycle lengths \(c_1,\ldots,c_s\) with greatest common divisor
           \(1\), the nonnegative integer combinations
           \(q_1c_1+\cdots+q_sc_s\) form a numerical semigroup. Its
@@ -202,8 +206,7 @@
           nonnegative integer linear combination of the cycle lengths.
           Every larger integer admits such a representation. If a generator is
           \(1\), every nonnegative integer is represented and the Frobenius
-          number is \(-1\).
-          <a href="https://imag.umontpellier.fr/~ramirez/Frobenius-Hilbert.pdf">[3, §1]</a>
+          number is \(-1\) <a href="#ref-frobenius">[3, §1]</a>.
           If the gcd is greater than \(1\), infinitely many integers are
           missing, so there is no finite Frobenius number for these generators.
         </p>
@@ -235,13 +238,16 @@
           \]
         </div>
         <p>
-          The original state graph at the top of this page illustrates how a
-          state graph records transients and attractors. Direct evaluation shows that
-          every other state reaches a fixed point in at most five steps.
-          For larger systems, we are investigating how to obtain transient
-          bounds from attainable walk lengths without enumerating all states;
-          the <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>
-          describes this direction of work.
+          The state graph at the top of the page shows transients and
+          attractors in a general Boolean network. For the monomial map above,
+          direct evaluation shows that every other state reaches a fixed point
+          in at most five steps. The
+          <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>
+          discusses bounds based on attainable walk lengths.
+          This example illustrates the central reduction: the state graph
+          defines the transient, while the dependency graph organizes the walk
+          lengths that govern it. This smaller representation offers a route to
+          transient bounds without exhaustive enumeration of the state space.
         </p>
       </section>
 

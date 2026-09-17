@@ -53,7 +53,7 @@ About
 
 [BODY PARAGRAPH]
 
-Hello. My interests are graph theory and combinatorics. I work in pure mathematics, where the useful parts have been carefully removed. A [LINK: CV -> `assets/Bryan_Busby_CV.pdf`] is available here. [LINK: Click here to send me a message -> `mailto:bryan.busby@upr.edu`] (If that did not work, try [LINK: this -> `email.html`].)
+Graph theory and combinatorics, mostly. Pure mathematics where the useful parts have been carefully removed. Here are my [LINK: CV -> `assets/Bryan_Busby_CV.pdf`] and [LINK: email -> `mailto:bryan.busby@upr.edu`]. If the email link fails, try [LINK: here -> `email.html`].
 
 [LAYOUT NOTE: This is one continuous paragraph. The joke about pure mathematics is part of the public-facing copy. There is no portrait or figure in this section.]
 
@@ -75,7 +75,7 @@ Arithmetical Structures on Graphs
 
 [BODY PARAGRAPH]
 
-Replacing one edge of a cycle by parallel edges breaks the classical enumeration. We recover its structure through smoothing, an exact reduction to strongly smooth cores, and a Euclidean-type construction from coprime boundary data. [MUTED: Advised by [LINK: Alexander Díaz -> `https://sites.google.com/site/diazlopezalexander/home`] and [LINK: Joel Louwsma -> `https://www.joellouwsma.com`].]
+Replacing one edge of a cycle by parallel edges changes the classical enumeration. This project recovers its structure through smoothing, an exact reduction to strongly smooth cores, and a Euclidean-type construction from coprime boundary data. [MUTED: Advised by [LINK: Alexander Díaz -> `https://sites.google.com/site/diazlopezalexander/home`] and [LINK: Joel Louwsma -> `https://www.joellouwsma.com`].]
 
 [SEPARATE LINK PARAGRAPH]
 
@@ -108,7 +108,7 @@ Boolean Monomial Dynamical Systems
 
 [BODY PARAGRAPH]
 
-A Boolean system on *n* variables can have 2^*n* states. I replace that state space with an *n*-vertex dependency graph and use acyclic reductions, directed walks, and Frobenius arithmetic to control the time before periodic behavior begins. [MUTED: Advised by [LINK: Omar Colón -> `https://pegasus.uprm.edu/ocolon/`].]
+A Boolean system on *n* variables can have 2^*n* states. This work replaces that state space with an *n*-vertex dependency graph and uses acyclic reductions, directed walks, and Frobenius arithmetic to control the time before periodic behavior begins. [MUTED: Advised by [LINK: Omar Colón -> `https://pegasus.uprm.edu/ocolon/`].]
 
 [SEPARATE LINK PARAGRAPH]
 
@@ -139,7 +139,7 @@ A Boolean system on *n* variables can have 2^*n* states. I replace that state sp
 
 [BODY PARAGRAPH]
 
-We study 5G propagation in microwave and millimeter-wave bands using SDR measurements. The work includes GNU Radio instrumentation, Vivaldi antenna design, and channel measurements for attenuation and directional effects. It also treats the measurement and signal-processing problems that arise in GNU Radio. [MUTED: Advised by [LINK: Rafael Solís -> `https://inec.uprm.edu/rafaelr/`].]
+This project examines 5G propagation in microwave and millimeter-wave bands using software-defined-radio measurements. The work includes GNU Radio instrumentation, Vivaldi antenna design, and channel measurements of attenuation and directional effects. [MUTED: Advised by [LINK: Rafael Solís -> `https://inec.uprm.edu/rafaelr/`].]
 
 [PROJECT MATERIAL 1; indented metadata row]
 
@@ -193,14 +193,14 @@ Arithmetical Structures on Graphs
 
 [LEDE; larger than body text]
 
-Replacing one edge of a cycle by \(k\) parallel edges looks like a small change. Arithmetically, it changes the problem completely. Our work finds the hidden structure behind that change: reduce every labeling to a smooth core, identify the number-theoretic data at the multi-edge, and rebuild the full family constructively.
+Replacing one edge of a cycle by \(k\) parallel edges changes the associated enumeration problem. The resulting structure is analyzed by reducing each labeling to a smooth core, identifying the number-theoretic data at the multi-edge, and reconstructing the full family.
 
 [CENTERED LEAD FIGURE; compact width, approximately 19rem]
 
 - Source: `assets/figures/busby-multiedge-fig-1.png`
 - Alt text: A cycle on five labeled vertices in which the edge between v 1 and v 2 is doubled.
 - Caption label: Figure 1
-- Caption: The multigraph \(\widetilde{C}_{5,2}\): a \(5\)-cycle whose edge \(v_1v_2\) has multiplicity \(2\). Cropped from Figure 1 of our [LINK: current manuscript -> `VPR3.pdf`].
+- Caption: The multigraph \(\widetilde{C}_{5,2}\): a \(5\)-cycle whose edge \(v_1v_2\) has multiplicity \(2\). Redrawn from Figure 1 of the [LINK: accompanying manuscript -> `VPR3.pdf`].
 
 ## The question
 
@@ -230,14 +230,14 @@ Ordinary cycles have a clean answer: \(\binom{2n-1}{n-1}\) structures on \(n\) v
 
 - Source: `assets/figures/glass-wagner-fig-1.png`
 - Alt text: Two paths, each with one doubled edge: P 3,2 and P 1,5.
-- Caption label: Literature figure
+- Caption label: Figure 2
 - Caption: The doubled-edge paths denoted \(\mathcal{P}_{3,2}\) and \(\mathcal{P}_{1,5}\) in the source, from Figure 1 of [LINK: Glass and Wagner -> `https://math.colgate.edu/~integers/u68/u68.pdf`]. Cropped and shown in monochrome; reproduced under [LINK: CC BY 4.0 -> `https://creativecommons.org/licenses/by/4.0/`].
 
-## How we get from local equations to a count
+## Deriving a count from the local equations
 
 [H2]
 
-How we get from local equations to a count
+Deriving a count from the local equations
 
 [NUMBERED RESEARCH PATH; four vertically stacked steps]
 
@@ -249,35 +249,35 @@ How we get from local equations to a count
 
 4. **Run the construction backward.** Starting with pairwise-coprime boundary data, a modified Euclidean algorithm generates two decreasing arms. Their last terms are \(1\), so the arms join and close into a valid multi-edge cycle.
 
-## What we obtain
+## Results
 
 [H2]
 
-What we obtain
+Results
 
 [SHADED RESULT BOX 1]
 
-[UPPERCASE MUTED LABEL: Construction theorem — current manuscript]
+[UPPERCASE MUTED LABEL: Construction theorem — manuscript in preparation]
 
 Positive integers \(r_1,r_2,k\) can serve as the boundary data of a multi-edge arithmetical structure exactly when they are pairwise coprime. The condition is both necessary and sufficient, and the proof supplies an algorithm that constructs the graph.
 
 [SHADED RESULT BOX 2]
 
-[UPPERCASE MUTED LABEL: Enumeration theorem — current manuscript]
+[UPPERCASE MUTED LABEL: Enumeration theorem — manuscript in preparation]
 
-For fixed \(n\) and \(k\), the total number of structures is an exact weighted sum over the strongly smooth cores on at most \(n\) vertices. The weights are ballot numbers and powers of two, recording how subdivisions and weakly smooth structures are recovered from those cores. The full formula appears in the [LINK: current manuscript -> `VPR3.pdf`].
+For fixed \(n\) and \(k\), the total number of structures is an exact weighted sum over the strongly smooth cores on at most \(n\) vertices. The weights are ballot numbers and powers of two, recording how subdivisions and weakly smooth structures are recovered from those cores. The full formula appears in the [LINK: accompanying manuscript -> `VPR3.pdf`].
 
 [CENTERED SOURCE FIGURE AFTER THE RESULT BOXES]
 
 - Source: `assets/figures/busby-multiedge-fig-2.png`
 - Alt text: Two pairs of labeled arithmetical structures on four-vertex multi-edge cycles.
 - Visible key beneath image: \(\mathbf d\), \(\mathbf r\), \(\mathbf d\), \(\mathbf r\)
-- Caption label: Figure 2
-- Caption: Each adjacent pair shows one arithmetical structure: the left graph gives the vertex values of \(\mathbf d\), and the right graph gives the corresponding values of \(\mathbf r\). The first pair is on \(\widetilde{C}_{4,3}\); the second is on \(\widetilde{C}_{4,4}\). From our [LINK: current manuscript -> `VPR3.pdf`].
+- Caption label: Figure 3
+- Caption: Each adjacent pair shows one arithmetical structure: the left graph gives the vertex values of \(\mathbf d\), and the right graph gives the corresponding values of \(\mathbf r\). The first pair is on \(\widetilde{C}_{4,3}\); the second is on \(\widetilde{C}_{4,4}\). Redrawn from the [LINK: accompanying manuscript -> `VPR3.pdf`].
 
 [BODY PARAGRAPH AFTER FIGURE]
 
-The point is not only to count. The reduction explains where the count comes from: ordinary vertices contribute combinatorial subdivision choices, while the multi-edge contributes a rigid coprimality problem. That separation turns a global labeling problem into a constructive one.
+The reduction separates two parts of the count: subdivision choices at ordinary vertices and coprimality conditions at the multi-edge. For additional background, see this [LINK: video introduction to arithmetical structures -> `https://youtu.be/nbCeFqcfTws`].
 
 ## References
 
@@ -330,13 +330,13 @@ Boolean Monomial Dynamics
 
 [LEDE; larger than body text]
 
-Attractors tell us where a finite Boolean system ends up. They do not tell us how long it takes to get there. My work attacks that missing question by replacing an exponentially large state space with a dependency graph, then translating iteration into the arithmetic of directed-walk lengths.
+Attractors describe where a finite Boolean system ends up, but not how long it takes to get there. This work addresses that question by replacing an exponentially large state space with a dependency graph, then translating iteration into the arithmetic of directed-walk lengths.
 
 [CENTERED LEAD FIGURE; approximately 32rem wide]
 
 - Source: `assets/figures/rafimanzelat-2025-fig-1.png`
 - Alt text: Top-down state-transition graph of a four-variable Boolean network, with transient states flowing downward into three fixed points and one two-state cycle.
-- Caption label: Literature figure
+- Caption label: Figure 1
 - Caption: A top-down state-transition graph with three fixed-point attractors and one \(2\)-cycle, shown in monochrome from Figure 1 of [LINK: Rafimanzelat -> `https://www.nature.com/articles/s41598-025-97684-y`]. This is a general Boolean-network example, not the state-transition digraph of the monomial system below. Licensed under [LINK: CC BY-NC-ND 4.0 -> `https://creativecommons.org/licenses/by-nc-nd/4.0/`]. [LINK: [1] -> `https://doi.org/10.1038/s41598-025-97684-y`]
 
 ## The question before the attractor
@@ -351,7 +351,7 @@ Boolean networks grew from models in which genes are treated as binary on–off 
 
 [BODY PARAGRAPH]
 
-This matters computationally as well as dynamically. A system on \(n\) Boolean variables has \(2^n\) possible states. Following every state soon becomes impractical, so the goal is to bound the transient from a graph with only \(n\) vertices.
+A system on \(n\) Boolean variables has \(2^n\) states, whereas its dependency graph has only \(n\) vertices. The objective is to derive transient bounds from this smaller graph.
 
 ## Compressing the system into a graph
 
@@ -379,7 +379,7 @@ The system also specifies a zero–one matrix \(A_f\): its \(ij\)-entry is \(1\)
 
 [BODY PARAGRAPH]
 
-Colón-Reyes, Laubenbacher, and Pareigis used this smaller graph to recognize systems whose periodic orbits are all fixed points. [LINK: [2] -> `https://arxiv.org/abs/math/0403166`] I take the graph correspondence in a new direction: instead of asking only what the eventual cycles look like, I use it to study the time spent before those cycles.
+Colón-Reyes, Laubenbacher, and Pareigis used this smaller graph to recognize systems whose periodic orbits are all fixed points. [LINK: [2] -> `https://arxiv.org/abs/math/0403166`] The present work takes the graph correspondence in a new direction: instead of asking only what the eventual cycles look like, it uses the correspondence to study the time spent before those cycles.
 
 [SHORT BODY PARAGRAPH]
 
@@ -395,8 +395,8 @@ f(x_1,x_2,x_3,x_4)=(x_2,\,x_1x_3,\,x_4,\,x_2).
 
 - Source: `assets/figures/busby-dynamics-fig-1.png`
 - Alt text: Dependency graph of the Boolean monomial system f equals x 2, x 1 x 3, x 4, x 2.
-- Caption label: Dependency graph
-- Caption: The dependency graph \(D_f\) for the displayed system, with each vertex labeled by its index. Redrawn from Figure 1 of our [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
+- Caption label: Figure 2
+- Caption: The dependency graph \(D_f\) for the displayed system, with each vertex labeled by its index. Redrawn from Figure 1 of the [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
 
 ## The bridge: iteration becomes walking
 
@@ -416,13 +416,13 @@ Starting from \(\mathbf x\), repeatedly applying \(f\) produces its orbit. Its t
 
 [BODY PARAGRAPH]
 
-The key fact is exact: \(x_j\) occurs in the \(i\)th coordinate of \(f^m\) precisely when \(D_f\) contains a directed walk of length \(m\) from \(i\) to \(j\). Iterating nonlinear coordinate rules has become a problem about possible walk lengths. The same graph correspondence extends to monomial systems over arbitrary finite fields. [LINK: [4] -> `https://www.complex-systems.com/abstracts/v16_i04_a04/`]
+The variable \(x_j\) occurs in the \(i\)th coordinate of \(f^m\) precisely when \(D_f\) contains a directed walk of length \(m\) from \(i\) to \(j\). The same correspondence holds for monomial systems over arbitrary finite fields. [LINK: [4] -> `https://www.complex-systems.com/abstracts/v16_i04_a04/`]
 
-## How I organize all possible walks
+## Organizing all possible walks
 
 [H2]
 
-How I organize all possible walks
+Organizing all possible walks
 
 [BODY PARAGRAPH]
 
@@ -432,8 +432,8 @@ Inside a strongly connected component, remove just enough edges to leave a maxim
 
 - Source: `assets/figures/acyclic-reduction.svg`
 - Alt text: An original directed graph followed by a right arrow and the same graph with selected edges removed, leaving an acyclic directed graph.
-- Caption label: Acyclic reduction
-- Caption: Original digraph (left) → the same graph after selected edges are removed (right), leaving a maximal acyclic subdigraph. Redrawn from Figure 3 of our [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
+- Caption label: Figure 3
+- Caption: Original digraph (left) → the same graph after selected edges are removed (right), leaving a maximal acyclic subdigraph. Redrawn from Figure 3 of the [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
 
 [SHADED RESULT BOX]
 
@@ -478,7 +478,7 @@ For the example whose dependency graph is formed from cycles of lengths \(2\), \
 
 [BODY PARAGRAPH]
 
-A closed formula for arbitrary Boolean monomial systems remains open. The contribution here is the reduction: a dynamical quantity on as many as \(2^n\) states is controlled through paths, cycles, and arithmetic on a graph with \(n\) vertices.
+A closed formula for arbitrary Boolean monomial systems remains open. The present bounds use paths, cycles, and walk lengths in the \(n\)-vertex dependency graph.
 
 ## References
 

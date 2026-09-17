@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
-    <script src="theme.js"></script>
+    <script src="theme.js?v=3"></script>
     <style>
       :root {
         color-scheme: light;
@@ -356,7 +356,11 @@
       }
 
       :root[data-theme="dark"] img {
-        filter: grayscale(1) invert(1);
+        filter: grayscale(1) invert(0.92) brightness(1.04) contrast(1.14);
+      }
+
+      :root[data-theme="dark"] .arith-merge {
+        filter: brightness(0) invert(1);
       }
 
       @media (max-width: 720px) {
@@ -436,6 +440,7 @@
     </style>
   </head>
   <body>
+    <button class="theme-toggle" type="button" aria-label="Switch color theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.1 15.2A8.5 8.5 0 0 1 8.8 3.9 8.5 8.5 0 1 0 20.1 15.2Z"></path></svg></button>
     <a class="skip-link" href="#content">Skip to content</a>
     <div class="site-shell">
       <h1>Bryan Busby</h1>
@@ -461,14 +466,14 @@
           <div class="project-copy">
             <h3>Arithmetical Structures on Graphs</h3>
             <p>
-              An arithmetical structure is a primitive positive-integer labeling
-              of a graph in which each vertex label divides the sum of the
-              labels of its neighbors, with parallel edges counted separately. We
-              study these structures on cycles with one multi-edge, with the aim
-              of counting them. Smoothing removes degree-two vertices whose
-              labels equal the sum of their neighbors' labels. A modified
-              Euclidean algorithm constructs examples from suitable endpoint
-              labels and edge multiplicities.
+              Current research concerns arithmetical structures on cycles with
+              one multi-edge. Such a structure begins with a primitive
+              positive-integer vertex labeling in which each label divides the
+              sum of the neighboring labels, with parallel edges counted
+              separately; the resulting quotients form a second
+              positive-integer labeling. The project uses smoothing and a
+              modified Euclidean algorithm to construct and enumerate these
+              structures.
               <span class="advisor">Advised by
               <a href="https://sites.google.com/site/diazlopezalexander/home">Alexander Díaz</a>
               and <a href="https://www.joellouwsma.com">Joel Louwsma</a>.</span>
@@ -505,14 +510,12 @@
           <div class="project-copy">
             <h3>Boolean Monomial Dynamical Systems</h3>
             <p>
-              In the Boolean monomial systems studied here, each coordinate
-              updates simultaneously by a product of Boolean variables.
-              An initial state's transient length is the
-              number of iterations needed to reach a periodic state. We translate
-              iterates into directed walks in the dependency graph and investigate
-              how acyclic subgraphs, connecting paths, and cycle lengths can
-              help bound the longest transient without listing all
-              2<sup>n</sup> states of an <em>n</em>-variable system.
+              A Boolean monomial system updates each coordinate by a product
+              of Boolean variables. This project examines the number of
+              iterations before a state becomes periodic. Directed walks in
+              the dependency graph
+              give bounds on this transient without listing all
+              2<sup>n</sup> states.
               <span class="advisor">Advised by
               <a href="https://pegasus.uprm.edu/ocolon/">Omar Colón</a>.</span>
             </p>
@@ -535,18 +538,8 @@
             <div class="figure-frame">
               <img
                 class="preview-figure boolean-state"
-                src="assets/figures/boolean-state-graph.svg"
+                src="assets/fig-boolean.svg"
                 alt="State graph of the Boolean monomial system."
-                loading="lazy"
-              />
-            </div>
-          </div>
-          <div class="gallery gallery-rf">
-            <div class="figure-frame">
-              <img
-                class="preview-figure rf-diagram"
-                src="assets/fig-rf-digraph.svg"
-                alt="Simulated H-plane and E-plane antenna gain patterns shown as several monochrome traces."
                 loading="lazy"
               />
             </div>
@@ -557,10 +550,10 @@
           <div class="project-copy">
             <h3>5G RF Propagation Measurements</h3>
             <p>
-              Our project studied radio-frequency propagation, including
-              measurements at 28 and 39 GHz and preliminary simulations of
-              Vivaldi antennas. The project also proposed a GNU Radio measurement
-              system with software-defined radios for work at 1.9 and 3.7 GHz.
+              This project measured radio-frequency propagation at 28 and 39
+              GHz, simulated Vivaldi antennas, and developed a GNU Radio
+              measurement system using software-defined radios for the 1.9 and
+              3.7 GHz bands.
               <span class="advisor">Advised by
               <a href="https://inec.uprm.edu/rafaelr/">Rafael Solís</a>.</span>
             </p>
@@ -568,11 +561,21 @@
           <div class="project-materials">
             <p>
               <a class="material-link" href="assets/posters/CarsePoster2023.pdf" aria-label="Open PDF presentation for 5G RF propagation">
-                <span class="material-label">Presentation.</span> UPR Mayaguez,
-                2023. RF propagation measurements and antenna design for
-                5G-related bands.
+                <span class="material-label">Presentation.</span> UPR Mayagüez,
+                2023. Radio-wave propagation measurements and antenna design
+                for 5G frequency bands.
               </a>
             </p>
+          </div>
+          <div class="gallery gallery-rf">
+            <div class="figure-frame">
+              <img
+                class="preview-figure rf-diagram"
+                src="assets/fig-rf-digraph.svg"
+                alt="Simulated H-plane and E-plane antenna gain patterns shown as several monochrome traces."
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>

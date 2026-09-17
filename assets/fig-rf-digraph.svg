@@ -15,6 +15,10 @@
   </desc>
   <defs>
     <style>
+      .bg {
+        fill: #ffffff;
+      }
+
       .ring-major {
         fill: none;
         stroke: #d8d8d8;
@@ -183,6 +187,8 @@
       <text x="0" y="121" text-anchor="middle" class="angle-label">180</text>
     </g>
   </defs>
+
+  <rect class="bg" x="140" y="0" width="700" height="360" />
 
   <g transform="translate(274 168)">
     <use href="#polar-frame" />

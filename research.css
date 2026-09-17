@@ -317,7 +317,7 @@ figcaption .figure-label {
 }
 
 :root[data-theme="dark"] figure img {
-  filter: grayscale(1) contrast(1.08) invert(1);
+  filter: grayscale(1) invert(0.92) brightness(1.04) contrast(1.14);
 }
 
 :root[data-theme="dark"] .result {
