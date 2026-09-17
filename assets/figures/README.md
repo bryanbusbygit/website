@@ -13,9 +13,8 @@ Source: [`VPR3.pdf`](../../VPR3.pdf)
   with small solid vertex markers and external labels.
 - `multiedge-labelings.svg` — Figure 2 redrawn with the same integer labels
   and edge multiplicities, using small solid vertex markers.
-- `arithmetical-merge.svg` — Archived construction schematic redrawn from
-  `../fig-arith-merge.svg`; no longer displayed. The homepage uses the verified
-  five-vertex cycle `multiedge-cycle.svg`.
+- `arithmetical-merge.svg` — Homepage construction schematic redrawn from
+  `../fig-arith-merge.svg`, using small solid vertex markers.
 - `busby-multiedge-fig-2.png` — Figure 2, examples on C-tilde(4,3) and
   C-tilde(4,4).
 
@@ -34,14 +33,10 @@ Source: [`2024_discrete_dynamical_systems_poster.pdf`](../posters/2024_discrete_
   of Figure 3, shown side by side with small solid vertex markers.
 - `dependency-digraph.svg` — Figure 1 redrawn with small solid vertex markers
   and external labels, omitting the separate graph-name label.
-- `boolean-state-graph.svg` — Original drawing of all 16 transitions computed
-  from `f(x1,x2,x3,x4) = (x2,x1*x3,x4,x2)`, the map in Figures 1–2 of the
-  poster. The fixed points are 0000 and 1111; the maximum transient is 6,
-  attained only by 1110. Node and edge data attributes record the states and
-  transitions for verification. The older `../fig-boolean.svg` represents a
-  different map and is not displayed.
+- `boolean-state-graph.svg` — Homepage state graph redrawn from
+  `../fig-boolean.svg`, using small solid vertex markers and external labels.
 
-The raster figures and dependency/acyclic redraws come from the site owner's poster.
+These figures come from the site owner's poster.
 `busby-dynamics-fig-2.png`, `busby-dynamics-fig-4.png`, and
 `busby-dynamics-fig-5.png` are retained in the source archive but are no
 longer displayed on the site.
@@ -52,8 +47,7 @@ Source: [Global Stabilization of Boolean Networks With Applications to
 Biomolecular Network Control](https://www.nature.com/articles/s41598-025-97684-y)
 ([DOI](https://doi.org/10.1038/s41598-025-97684-y))
 
-- `rafimanzelat-2025-fig-1.png` — Archived Figure 1, a top-down
-  state-transition graph; no longer displayed on the site.
+- `rafimanzelat-2025-fig-1.png` — Figure 1, a top-down state graph.
 
 The figure is reproduced unchanged under
 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).

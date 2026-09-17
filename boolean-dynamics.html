@@ -35,15 +35,16 @@
         </p>
       </header>
 
-      <figure class="lead-figure">
-        <img src="assets/figures/boolean-state-graph.svg" alt="All 16 states of f(x1,x2,x3,x4)=(x2,x1x3,x4,x2), with arrows to their images. The fixed points are 0000 and 1111; the longest transient has six steps." decoding="async">
+      <figure class="lead-figure lead-figure--literature">
+        <img src="assets/figures/rafimanzelat-2025-fig-1.png" alt="State graph of a four-variable Boolean network, with transient states leading to three fixed points and one two-state cycle." decoding="async">
         <figcaption>
-          <span class="figure-label">State-transition graph.</span>
-          All states of \(f(x_1,x_2,x_3,x_4)=(x_2,x_1x_3,x_4,x_2)\),
-          with each arrow showing one simultaneous update. State labels list
-          the coordinates in order. Computed directly from the map, also
-          shown in Figure 2 of the
-          <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
+          <span class="figure-label">Literature figure.</span>
+          A state graph with three fixed-point attractors and one \(2\)-cycle,
+          shown in monochrome from Figure 1 of
+          <a href="https://www.nature.com/articles/s41598-025-97684-y">Rafimanzelat</a>.
+          This is a general Boolean-network example, not the state graph of the
+          monomial system considered below. Licensed under
+          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.
         </figcaption>
       </figure>
 
@@ -234,7 +235,8 @@
           \]
         </div>
         <p>
-          The full state-transition graph at the top of this page shows that
+          The original state graph at the top of this page illustrates how a
+          state graph records transients and attractors. Direct evaluation shows that
           every other state reaches a fixed point in at most five steps.
           For larger systems, we are investigating how to obtain transient
           bounds from attainable walk lengths without enumerating all states;
