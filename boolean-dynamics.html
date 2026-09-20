@@ -28,258 +28,192 @@
       <header>
         <h1 class="visually-hidden">Boolean Monomial Dynamics</h1>
         <p class="lede">
-          A Boolean system on \(n\) variables has \(2^n\) states but only
-          \(n\) vertices in its dependency graph. For Boolean monomial systems,
-          iteration has an exact interpretation in terms of directed walks.
-          This correspondence turns the search for long transients into a
-          problem about paths, cycles, and attainable walk lengths.
+          Elspas's 1959 analysis of linear sequential networks relates
+          periodic behavior to matrix algebra over finite fields
+          <a href="#ref-elspas">[1]</a>. Nonlinear updates generally lack
+          this linear description. Boolean monomial systems retain enough
+          structure to study their transients through directed walks,
+          connecting the problem to primitive matrices and the arithmetic
+          of cycle lengths.
         </p>
       </header>
 
       <figure class="lead-figure lead-figure--literature">
-        <img src="assets/figures/rafimanzelat-2025-fig-1.png" alt="State graph of a four-variable Boolean network, with transient states leading to three fixed points and one two-state cycle." decoding="async">
+        <img src="assets/figures/rafimanzelat-2025-fig-1.png"
+          alt="State-transition graph of a four-variable Boolean network, with transient states leading to three fixed points and one two-state cycle."
+          decoding="async">
         <figcaption>
-          <span class="figure-label">Figure 1.</span>
-          A state graph with three fixed-point attractors and one \(2\)-cycle,
-          displayed in monochrome and reproduced from Figure 1 of
-          <a href="https://www.nature.com/articles/s41598-025-97684-y">Rafimanzelat</a>.
-          This is a general Boolean-network example, not the state graph of the
-          monomial system considered below. Licensed under
-          <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.
+          <span class="figure-label">Literature figure.</span>
+          A nonlinear Boolean state space with three fixed points and one
+          two-cycle, reproduced from Figure 1 of
+          <a href="https://doi.org/10.1038/s41598-025-97684-y">Rafimanzelat</a>.
+          This example is a general Boolean network and is distinct from
+          the monomial system analyzed below.
         </figcaption>
       </figure>
 
-      <section aria-labelledby="motivation">
-        <h2 id="motivation">The question before periodicity</h2>
+      <section aria-label="From state spaces to dependencies">
         <p>
-          Boolean networks provide discrete models of gene regulation in
-          which binary variables represent gene activity and coordinate
-          update functions encode regulatory interactions
-          <a href="#ref-kauffman">[1]</a>.
-          Periodic orbits represent persistent activity patterns. The
-          transient length of an initial state is the least number of
-          iterations required to reach a periodic state; it is zero precisely
-          when the initial state is periodic.
-          In the state graph, each state has one outgoing edge to its image.
-          A system on \(n\) variables has \(2^n\) states, whereas its
-          dependency graph has only \(n\) vertices. The objective is to derive
-          transient bounds from this smaller graph.
+          Every finite state space consists of cycles with directed trees
+          feeding into them, as illustrated below. The maximum
+          <strong>transient length</strong> \(T(f)\) is the greatest
+          distance along an orbit to its eventual cycle. Recovering this
+          quantity from the update rule avoids enumerating all \(2^n\)
+          states of an \(n\)-variable Boolean system.
         </p>
-      </section>
-
-      <section aria-labelledby="compression">
-        <h2 id="compression">The dependency graph</h2>
+        <figure class="source-figure source-figure--state-catalog">
+          <img src="assets/figures/laubenbacher-pareigis-state-spaces.png" width="690" height="834"
+            alt="Eighteen state-graph shapes on four states, with cycles and trees feeding into cycles." decoding="async">
+          <figcaption>
+            <span class="figure-label">Figure 1.</span>
+            Eighteen state spaces illustrated by Laubenbacher and Pareigis
+            <a href="#ref-laubenbacher">[2, Figure 1]</a>. Linear maps
+            realize six types. The source omits self-loops at fixed points.
+          </figcaption>
+        </figure>
         <p>
-          Consider Boolean monomial maps
-          \(f:\{0,1\}^n\to\{0,1\}^n\) with coefficient \(1\)
-          in every coordinate. Write the state vector as
-          \(\mathbf x=(x_1,\ldots,x_n)\) and the coordinate
-          functions as \(f_1,\ldots,f_n\). For each \(i\), an index set
-          \(N_i\subseteq\{1,\ldots,n\}\) determines the coordinate function
-        </p>
-        <div class="equation">
-          \[
-            f_i(\mathbf x)=\prod_{j\in N_i}x_j.
-          \]
-        </div>
-        <p>
-          Each product is the logical conjunction of its factors. The empty
-          product is taken to be \(1\), and all coordinates are updated
-          simultaneously. Some definitions also allow a coordinate that is
-          identically zero; those maps are outside the scope of this note.
-          The dependency graph \(D_f\) has vertex set
-          \(\{1,\ldots,n\}\) and an edge \(j\to i\) if and only if
-          \(j\in N_i\), equivalently, if \(x_j\) divides \(f_i\). Thus each
-          arrow follows the influence of a variable on an updated coordinate.
-        </p>
-        <p>
-          The sets \(N_i\) determine the coordinate functions; therefore
-          \(D_f\) records the system on \(n\) vertices. Colón-Reyes,
-          Laubenbacher, and Pareigis used this representation to study the
-          periodic behavior of Boolean monomial systems
-          <a href="#ref-boolean">[2]</a>.
-        </p>
-        <p>For example, consider</p>
-        <div class="equation">
-          \[
-            f(x_1,x_2,x_3,x_4)=(x_2,\,x_1x_3,\,x_4,\,x_2).
-          \]
-        </div>
-        <p>
-          Here \(N_2=\{1,3\}\), giving the edges \(1\to2\) and
-          \(3\to2\); the remaining coordinate functions give
-          \(2\to1\), \(4\to3\), and \(2\to4\).
+          This reduction is possible for a <strong>Boolean monomial
+          system</strong> with nonzero squarefree monomial coordinates
+          over \(\mathbb F_2\). Its dependency graph \(D_f\) has
+          vertex set \(\{1,\ldots,n\}\) and a directed edge
+          \(j\to i\) if and only if \(x_j\mid f_i\).
+          Under iteration, \(x_j\mid(f^m)_i\) if and only if a directed
+          walk of length \(m\) joins \(j\) to \(i\)
+          <a href="#ref-boolean">[3]</a>. Equivalently, the ordinary
+          integer power of the adjacency matrix satisfies
+          \((M^m)_{ij}>0\). Matrix powers encode dependencies rather
+          than linearize the update.
         </p>
         <figure class="source-figure source-figure--dependency">
           <div class="dependency-diagram">
-            <img src="assets/figures/dependency-digraph.svg" alt="Dependency graph of the displayed four-variable Boolean monomial system, with vertices labeled 1, 2, 3, and 4." decoding="async">
+            <img src="assets/figures/dependency-digraph.svg"
+              alt="A directed two-cycle and three-cycle sharing vertex 2 in the four-variable dependency graph." decoding="async">
           </div>
           <figcaption>
             <span class="figure-label">Figure 2.</span>
-            The dependency graph \(D_f\) of the displayed system, with each
-            vertex labeled by its index. Adapted from Figure 1 of the
-            <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
+            Dependency graph of \(f=(x_2,x_1x_3,x_4,x_2)\), adapted
+            from the <a href="#ref-poster">2024 poster [6]</a>.
+            An edge \(j\to i\) records the dependence of \(f_i\)
+            on \(x_j\).
           </figcaption>
         </figure>
       </section>
 
-      <section aria-labelledby="bridge">
-        <h2 id="bridge">Iterates and directed walks</h2>
+      <section aria-label="Primitivity and transient length">
         <p>
-          The dependency graph records not only which variables occur in each
-          update rule, but also how those dependencies propagate under
-          iteration.
-          Successive substitution expresses each coordinate of an iterate
-          in terms of the initial variables. In the displayed example,
-          \((f^2)_2(\mathbf x)=f_1(\mathbf x)f_3(\mathbf x)=x_2x_4\).
-          The two corresponding walks of length \(2\) ending at vertex \(2\)
-          are \(2\to1\to2\) and \(4\to3\to2\); their initial vertices index
-          the variables occurring in \((f^2)_2\).
+          The transient is therefore governed by the lengths at which
+          dependencies occur. Strong connectivity ensures reachability,
+          but walk lengths may still be restricted to residue classes.
+          The graph is <strong>primitive</strong> when it is strongly
+          connected and its cycle lengths have gcd \(1\). Its <strong>exponent</strong>
+          \(\gamma(D_f)\) is the least power for which every matrix
+          entry is positive <a href="#ref-exponent">[7]</a>.
+          For such dependency graphs,
+          \(T(f)=\gamma(D_f)\) <a href="#ref-teran">[5]</a>.
+          At this time every coordinate depends on every initial variable,
+          sending each state containing a zero to the all-zero fixed point.
         </p>
-        <figure class="source-figure demo-figure">
-          <img class="demo-media" src="assets/demos/boolean-system-visualizer-poster.webp"
-            alt="The dependency graph and all 16 states, with the six-step orbit from 1110 to the fixed point 0000 highlighted."
-            decoding="async">
-          <figcaption id="visualizer-caption">
+        <figure class="source-figure">
+          <img src="assets/figures/primitive-matrix-powers.svg" width="660" height="230"
+            alt="Support of M, M to the fifth power, and M to the sixth power. M to the fifth has a single zero at row 3, column 4. M to the sixth is positive everywhere." decoding="async">
+          <figcaption>
             <span class="figure-label">Figure 3.</span>
-            Dependency graph, phase space, and a longest transient for the
-            displayed four-variable Boolean monomial system. The highlighted
-            orbit reaches \(0000\) from \(1110\) after six updates; \(0000\)
-            then maps to itself. <a href="assets/demos/boolean-system-visualizer.gif">View the 15-second GIF</a>.
+            Positive entries of the example's matrix powers. Rows are
+            destinations and columns are sources, ordered \(1\) to \(4\).
+            The exponent and maximum transient are both \(6\).
           </figcaption>
         </figure>
         <p>
-          More generally, let
-          \(f^m\) denote \(m\) successive applications of \(f\), and let
-          \((f^m)_i\) be its \(i\)th coordinate. For \(m\geq1\), the
-          variable \(x_j\) occurs in \((f^m)_i\) if and only if \(D_f\)
-          has a directed walk of length \(m\) from \(j\) to \(i\).
-          A directed walk may repeat vertices and edges; its length is the
-          number of edges traversed. If several such walks have the same
-          initial vertex, substitution may produce repeated factors. These collapse to one
-          factor by the Boolean identity \(x_j^2=x_j\). This is the
-          coefficient-\(1\) case established by Colón-Reyes et al.
-          <a href="#ref-boolean">[2, Proposition 2.3]</a>.
+          Estimating this exponent requires understanding how traversing
+          cycles supplies additional steps. In a primitive graph, the
+          cycle lengths generate a numerical semigroup
+          \(\Gamma=\langle c_1,\ldots,c_k\rangle\)
+          <a href="#ref-frobenius">[4]</a>. Its largest gap is the
+          <strong>Frobenius number</strong> \(g\), with \(g=-1\)
+          when there are no gaps. For two coprime generators \(a,b>1\),
+          Sylvester's formula gives \(g=ab-a-b\)
+          <a href="#ref-sylvester">[8]</a>.
         </p>
-        <p>
-          The problem is then to determine the attainable walk lengths between
-          ordered pairs of vertices. Let
-          \(\tau_f(\mathbf x)\) denote the transient length of an initial
-          state \(\mathbf x\). The maximum transient length is
-        </p>
-        <div class="equation">
-          \[
-            \tau_{\max}(f)=\max_{\mathbf x\in\{0,1\}^n}\tau_f(\mathbf x).
-          \]
-        </div>
-      </section>
-
-      <section aria-labelledby="route">
-        <h2 id="route">Decomposing walk lengths</h2>
-        <p>
-          The dynamical quantity \(\tau_{\max}(f)\) is tied to the lengths of
-          walks supported by \(D_f\). Separating the bounded, acyclic portions
-          of those walks from their repeatable cycles exposes the arithmetic
-          that controls large walk lengths. Specifically, deleting selected
-          edges leaves an acyclic subgraph, in which no
-          directed walk can repeat a vertex and every directed walk therefore
-          has length at most \(n-1\) on \(n\) vertices. Restoring
-          the deleted edges allows repeated traversals of cycles. The resulting
-          walk lengths depend on the cycle lengths and on the paths connecting
-          the cycles.
-        </p>
-        <figure class="source-figure source-figure--acyclic">
-          <img src="assets/figures/acyclic-reduction.svg" alt="A directed graph beside the same graph with selected edges removed to leave an acyclic subgraph." decoding="async">
+        <figure class="source-figure">
+          <img src="assets/figures/frobenius-gaps.svg" width="660" height="98"
+            alt="Positive integers on a number line. Filled circles belong to the semigroup generated by 4 and 7. Open circles are gaps, with the final gap at 17." decoding="async">
           <figcaption>
             <span class="figure-label">Figure 4.</span>
-            A directed graph (left) and the acyclic subgraph obtained by
-            deleting three edges (right).
-            Redrawn from Figure 3 of the
-            <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>.
+            Positive integers in \(\langle4,7\rangle\) are filled,
+            and gaps are open. The final gap is \(g=17\).
           </figcaption>
         </figure>
         <p>
-          Now fix a directed walk of length \(L\) from \(u\) to \(v\) that
-          visits a vertex on each of some directed cycles of lengths
-          \(c_1,\ldots,c_s\). At each visit, insert any nonnegative number
-          of full traversals of that cycle. This constructs walks from \(u\)
-          to \(v\) of lengths
-          \(L+q_1c_1+\cdots+q_sc_s\), with integers \(q_i\geq0\).
-          The connecting walks are included in \(L\); this construction need
-          not describe every possible walk.
-        </p>
-        <p>
-          For positive cycle lengths \(c_1,\ldots,c_s\) with greatest common divisor
-          \(1\), the nonnegative integer combinations
-          \(q_1c_1+\cdots+q_sc_s\) form a numerical semigroup. Its
-          Frobenius number is the largest integer not expressible as a
-          nonnegative integer linear combination of the cycle lengths.
-          Every larger integer admits such a representation. If a generator is
-          \(1\), every nonnegative integer is represented and the Frobenius
-          number is \(-1\) <a href="#ref-frobenius">[3, §1]</a>.
-          If the gcd is greater than \(1\), infinitely many integers are
-          missing, so there is no finite Frobenius number for these generators.
-        </p>
-        <p>
-          For example, \(2\) and \(3\) generate every integer at least
-          \(2\), but do not generate \(1\), so their Frobenius number is
-          \(1\): every even number is a multiple of \(2\), and every odd
-          number at least \(3\) is \(3\) plus an even number. Thus, if a
-          chosen walk of length \(L\) visits both a \(2\)-cycle and a
-          \(3\)-cycle, inserting full traversals produces every walk length
-          at least \(L+2\) between its endpoints.
-        </p>
-      </section>
-
-      <section aria-labelledby="payoff">
-        <h2 id="payoff">An exact transient</h2>
-        <p>
-          For the four-variable map displayed above, direct evaluation of all
-          \(16\) states gives \(\tau_{\max}(f)=6\). The only periodic
-          states are the fixed points \(0000\) and \(1111\). The orbit
-          starting at \(1110\) takes six steps to reach \(0000\):
+          The Frobenius number controls these numerical gaps, while
+          directed distance accounts for travel between vertices.
+          Combining them gives the diameter-based estimates recorded
+          in the <a href="#ref-poster">2024 poster [6]</a>, where
+          diameter is the greatest directed shortest-path distance.
         </p>
         <div class="equation">
           \[
             \begin{aligned}
-              1110&amp;\to1101\to1011\to0110\\
-                  &amp;\to1001\to0010\to0000.
+              1+g+\operatorname{diam}(D_f)&amp;\leq T(f),\\
+              T(f)&amp;\leq g+2\,\operatorname{diam}(D_f).
             \end{aligned}
           \]
         </div>
         <p>
-          The state graph at the top of the page shows transients and
-          attractors in a general Boolean network. For the monomial map above,
-          direct evaluation shows that every other state reaches a fixed point
-          in at most five steps. The
-          <a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">2024 poster</a>
-          discusses bounds based on attainable walk lengths.
-          This example illustrates the central reduction: the state graph
-          defines the transient, while the dependency graph organizes the walk
-          lengths that govern it. This smaller representation offers a route to
-          transient bounds without exhaustive enumeration of the state space.
+          Determining their valid hypotheses requires accounting for
+          travel between cycles. A numerical combination of cycle lengths
+          need not give a walk between prescribed endpoints. This
+          distinction is the main obstacle to converting Frobenius
+          estimates into transient bounds.
         </p>
       </section>
 
       <section aria-labelledby="references">
         <h2 id="references">References</h2>
         <ol class="references">
-          <li id="ref-kauffman">
-            S. A. Kauffman, “Metabolic stability and epigenesis in randomly
-            constructed genetic nets,” <em>Journal of Theoretical Biology</em>
-            22 (1969), 437–467.
-            <span class="reference-links"><a href="https://www.sciencedirect.com/science/article/pii/0022519369900150">Paper</a> · <a href="https://doi.org/10.1016/0022-5193(69)90015-0">DOI</a></span>
+          <li id="ref-elspas">
+            B. Elspas, “The theory of autonomous linear sequential networks,”
+            <em>IRE Transactions on Circuit Theory</em> 6 (1959), 45–60.
+            <span class="reference-links"><a href="https://doi.org/10.1109/TCT.1959.1086506">Paper</a></span>
+          </li>
+          <li id="ref-laubenbacher">
+            R. Laubenbacher and B. Pareigis, “Equivalence relations on finite
+            dynamical systems,” <em>Advances in Applied Mathematics</em> 26
+            (2001), 237–251.
+            <span class="reference-links"><a href="https://doi.org/10.1006/aama.2000.0717">Paper</a></span>
           </li>
           <li id="ref-boolean">
             O. Colón-Reyes, R. Laubenbacher, and B. Pareigis, “Boolean monomial
-            dynamical systems,” <em>Annals of Combinatorics</em> 8 (2005),
-            425–439. <span class="reference-links"><a href="https://arxiv.org/abs/math/0403166">Paper</a> · <a href="https://doi.org/10.1007/s00026-004-0230-6">DOI</a></span>
+            dynamical systems,” <em>Annals of Combinatorics</em> 8 (2005), 425–439.
+            <span class="reference-links"><a href="https://arxiv.org/abs/math/0403166">Paper</a> · <a href="https://doi.org/10.1007/s00026-004-0230-6">DOI</a></span>
           </li>
           <li id="ref-frobenius">
             J. L. Ramírez Alfonsín and Ø. J. Rødseth, “Numerical semigroups:
             Apéry sets and Hilbert series,” <em>Semigroup Forum</em> 79
             (2009), 323–340.
-            <span class="reference-links"><a href="https://imag.umontpellier.fr/~ramirez/Frobenius-Hilbert.pdf">Paper</a> · <a href="https://doi.org/10.1007/s00233-009-9133-5">DOI</a></span>
+            <span class="reference-links"><a href="https://imag.umontpellier.fr/~ramirez/Frobenius-Hilbert.pdf">Paper</a></span>
+          </li>
+          <li id="ref-teran">
+            X. Terán Batista, “Hacia una solución del problema de tiempo de
+            transición para un sistema dinámico monomial booleano,”
+            <em>Ciencia e Ingeniería</em> 4(2) (2017).
+            <span class="reference-links"><a href="https://dialnet.unirioja.es/servlet/articulo?codigo=8742418">Paper</a></span>
+          </li>
+          <li id="ref-poster">
+            B. C. Busby, advised by O. Colón-Reyes, “On Acyclic Subgraphs
+            and Transient Length Bounds,” research poster (2024).
+            <span class="reference-links"><a href="assets/posters/2024_discrete_dynamical_systems_poster.pdf">Poster</a></span>
+          </li>
+          <li id="ref-exponent">
+            A. L. Dulmage and N. S. Mendelsohn, “The exponent of a
+            primitive matrix,” <em>Canadian Mathematical Bulletin</em>
+            5 (1962), 241–244.
+            <span class="reference-links"><a href="https://doi.org/10.4153/CMB-1962-023-2">Paper</a></span>
+          </li>
+          <li id="ref-sylvester">
+            M. B. Nathanson, “Commutative algebra and the linear
+            diophantine problem of Frobenius,” <em>Integers</em>
+            18B (2018), A7.
+            <span class="reference-links"><a href="https://arxiv.org/abs/1611.07415">Paper</a></span>
           </li>
         </ol>
       </section>

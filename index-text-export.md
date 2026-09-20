@@ -398,19 +398,6 @@ f(x_1,x_2,x_3,x_4)=(x_2,\,x_1x_3,\,x_4,\,x_2).
 - Caption label: Figure 2
 - Caption: The dependency graph \(D_f\) for the displayed system, with each vertex labeled by its index. Adapted from Figure 1 of the [LINK: 2024 poster -> `assets/posters/2024_discrete_dynamical_systems_poster.pdf`].
 
-## The bridge: iteration becomes walking
-
-[VISUALIZER DEMONSTRATION — placed after the concrete second-iterate calculation in boolean-dynamics.html]
-
-- Poster: `assets/demos/boolean-system-visualizer-poster.webp`.
-- GIF: `assets/demos/boolean-system-visualizer.gif`.
-- Caption: Figure 3. Dependency graph, phase space, and a longest transient for the displayed four-variable Boolean monomial system. The highlighted orbit reaches 0000 from 1110 after six updates; 0000 then maps to itself.
-- Delivery: static poster on the page with a linked GIF, including for reduced-motion visitors.
-
-[H2]
-
-The bridge: iteration becomes walking
-
 [BODY PARAGRAPH]
 
 Starting from \(\mathbf x\), repeatedly applying \(f\) produces its orbit. Its transient length \(\tau_f(\mathbf x)\) is the number of steps before that orbit first reaches its eventual cycle. The longest transient in the system is
