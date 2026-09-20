@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" role="img" aria-labelledby="title desc">
   <title id="title">Two arithmetical structures</title>
-  <desc id="desc">Left: three parallel edges, r values 1, 1, 1, 1 and d values 4, 4, 2, 2 clockwise. Right: four parallel edges, r values 7, 5, 2, 1 and d values 3, 6, 3, 9 clockwise. Large r values appear inside vertices, and smaller d values sit outside.</desc>
+  <desc id="desc">On the left, three parallel edges, r values 1, 1, 1, 1 and d values 4, 4, 2, 2 clockwise. On the right, four parallel edges, r values 7, 5, 2, 1 and d values 3, 6, 3, 9 clockwise. Large r values appear inside vertices, and smaller d values sit outside.</desc>
   <style>
     .edge { fill: none; stroke: #111; stroke-width: 1.6px; }
     circle { fill: #fff; stroke: #111; stroke-width: 1.6px; }

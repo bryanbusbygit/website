@@ -144,15 +144,22 @@ section { margin-top: 3.75rem; }
 
 .equation {
   margin: 1.55rem 0;
-  overflow-x: auto;
+  overflow: visible;
   padding: 0;
   text-align: left;
 }
 
-.equation mjx-container { margin: 0 !important; }
+/* Equations stay in the document flow and scale to fit narrow screens. */
+.equation mjx-container[jax="SVG"][display="true"] {
+  margin: 0 !important;
+  max-width: 100%;
+  overflow: visible;
+}
 
-.bounds-equation { overflow: hidden; }
-.bounds-equation mjx-container { max-width: 100%; }
+.equation mjx-container[jax="SVG"] > svg {
+  max-width: calc(100% - 1.25em);
+  height: auto;
+}
 
 /* Attach each figure to its introduction; separate it from subsequent prose. */
 figure { margin: var(--figure-gap-before) 0 var(--figure-gap-after); }
@@ -256,6 +263,26 @@ figcaption .figure-label {
 }
 
 .result p:last-child { margin-bottom: 0; }
+
+/* Numbered theorem environments share the research notes' restrained palette. */
+.theorem {
+  margin: 2rem 0;
+  padding: 1.1rem 0 1.1rem 1.25rem;
+  border-left: 2px solid var(--text);
+  break-inside: avoid;
+}
+
+.theorem h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.theorem h3 span { font-weight: 400; }
+.theorem > p { font-style: italic; }
+.definition > p { font-style: normal; }
+.theorem > :last-child { margin-bottom: 0; }
 
 .references {
   padding-left: 1.35rem;
