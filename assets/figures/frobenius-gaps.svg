@@ -45,7 +45,7 @@
     <circle cx="578.5" cy="49" r="5.8" fill="#111" stroke="#111" stroke-width="1.3"/>
     <text x="578.5" y="81" font-size="21">20</text>
     <text x="620" y="81" font-size="21">…</text>
-    <text x="490" y="20" font-size="20" font-style="italic">g = 17</text>
+    <text x="490" y="20" font-size="20">𝑔 = 17</text>
   </g>
   <path d="M490 25V36" fill="none" stroke="#565656" stroke-width="1"/>
 </svg>
