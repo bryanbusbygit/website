@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 165" role="img" aria-label="Dependency graph of the four-variable Boolean monomial system, with vertices labeled 1, 2, 3, and 4">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 165" role="img" aria-label="The four-variable dependency graph with edges 2 to 1, 1 to 2, 3 to 2, 4 to 3, and 2 to 4">
   <defs>
     <marker id="arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="5" markerHeight="5" orient="auto">
       <path d="M0 0L8 4L0 8Z" fill="#111"/>
