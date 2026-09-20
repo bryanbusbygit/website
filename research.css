@@ -151,6 +151,9 @@ section { margin-top: 3.75rem; }
 
 .equation mjx-container { margin: 0 !important; }
 
+.bounds-equation { overflow: hidden; }
+.bounds-equation mjx-container { max-width: 100%; }
+
 /* Attach each figure to its introduction; separate it from subsequent prose. */
 figure { margin: var(--figure-gap-before) 0 var(--figure-gap-after); }
 
@@ -334,6 +337,7 @@ figcaption .figure-label {
   .lede { font-size: 1.18rem; }
   section { margin-top: 3rem; }
   .result { padding: 1.1rem 1.15rem 1rem; }
+  .bounds-equation { font-size: 0.88rem; }
 
   .figure-grid {
     grid-template-columns: 1fr;
