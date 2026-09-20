@@ -149,14 +149,15 @@
           The Frobenius number controls these numerical gaps, while
           directed distance accounts for travel between vertices.
           Combining them gives the diameter-based estimates recorded
-          in the <a href="#ref-poster">2024 poster [6]</a>, where
-          diameter is the greatest directed shortest-path distance.
+          in the <a href="#ref-poster">2024 poster [6]</a>. Let
+          \(d=\operatorname{diam}(D_f)\) be the greatest directed
+          shortest-path distance.
         </p>
         <div class="equation">
           \[
             \begin{aligned}
-              1+g+\operatorname{diam}(D_f)&amp;\leq T(f),\\
-              T(f)&amp;\leq g+2\,\operatorname{diam}(D_f).
+              1+g+d&amp;\leq T(f),\\
+              T(f)&amp;\leq g+2d.
             \end{aligned}
           \]
         </div>
