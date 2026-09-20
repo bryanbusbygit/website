@@ -9,6 +9,9 @@
     <path d="M44 87h132M44 120h132M44 153h132M264 87h132M264 120h132M264 153h132M484 87h132M484 120h132M484 153h132" fill="none"/>
     <path d="M77 54h30v30H77zm-33 33h30v30H44zm66 0h30v30h-30zm33 33h30v30h-30zm-66 33h30v30H77z" fill="#222"/>
     <path d="M264 54h132v132H264z" fill="#222"/><path d="M363 120h30v30h-30z" fill="#fff"/><path d="M484 54h132v132H484z" fill="#222"/>
+    <path d="M44 54h132v132H44zm220 0h132v132H264zm220 0h132v132H484" fill="none"/>
+    <path d="M77 54v132m33-132v132m33-132v132M297 54v132m33-132v132m33-132v132M517 54v132m33-132v132m33-132v132" fill="none"/>
+    <path d="M44 87h132M44 120h132M44 153h132M264 87h132M264 120h132M264 153h132M484 87h132M484 120h132M484 153h132" fill="none"/>
   </g>
   <g font-size="20"><text x="110" y="216">5 of 16 positive</text><text x="330" y="216">15 of 16 positive</text><text x="550" y="216">16 of 16 positive</text></g>
 </svg>
