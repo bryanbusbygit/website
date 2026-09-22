@@ -28,37 +28,19 @@
       <header>
         <h1 class="visually-hidden">Arithmetical Structures on Graphs</h1>
         <p class="lede">
-          Arithmetical structures generalize the graph Laplacian by
-          replacing vertex degrees with positive integers while retaining
-          a positive integer kernel vector. Originating in Lorenzini's
-          study of degenerating curves, they connect integer linear
-          algebra with graph enumeration <a href="#ref-lorenzini">[3]</a>.
-          This project studies cycles with one multi-edge through
+          Arithmetical structures generalize the graph Laplacian by allowing its
+          diagonal entries to vary while retaining a positive integral kernel
+          vector. We study their enumeration on cycles with a multi-edge, using
           subdivision and a modified Euclidean algorithm.
         </p>
       </header>
 
       <section aria-label="Graphs and their Laplacians">
         <p>
-          Let \(G\) be a finite connected undirected graph on vertices
-          \(v_1,\ldots,v_n\), with \(n\geq2\). We allow parallel
-          edges between two vertices but no loops from a vertex to itself.
-          Its <strong>adjacency matrix</strong> \(A\) has entry
-          \(A_{ij}\) equal to the number of edges between \(v_i\) and
-          \(v_j\). The <strong>degree</strong> \(\deg(v_i)\) counts
-          incident edges, including their multiplicities. The ordinary
-          <strong>graph Laplacian</strong> is
-          \(\operatorname{diag}(\deg(v_1),\ldots,\deg(v_n))-A\),
-          where \(\operatorname{diag}\) places its arguments on the diagonal
-          and has zeros elsewhere.
-        </p>
-        <p>
-          The path \(P_n\) joins \(n\) vertices in a chain; the cycle
-          \(C_n\), for \(n\geq3\), also joins the last vertex to the
-          first. In \(\widetilde C_{n,k}\), one edge of \(C_n\) is
-          replaced by \(k\geq2\) parallel edges, called the
-          <strong>multi-edge</strong>. The remaining edges have multiplicity
-          \(1\) and are called ordinary edges.
+          The count is known for ordinary cycles. Replacing one edge by several
+          parallel edges changes the divisibility equations at just two vertices.
+          The remaining equations are those of a path, so the problem is to
+          determine which path labelings satisfy the new endpoint conditions.
         </p>
       </section>
 
@@ -68,17 +50,24 @@
         <figcaption>
           <span class="figure-label">Figure 1.</span>
             The graph \(\widetilde C_{5,2}\). In \(\widetilde C_{n,k}\),
-            one edge of an \(n\)-cycle has multiplicity \(k\).
+            one edge of an \(n\)-cycle has multiplicity \(k\),
+            where \(n\geq3\) and \(k\geq2\).
             Redrawn from the <a href="VPR3.pdf">manuscript</a>.
           </figcaption>
       </figure>
       <section aria-label="Arithmetical structures and reduction">
+        <p>
+          Let \(G\) be a finite connected undirected loopless graph with at least
+          two vertices and adjacency matrix \(A\), counting multiplicities. Each
+          vertex label must divide the sum of its neighbors’ labels. Collecting
+          the labels into \(\mathbf r\) and the quotients into \(\mathbf d\) gives
+          the following equation.
+        </p>
         <div class="theorem definition" role="note" aria-labelledby="definition-arithmetical-structure">
           <h3 id="definition-arithmetical-structure">Definition 1 <span>(Arithmetical structure)</span></h3>
           <p>
-            An <strong>arithmetical structure</strong> on \(G\) is a pair
-            of positive integer vectors \(\mathbf d=(d_1,\ldots,d_n)\)
-            and \(\mathbf r=(r_1,\ldots,r_n)\) satisfying
+            An <strong>arithmetical structure</strong> on \(G\) is a pair of
+            positive integer vectors \(\mathbf d,\mathbf r\) satisfying
           </p>
           <div class="equation">
             \[
@@ -89,23 +78,11 @@
             \]
           </div>
           <p>
-            The first condition makes \(\mathbf r\) a kernel vector, meaning that
-            multiplying it by the matrix gives zero. The second says
-            its entries have greatest common divisor \(1\); such a
-            vector is called <strong>primitive</strong> or normalized.
+            Primitivity of \(\mathbf r\) removes scaling. The choice \(\mathbf
+            r=\mathbf 1\) gives the ordinary Laplacian.
           </p>
         </div>
-        <p>
-          Each \(r\)-label divides the sum of its neighbors, counting
-          edge multiplicity, and the quotient is its \(d\)-label.
-          Thus the equation at \(v_i\) is
-          \(d_i r_i=\sum_{j=1}^n A_{ij}r_j\).
-          Normalization removes scaled copies of \(\mathbf r\).
-          The assignment \(r_i=1\), \(d_i=\deg(v_i)\) recovers the
-          ordinary Laplacian. Write \(\operatorname{Arith}(G)\) for
-          the set of normalized structures on \(G\), and
-          \(|\operatorname{Arith}(G)|\) for its size.
-        </p>
+
         <div class="theorem" role="note" aria-labelledby="theorem-finiteness">
           <h3 id="theorem-finiteness">Theorem 1 <span>(Finiteness, Lorenzini)</span></h3>
           <p>
@@ -115,19 +92,19 @@
           </p>
         </div>
         <p>
-          The labels are positive integers with no bound imposed in the
-          definition, so finiteness is already a substantive restriction.
-          It turns the existence problem into an enumeration problem.
-          How does the shape of a graph determine the number of allowable
-          labelings?
+          The definition gives no bound on the labels to search over. Finiteness
+          establishes that only finitely many labelings satisfy the equations,
+          but an explicit count requires more information about the graph. We write
+          \(|\operatorname{Arith}(G)|\) for the number of structures.
         </p>
       </section>
 
       <section aria-label="Foundational enumeration theorems">
         <p>
-          Paths and ordinary cycles provide the basic comparison. Here
-          \(P_n\) and \(C_n\) have fixed vertex positions; labelings
-          related by a reflection or rotation are not identified.
+          Paths and cycles admit explicit counts, giving a starting point for the
+          multi-edge problem. Write \(P_n\) and \(C_n\) for the path and cycle on
+          \(n\) vertices. Both counts below distinguish labelings related by graph
+          symmetries.
         </p>
         <div class="theorem lemma" role="note" aria-labelledby="lemma-path-endpoints">
           <h3 id="lemma-path-endpoints">Lemma 1 <span>(Path endpoints)</span></h3>
@@ -140,8 +117,8 @@
         <div class="theorem" role="note" aria-labelledby="theorem-counting">
           <h3 id="theorem-counting">Theorem 2 <span>(Paths and cycles, Braun et al.)</span></h3>
           <p>
-            For \(n\geq2\), path structures are counted by a Catalan number;
-            for \(n\geq3\), cycle structures satisfy
+            For paths with \(n\geq2\) and cycles with \(n\geq3\),
+            the following counts hold
             <a href="#ref-braun">[1]</a>.
           </p>
           <div class="equation">
@@ -153,26 +130,14 @@
             \]
           </div>
         </div>
-        <p>
-          For example, the two structures on \(P_3\) are
-          \(\mathbf r=(1,1,1)\) with \(\mathbf d=(1,2,1)\), and
-          \(\mathbf r=(1,2,1)\) with \(\mathbf d=(2,1,2)\).
-          Closing the path into a triangle gives
-          \(|\operatorname{Arith}(C_3)|=10\). Even one added edge
-          changes the possible integer labelings substantially.
-        </p>
       </section>
 
       <section aria-label="Critical groups and subdivision">
         <p>
-          Counting structures is one question; understanding their algebra
-          is another. Put \(L=\operatorname{diag}(\mathbf d)-A\).
-          The <strong>cokernel</strong> \(\mathbb Z^n/L\mathbb Z^n\)
-          groups integer vectors together when their difference is
-          \(L\mathbf z\) for some integer vector \(\mathbf z\).
-          Its <strong>torsion subgroup</strong> consists of the classes
-          that become zero after multiplication by some positive integer.
-          This defines the <strong>critical group</strong>
+          The count alone does not describe the matrices obtained from these
+          labelings. Their integral cokernels can differ even on the same graph.
+          We study this through the <strong>critical group</strong>, the torsion
+          subgroup of the cokernel of \(L=\operatorname{diag}(\mathbf d)-A\).
         </p>
         <div class="equation">
           \[
@@ -180,12 +145,7 @@
             =\operatorname{tors}(\mathbb Z^n/L\mathbb Z^n).
           \]
         </div>
-        <p>
-          A trivial group has only its zero element.
-          The cyclic group \(\mathbb Z/t\mathbb Z\) is the integers
-          under addition modulo \(t\); the symbol \(\cong\) means
-          that two groups have the same group structure.
-        </p>
+
         <div class="theorem" role="note" aria-labelledby="theorem-critical-group">
           <h3 id="theorem-critical-group">Theorem 3 <span>(Critical groups of paths and cycles)</span></h3>
           <p>
@@ -200,22 +160,13 @@
           </div>
         </div>
         <p>
-          On \(C_3\), the Laplacian structure \(\mathbf r=(1,1,1)\)
-          has critical group \(\mathbb Z/3\mathbb Z\).
-          The structure \(\mathbf r=(1,1,2)\), \(\mathbf d=(3,3,1)\)
-          has group \(\mathbb Z/2\mathbb Z\), while
-          \(\mathbf r=(1,2,3)\), \(\mathbf d=(5,2,1)\)
-          has trivial group. Thus the same graph supports different
-          critical groups as its arithmetic data vary.
+          Constructing every labeling independently would ignore the relations
+          between different graph sizes. Subdivision gives a way to pass from one
+          size to the next. On a cycle, inserting the sum of adjacent positive
+          labels introduces no new unit label, so the preceding theorem also
+          explains why the critical group is preserved.
         </p>
-        <p>
-          A multi-edge changes the divisibility conditions at its two
-          endpoints. To isolate this arithmetic, the remaining path can
-          be studied through <strong>subdivision</strong>, which replaces an edge
-          by two edges meeting at a new vertex. Its inverse,
-          <strong>smoothing</strong>, removes a vertex of degree two and
-          joins its neighbors.
-        </p>
+
         <div class="theorem proposition" role="note" aria-labelledby="proposition-subdivision">
           <h3 id="proposition-subdivision">Proposition 1 <span>(Subdivision)</span></h3>
           <p>
@@ -226,38 +177,19 @@
             <a href="#ref-braun">[1]</a>.
           </p>
         </div>
-        <p>
-          At an endpoint, the neighbor sum increases by its own label,
-          explaining the increment in its quotient. At the inserted vertex,
-          the neighbor sum equals its label, so its quotient is \(1\).
-        </p>
-        <p>
-          On a multi-edge cycle, an <strong>ordinary vertex</strong> is
-          one not incident to the multi-edge. Smoothing removes such a vertex with \(d_i=1\), decreasing both
-          neighbor quotients by \(1\). It applies away from the multi-edge
-          when at least four vertices remain before removal. Structures whose ordinary vertices all
-          have quotients greater than \(1\) are <strong>smooth</strong>.
-          If every quotient, including those at the multi-edge endpoints,
-          exceeds \(1\), the structure is <strong>strongly smooth</strong>.
-        </p>
       </section>
 
       <section aria-label="Endpoint arithmetic and enumeration">
         <p>
-          The endpoint data constrain which reduced structures can occur.
-          If \(a,b\) label the multi-edge endpoints and \(k\) is its
-          multiplicity, then \(a,b,k\) must be <strong>pairwise
-          coprime</strong>, meaning that each pair has gcd \(1\)
-          <a href="VPR3.pdf#page=2">[Proposition 2.1]</a>.
-          Conversely, pairwise coprime \(a,b>1\), \(k\geq2\) determine
-          a construction. Starting from \((kb,a)\) and \((ka,b)\),
-          append to consecutive terms \(p,q\) the least nonnegative
-          remainder \(s\equiv-p\pmod q\), stopping before zero.
-          The equation \(p+s=dq\) enforces local divisibility.
-          Discarding the initial terms, joining \(a,b\) by \(k\)
-          edges, and identifying the terminal \(1\)'s gives a cycle
-          with the prescribed endpoints.
+          Subdivision produces larger structures from known ones, but does not
+          supply the initial structures at the multi-edge. If its endpoint labels
+          are \(a,b\) and its multiplicity is \(k\), these three integers must be
+          pairwise coprime <a href="VPR3.pdf#page=2">[Proposition 2.1]</a>. For
+          such triples with \(a,b>1\), a modified Euclidean algorithm constructs
+          two remainder chains that meet at \(1\). Choosing remainders enforces
+          the divisibility equations as the chains are formed.
         </p>
+
         <figure class="source-figure">
           <img src="assets/figures/multiedge-labelings.svg"
             alt="Two four-vertex cycles. The left has three parallel edges and r labels all 1. The right has four parallel edges and r labels 7, 5, 2, 1. Smaller d labels appear outside the vertices." decoding="async">
@@ -270,38 +202,22 @@
           </figcaption>
         </figure>
         <p>
-          This construction supplies labelings, but its remainder
-          sequences determine the cycle's size. Enumeration at a fixed
-          size therefore requires classifying endpoint data and subdivisions
-          that produce a prescribed size without duplication. The
-          <a href="VPR3.pdf">manuscript with Nesty Dogbatse and Peter
-          Palma</a> develops this approach, extending methods used for
-          paths with a doubled edge <a href="#ref-glass">[2]</a>.
+          This construction chooses the cycle size through the lengths of its
+          remainder chains. To count structures on a cycle of a given size, we
+          must determine which endpoint data produce the required chain lengths.
+          Our <a href="VPR3.pdf">manuscript with Nesty Dogbatse and Peter
+          Palma</a> combines this construction with subdivision, following methods
+          for paths with a doubled edge <a href="#ref-glass">[2]</a>.
         </p>
       </section>
 
       <section aria-labelledby="what-we-dont-know">
-        <h2 id="what-we-dont-know">What we don’t know</h2>
+        <h2 id="what-we-dont-know">Open questions</h2>
         <p>
-          For the multi-edge project, the next step is to turn the endpoint
-          construction into a complete count for prescribed \(n\) and
-          \(k\). Which endpoint pairs yield a smooth structure of the
-          required size, and how can their subdivisions be counted without
-          duplication? The construction above gives examples, but does not
-          by itself provide a counting formula. The
-          <a href="VPR3.pdf#page=5">enumeration section of the working
-          manuscript</a> develops this reduction; its general argument
-          remains to be completed.
-        </p>
-        <p>
-          A related question concerns the starting structures for that
-          reduction. Can strongly smooth structures be generated from a
-          classified collection of smaller ones, with precise conditions
-          for reversing each operation? The
-          <a href="VPR3.pdf#page=16">triple-edge case in the manuscript</a>
-          leaves this origin question unresolved. Settling it would explain
-          both which initial structures must be counted and whether
-          different construction histories lead to the same labeling.
+          A complete count at fixed cycle size and edge multiplicity requires
+          classifying the endpoint pairs and subdivisions that produce that size,
+          with repeated constructions accounted for. The enumeration argument in
+          the <a href="VPR3.pdf#page=5">working manuscript</a> remains incomplete.
         </p>
       </section>
 

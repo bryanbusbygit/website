@@ -28,13 +28,11 @@
       <header>
         <h1 class="visually-hidden">Boolean Monomial Dynamics</h1>
         <p class="lede">
-          Elspas's 1959 analysis of linear sequential networks relates
-          periodic behavior to matrix algebra over finite fields
-          <a href="#ref-elspas">[1]</a>. Nonlinear updates generally lack
-          this linear description. Boolean monomial systems retain enough
-          structure to study their transients through directed walks,
-          connecting the problem to primitive matrices and the arithmetic
-          of cycle lengths.
+          We study the maximum transient length of Boolean monomial dynamical
+          systems. Dependencies in successive iterates correspond to directed
+          walks, allowing transient lengths to be computed from a graph on the
+          variables. Our results concern families for which the cycle lengths and
+          their intersections give exact formulas.
         </p>
       </header>
 
@@ -42,36 +40,22 @@
         <div class="theorem definition" role="note" aria-labelledby="definition-boolean-system">
           <h3 id="definition-boolean-system">Definition 1 <span>(Boolean dynamical system)</span></h3>
           <p>
-            A <strong>Boolean dynamical system</strong> on \(n\) variables
-            is a map \(f:\{0,1\}^n\to\{0,1\}^n\). A state
-            \(a=(a_1,\ldots,a_n)\) records one binary value per variable, and
-            \(f=(f_1,\ldots,f_n)\) updates all variables simultaneously
-            at each integer time \(t\geq0\) according to
+            A <strong>Boolean dynamical system</strong> is a map
+            \(f:\{0,1\}^n\to\{0,1\}^n\). All coordinates are updated
+            simultaneously at each iteration.
           </p>
-          <div class="equation">
-            \[
-              a_i(t+1)=f_i(a_1(t),\ldots,a_n(t)).
-            \]
-          </div>
         </div>
         <p>
-          Iterating the rule gives the <strong>orbit</strong>
-          \(a,f(a),f^2(a),\ldots\), where \(f^m\) means \(m\)
-          successive applications of \(f\), and \(f^0\) is the identity.
-          The <strong>state graph</strong> has all \(2^n\)
-          states as vertices and one arrow \(a\to f(a)\) from each state.
-          A <strong>fixed point</strong> satisfies \(f(a)=a\); a periodic
-          orbit returns to its starting state after some positive number
-          of updates. Its period is the smallest such number.
+          The <strong>state graph</strong> has edges \(a\to f(a)\) and consists of
+          periodic orbits with directed trees attached. We write \(t(f)\) for the
+          maximum number of iterations needed to reach a periodic state, taken
+          over all initial states.
         </p>
         <p>
-          Every orbit eventually enters a periodic orbit because the state
-          set is finite. Define \(\tau(a)\) to be the number of updates
-          before it first reaches that orbit. The system’s maximum
-          <strong>transient length</strong> is
-          \(t(f)=\max_{a\in\{0,1\}^n}\tau(a)\).
-          In particular, a state already on a periodic orbit has
-          \(\tau(a)=0\).
+          Computing \(t(f)\) from the state graph requires up to \(2^n\) states.
+          For monomial maps, iteration only changes which variables occur in each
+          coordinate product. Tracking those variables leads to a dependency graph
+          on \(n\) vertices.
         </p>
       </section>
 
@@ -90,12 +74,6 @@
       </figure>
 
       <section aria-label="From state spaces to dependencies">
-        <p>
-          A state graph consists of directed cycles with trees
-          feeding into them. The examples below illustrate this structure.
-          Our aim is to recover the maximum transient from the update rule
-          without enumerating every state.
-        </p>
         <figure class="source-figure source-figure--state-catalog">
           <img src="assets/figures/laubenbacher-pareigis-state-spaces.png?v=2" width="690" height="834"
             alt="Eighteen state-graph shapes on four states, with cycles and trees feeding into cycles." decoding="async">
@@ -109,35 +87,20 @@
         <div class="theorem definition" role="note" aria-labelledby="definition-monomial-system">
           <h3 id="definition-monomial-system">Definition 2 <span>(Boolean monomial system)</span></h3>
           <p>
-            A Boolean system is <strong>monomial</strong> when each update
-            is a product of selected input values, possibly multiplied by
-            \(0\). We study the case with no identically zero coordinates.
-            For a subset \(S_i\subseteq\{1,\ldots,n\}\), its coordinate
-            update is
-            \(f_i(a)=\prod_{j\in S_i}a_j\).
+            A Boolean system is <strong>monomial</strong> if each coordinate
+            function is a product of selected variables. We exclude identically
+            zero coordinate functions.
           </p>
           <p>
-            The product is the logical AND of its inputs. An empty product
-            is the constant \(1\). Since \(a_j^2=a_j\) for \(a_j\in\{0,1\}\), each
-            variable need appear at most once. Such a monomial is
-            <strong>squarefree</strong>.
+            Since \(a_j^2=a_j\), the monomials may be taken squarefree. The empty
+            product is \(1\).
           </p>
         </div>
+
         <p>
-          Algebraically, \(\{0,1\}\) forms the field \(\mathbb F_2\) with
-          addition and multiplication modulo \(2\). For example,
-          \(f=(a_2,a_1a_3,a_4,a_2)\) sends \((1,0,1,1)\) to
-          \((0,1,1,0)\) in one simultaneous update.
-        </p>
-        <p>
-          The <strong>dependency graph</strong> \(D_f\) has one vertex
-          per variable and an arrow \(j\to i\) when \(j\in S_i\),
-          meaning that \(f_i\) uses \(a_j\). A <strong>directed walk</strong>
-          follows arrows in order and may repeat vertices or edges; its
-          length is the number of edges traversed. A closed walk returns
-          to its starting vertex, and a directed cycle has no other repeated
-          vertex. Unlike the state graph, \(D_f\) has only
-          \(n\) vertices.
+          The <strong>dependency graph</strong> \(D_f\) has an edge \(j\to i\)
+          when \(a_j\) occurs in \(f_i\). Walks in this graph describe
+          dependencies in the iterates of \(f\).
         </p>
         <div class="theorem" role="note" aria-labelledby="theorem-dependency-walks">
           <h3 id="theorem-dependency-walks">Theorem 1 <span>(Dependencies and directed walks)</span></h3>
@@ -150,12 +113,11 @@
           </p>
         </div>
         <p>
-          Let \(A\) be the adjacency matrix of \(D_f\), with
-          \(A_{ij}=1\) when \(j\to i\) and \(0\) otherwise.
-          Then \((A^m)_{ij}>0\) exactly when a length-\(m\) walk
-          joins \(j\) to \(i\). Matrix powers here use ordinary integer
-          arithmetic, with rows indexing destinations and columns sources. Matrix powers encode dependencies
-          rather than linearize the update.
+          The adjacency matrix \(A\), with rows indexing destinations, records
+          dependencies in one iteration. Its powers record dependencies in
+          successive iterates. Because a single zero factor makes a monomial
+          vanish, these dependencies determine where initial zeros occur at later
+          times.
         </p>
         <div class="theorem lemma" role="note" aria-labelledby="lemma-zero-propagation">
           <h3 id="lemma-zero-propagation">Lemma 1 <span>(Propagation of zeros)</span></h3>
@@ -184,15 +146,17 @@
 
       <section aria-label="Primitivity and transient length">
         <p>
-          The transient is therefore governed by the lengths at which
-          dependencies occur. A graph is <strong>strongly connected</strong>
-          if a directed walk joins every ordered pair of vertices. Even
-          then, some lengths may be unavailable between a given pair.
-          The graph is <strong>primitive</strong> when it is strongly
-          connected and the greatest common divisor (gcd) of its cycle
-          lengths is \(1\). Its <strong>exponent</strong>
-          \(\gamma(D_f)\) is the least power for which every matrix
-          entry is positive <a href="#ref-exponent">[7]</a>.
+          To obtain a time by which every initial zero has affected every
+          coordinate, we need walks of a common length between every ordered pair
+          of vertices. Strong connectivity supplies paths, but their lengths need
+          not agree. Traversing cycles extends these lengths, and the gcd of the
+          cycle lengths determines whether a common length is eventually possible.
+        </p>
+        <p>
+          A strongly connected digraph is <strong>primitive</strong> when its
+          cycle lengths have gcd \(1\). Its <strong>exponent</strong>
+          \(\gamma(D_f)\) is the least power of \(A\) with all entries positive <a
+          href="#ref-exponent">[7]</a>.
         </p>
         <div class="theorem" role="note" aria-labelledby="theorem-transient-exponent">
           <h3 id="theorem-transient-exponent">Theorem 2 <span>(Transient length and exponent)</span></h3>
@@ -209,8 +173,10 @@
           </div>
         </div>
         <p>
-          At this time every coordinate depends on every initial variable,
-          sending each state containing a zero to the all-zero fixed point.
+          At the exponent, every coordinate depends on every initial variable.
+          Every state containing a zero has therefore reached the zero fixed
+          point. The theorem shows that this time is attained, so estimating the
+          exponent determines the maximal transient.
         </p>
         <figure class="source-figure">
           <img src="assets/figures/primitive-matrix-powers.svg?v=2" width="660" height="230"
@@ -223,30 +189,18 @@
           </figcaption>
         </figure>
         <p>
-          Estimating this exponent requires understanding how traversing
-          cycles supplies additional steps. Let \(c_1,\ldots,c_k\) be
-          the distinct directed-cycle lengths. Their nonnegative integer
-          combinations form
+          Computing successive matrix powers gives the exponent, but does not
+          explain its dependence on the graph. Cycle lengths offer another
+          approach. Inserting a traversal of a cycle extends a walk without
+          changing its endpoints, so sums of cycle lengths describe the increments
+          obtainable in this way.
         </p>
-        <div class="equation">
-          \[
-            \begin{aligned}
-              \Gamma&amp;=\langle c_1,\ldots,c_k\rangle\\
-              &amp;=\left\{\sum_{i=1}^k m_i c_i\;\middle|\;m_i\in\mathbb Z_{\geq0}\right\}.
-            \end{aligned}
-          \]
-        </div>
         <p>
-          Here \(\mathbb Z_{\geq0}\) denotes the nonnegative integers.
-          A <strong>numerical semigroup</strong> is a set of nonnegative
-          integers containing \(0\), closed under addition, and missing
-          only finitely many nonnegative integers. For a primitive graph,
-          the cycle lengths have gcd \(1\), so \(\Gamma\) is such a
-          semigroup <a href="#ref-frobenius">[4]</a>.
-          A <strong>gap</strong> is a nonnegative integer outside it.
-          Its largest gap is the
-          <strong>Frobenius number</strong> \(\mathrm{ℊ}\), with \(\mathrm{ℊ}=-1\)
-          when there are no gaps.
+          For cycle lengths \(c_1,\ldots,c_k\) with gcd \(1\), their nonnegative
+          integer combinations form the <strong>numerical semigroup</strong>
+          \(\langle c_1,\ldots,c_k\rangle\) <a href="#ref-frobenius">[4]</a>. Its
+          largest missing integer is the <strong>Frobenius number</strong>
+          \(\mathrm{ℊ}\), with \(\mathrm{ℊ}=-1\) when there are no gaps.
         </p>
         <div class="theorem" role="note" aria-labelledby="theorem-sylvester">
           <h3 id="theorem-sylvester">Theorem 3 <span>(Sylvester's formula)</span></h3>
@@ -272,13 +226,11 @@
           </figcaption>
         </figure>
         <p>
-          The <strong>directed distance</strong> from \(u\) to \(v\)
-          is the length of a shortest directed path from \(u\) to \(v\).
-          The <strong>diameter</strong> \(d=\operatorname{diam}(D_f)\)
-          is the greatest of these distances over all ordered pairs of
-          vertices. The approach in the
-          <a href="#ref-poster">2024 poster [6]</a> combines this travel
-          distance with the gaps measured by the Frobenius number.
+          Above the Frobenius number, every integer is a sum of cycle lengths.
+          This does not yet produce walks between prescribed endpoints, since the
+          cycles in a chosen sum may be at different locations. The <a
+          href="#ref-poster">2024 poster [6]</a> proposes using the directed
+          diameter to bound the additional travel.
         </p>
         <div class="theorem proposition" role="note" aria-labelledby="proposition-diameter">
           <h3 id="proposition-diameter">Proposed bounds <span>(Diameter and Frobenius number)</span></h3>
@@ -300,30 +252,27 @@
           </div>
         </div>
         <p>
-          The guiding idea is to express walk lengths as a path length
-          plus a nonnegative combination of cycle lengths. The Frobenius
-          number describes the missing combinations, while the diameter
-          measures travel between vertices. Making this description work
-          for prescribed starting and ending vertices is the central
-          step toward the proposed bounds.
+          Primitivity alone does not imply these bounds. Additional hypotheses
+          must account for the locations of the cycles used to realize a given
+          length.
         </p>
       </section>
 
       <section aria-labelledby="exact-transient-formulas">
         <h2 id="exact-transient-formulas">Families with exact transient formulas</h2>
         <p>
-          Our manuscript in preparation gives exact formulas for two
-          families of dependency graphs. Throughout, the Boolean monomial
-          systems have no identically zero coordinate functions, so
-          Theorem 2 translates each graph exponent into \(t(f)\).
+          The difficulty of reaching different cycles is simpler for a bouquet,
+          where all cycles meet at one vertex. This allows an exact formula. Our
+          manuscript in preparation also treats an arrangement with two
+          intersection vertices, where travel between the intersections
+          contributes to the transient. Coordinate functions remain nonzero
+          throughout.
         </p>
         <p>
-          A <strong>cycle bouquet</strong> is formed by taking directed
-          cycles and identifying one vertex from each into a single shared
-          vertex, with no other intersections. Let their lengths be
-          \(2\leq c_1&lt;\cdots&lt;c_k\), with gcd \(1\), and let
-          \(L=c_k\) be the longest length. Write \(\mathrm{ℊ}\) for
-          the Frobenius number of \(\langle c_1,\ldots,c_k\rangle\).
+          A <strong>cycle bouquet</strong> consists of directed cycles meeting at
+          one shared vertex, with no other intersections. Let their lengths be
+          \(2\leq c_1&lt;\cdots&lt;c_k=L\), with gcd \(1\), and let \(\mathrm{ℊ}\)
+          be their Frobenius number.
         </p>
         <div class="theorem" role="note" aria-labelledby="theorem-bouquet-transient">
           <h3 id="theorem-bouquet-transient">Theorem 4 <span>(Cycle bouquets)</span></h3>
@@ -338,11 +287,8 @@
           </div>
         </div>
         <p>
-          This covers any number of distinct cycle lengths with gcd \(1\).
-          For two coprime lengths \(p&lt;q\), Sylvester’s formula makes it
-          completely explicit, giving \(t(f)=pq-p+q-1\). With more
-          generators, the bouquet formula is exact once the corresponding
-          Frobenius number is known.
+          For two coprime lengths \(p&lt;q\), Sylvester’s formula makes the
+          bouquet result explicit, giving \(t(f)=pq-p+q-1\).
         </p>
         <p>
           The second family joins three directed cycles of lengths
@@ -371,32 +317,19 @@
           </div>
         </div>
         <p>
-          For example, lengths \(2,3,5\) satisfy these hypotheses.
-          Joining all three cycles at one vertex gives \(t(f)=10\),
-          while the specified arrangement at two vertices gives
-          \(t(f)=13\). The cycle lengths agree, but their placement
-          changes the transient. The second formula applies to the
-          arrangement and arithmetic conditions stated above.
+          For lengths \(2,3,5\), the bouquet has transient \(10\) and the
+          two-vertex arrangement above has transient \(13\). Thus the transient
+          depends on the intersection pattern even when the cycle lengths are
+          fixed.
         </p>
       </section>
 
       <section aria-labelledby="what-we-dont-know">
-        <h2 id="what-we-dont-know">What we don’t know</h2>
+        <h2 id="what-we-dont-know">Open questions</h2>
         <p>
-          The exact formulas above cover bouquets and the specified
-          family of three cycles joined at two vertices. How far can
-          these formulas be extended to other arrangements of cycles?
-          Which hypotheses make the poster’s proposed bounds valid?
-          Primitivity alone is insufficient. Cycles of the needed lengths
-          may occur at different locations, and reaching them can require
-          extra steps. We need to identify graph families where the
-          proposed decomposition of walk lengths accounts for this travel.
-        </p>
-        <p>
-          For those families, when is either bound attained? Understanding
-          the equality cases would show when the diameter and cycle-length
-          arithmetic determine the transient exactly, and when the way
-          cycles are joined contributes further information.
+          Extending the exact formulas requires accounting for the walks between
+          cycles as well as the semigroup generated by their lengths. The
+          hypotheses needed for the proposed diameter bounds remain undetermined.
         </p>
       </section>
 
